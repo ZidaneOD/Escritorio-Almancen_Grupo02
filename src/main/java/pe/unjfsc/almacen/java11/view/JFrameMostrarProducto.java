@@ -233,6 +233,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtunxemp.setBorder(null);
         jPanel1.add(txtunxemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 120, 30));
 
+        txtimg.setEditable(false);
         txtimg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtimgActionPerformed(evt);
@@ -471,7 +472,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
             oAlmacen.setImagProd(txtimg.getText());
 
             Image foto = getToolkit().getImage(txtimg.getText());
-            foto = foto.getScaledInstance(151, 166, Image.SCALE_DEFAULT);
+            foto = foto.getScaledInstance(160, 200, Image.SCALE_DEFAULT);
             jblImagen.setIcon(new ImageIcon(foto));
 
             if (sw) {
@@ -530,16 +531,17 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         archivo.setDialogTitle("Abrir Archivo");
 
         //RUTA DE LAS IMAGENES
-        File ruta = new File("C:\\Users\\zidan\\Documents\\NetBeansProjects\\GRUPO04ALMC_2\\src\\main\\java\\imagenes");
-
-        System.out.println("ruta" + new File(".").getAbsolutePath());
+        String directorio = System.getProperty("user.dir") + "\\src\\main\\resources\\productos_de_almacen";
+        File ruta = new File(directorio);
+        System.out.println(directorio);
+        
         archivo.setCurrentDirectory(ruta);
         int ventana = archivo.showOpenDialog(null);
         if (ventana == JFileChooser.APPROVE_OPTION) {
             File file = archivo.getSelectedFile();
             txtimg.setText(String.valueOf(file));
             Image foto = getToolkit().getImage(txtimg.getText());
-            foto = foto.getScaledInstance(151, 166, Image.SCALE_DEFAULT);
+            foto = foto.getScaledInstance(160, 200, Image.SCALE_DEFAULT);
             jblImagen.setIcon(new ImageIcon(foto));
         }
 
@@ -562,7 +564,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtimg.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 12).toString());
 
         Image foto = getToolkit().getImage(txtimg.getText());
-        foto = foto.getScaledInstance(151, 166, Image.SCALE_DEFAULT);
+        foto = foto.getScaledInstance(160, 200, Image.SCALE_DEFAULT);
         jblImagen.setIcon(new ImageIcon(foto));
     }//GEN-LAST:event_tblRegistroMouseClicked
 
@@ -627,7 +629,8 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtpresentxemp.setEditable(b);
         txtunidad.setEditable(b);
         txtunxemp.setEditable(b);
-
+        
+        
         cbidcategoria.setEnabled(b);
         cbidempaque.setEnabled(b);
         cbidmarca.setEnabled(b);
@@ -655,7 +658,8 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtpresentxemp.setText(null);
         txtunidad.setText(null);
         txtunxemp.setText(null);
-
+        txtimg.setText(null);
+        
         cbidcategoria.setSelectedIndex(0);
         cbidempaque.setSelectedIndex(0);
         cbidmarca.setSelectedIndex(0);
