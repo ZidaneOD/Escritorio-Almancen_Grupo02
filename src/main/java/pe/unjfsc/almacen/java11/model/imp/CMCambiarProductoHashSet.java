@@ -20,8 +20,8 @@ public class CMCambiarProductoHashSet implements CICambioAlmacen<CEProducto> {
         oHsData = new HashSet<>();
 
         LOG.info("[FSI] Count del HashSet :", oHsData.isEmpty());
-        oHsData.add(new CEProducto("93132401", "TURBO", "MAX", "CA001", "S005", "MR001", 65.0, "UN002", 30, "UND", "EM001", 1, "C:\\Users\\zidan\\Documents\\NetBeansProjects\\GRUPO04ALMC_2\\src\\main\\java\\imagenes\\TURBO.PNG"));
-        oHsData.add(new CEProducto("79088558", "FRIO RICO", "CON ALMENDRA", "CA003", "S002", "MR001", 93.0, "UN002", 15, "UND", "EM001", 1, "C:\\Users\\zidan\\Documents\\NetBeansProjects\\GRUPO04ALMC_2\\src\\main\\java\\imagenes\\FRIO_RICO.PNG"));
+        oHsData.add(new CEProducto("93132401", "TURBO", "MAX", "CA001", "S005", "MR001", 65.0, "UN002", 30, "UND", "EM001", 1, "\\productos_de_almacen\\TURBO.PNG"));
+        oHsData.add(new CEProducto("79088558", "FRIO RICO", "CON ALMENDRA", "CA003", "S002", "MR001", 93.0, "UN002", 15, "UND", "EM001", 1, "\\productos_de_almacen\\FRIO_RICO.PNG"));
 
         LOG.info("[FSI] After - Count del HashSet : {}", oHsData.size());
     }
