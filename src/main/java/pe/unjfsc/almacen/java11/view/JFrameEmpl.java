@@ -150,7 +150,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
                 btnEstadoTransActionPerformed(evt);
             }
         });
-        jPanel8.add(btnEstadoTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 90));
+        jPanel8.add(btnEstadoTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 220, 90));
 
         jLabel9.setBackground(new java.awt.Color(58, 78, 121));
         jLabel9.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
@@ -465,7 +465,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
 
         jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 250, 170));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 700));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 940, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
