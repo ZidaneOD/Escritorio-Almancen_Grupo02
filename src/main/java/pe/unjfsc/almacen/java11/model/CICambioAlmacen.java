@@ -1,14 +1,15 @@
 package pe.unjfsc.almacen.java11.model;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
+
 
 public interface CICambioAlmacen<Objeto> {
 
-    public void saveAlmacenCIC(Objeto objObjeto);
+    public void saveAlmacenCIC(Objeto objObjeto) throws Exception;
 
-    public void modificarAlmacenCIC(Objeto objObjeto);
+    public void modificarAlmacenCIC(Objeto objObjeto)throws Exception ;
 
-    public void eliminarAlmacenCIC(String poData);
+    public void eliminarAlmacenCIC(Objeto objObjeto) throws Exception ;
 
-    public HashSet<Object> consultAllAlmacenCIC();
+   public ResultSet buscar(Object objObject) throws Exception;
 }

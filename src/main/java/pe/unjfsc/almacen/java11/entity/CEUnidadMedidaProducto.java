@@ -2,22 +2,22 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CEUnidadMedidaProducto {
 
-    private String idUnidadM;
+    private int idUnidadM;
     private String nombUnid;
 
     public CEUnidadMedidaProducto() {
     }
 
-    public CEUnidadMedidaProducto(String codiUnid, String nombUnid) {
+    public CEUnidadMedidaProducto(int codiUnid, String nombUnid) {
         this.idUnidadM = codiUnid;
         this.nombUnid = nombUnid;
     }
 
-    public String getIdUnidadM() {
+    public int getIdUnidadM() {
         return idUnidadM;
     }
 
-    public void setIdUnidadM(String idUnidadM) {
+    public void setIdUnidadM(int idUnidadM) {
         this.idUnidadM = idUnidadM;
     }
 

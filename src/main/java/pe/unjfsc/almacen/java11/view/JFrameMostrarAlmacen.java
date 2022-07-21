@@ -1,46 +1,34 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pe.unjfsc.almacen.java11.entity.CEAlmacen;
-import pe.unjfsc.almacen.java11.logical.CLVariacionAlmacen;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarAlmacen;
 
 public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameMostrarAlmacen");
 
-    private HashSet<CEAlmacen> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CEAlmacen oAlmacen;
-    CMCambiarAlmacen oCMAlmacen;
+      DefaultTableModel objDtm;
+    CMCambiarAlmacen objDistritoDAO = new CMCambiarAlmacen();
+    ResultSet rsDistrito;
+    int xiddistrito;
     boolean sw;
 
     public JFrameMostrarAlmacen() {
         initComponents();
-        oCMAlmacen = new CMCambiarAlmacen();
-        oAlmacen = new CEAlmacen();
+          objDtm = (DefaultTableModel) tblRegistro.getModel();
+       // oAlmacen = new CEAlmacen();
         setSize(559, 408);
         //setVisible(true);
         setLocationRelativeTo(null);
 
-        String[] aTitulo = {"CODIGO", "NOMBRE", "UBICACIÓN"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
+    
     }
 
-    private Object[][] loadData() {
-        oCIAlmacen = oCMAlmacen;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
-
-        CLVariacionAlmacen oLogicalAlmacen = new CLVariacionAlmacen();
-        return oLogicalAlmacen.convertHashSetArray(oHsData);
-    }
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,6 +52,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         btnGrabar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
+        jTextBuscar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -125,7 +114,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "ID", "NOMBRE"
             }
         ));
         tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,7 +124,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblRegistro);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 320, 100));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 320, 70));
 
         cbidubicacion.setForeground(new java.awt.Color(102, 102, 102));
         cbidubicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UB001", "UB002" }));
@@ -218,6 +207,13 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, 40));
+
+        jTextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextBuscarKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 100, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 400, 410));
 
@@ -308,50 +304,35 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         LOG.info("[FSI] Star boton Eliminar : {}");
-        try {
-            int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (!txtidalmacen.getText().isEmpty()) {
-                if (op == JOptionPane.YES_OPTION) {
-
-                    oCMAlmacen.eliminarAlmacenCIC(txtidalmacen.getText());
-                    limpiarControles();
-                    JOptionPane.showMessageDialog(rootPane, "Registro borrado");
-                    mostrarDatos();
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar un registro");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
 
-        //Verificar
-        if (!txtidalmacen.getText().isEmpty()) {
-
-            oAlmacen.setIdAlmacen(txtidalmacen.getText());
-            oAlmacen.setNombAlm(txtnombalmacen.getText());
-            oAlmacen.setIdUbicacion(cbidubicacion.getSelectedItem().toString());
-
-            if (sw) {
-                oCMAlmacen.saveAlmacenCIC(oAlmacen);
-                LOG.info("[FSI] Dato Grabado : {}");
-            } else {
-                oCMAlmacen.modificarAlmacenCIC(new CEAlmacen(txtidalmacen.getText(), txtnombalmacen.getText(), cbidubicacion.getSelectedItem().toString()));
-                LOG.info("[FSI] Dato Editado : {}");
-            }
-
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtidalmacen.getText(), " - ", txtnombalmacen.getText());
-        }
-        habilitaControles(false);
-        limpiarControles();
+        
     }//GEN-LAST:event_btnGrabarActionPerformed
 
+    private void jTextBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscarKeyReleased
+      try {
+            limpiarJTable();
+            if (!jTextBuscar.getText().isEmpty()) {
+                rsDistrito = objDistritoDAO.buscar(jTextBuscar.getText().trim());
+                while (rsDistrito.next()) {
+                    Object registro[] = {rsDistrito.getInt(1), rsDistrito.getString(2)};
+                    objDtm.addRow(registro);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jTextBuscarKeyReleased
+    
+    
+     private void limpiarJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -374,6 +355,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JTextField jTextBuscar;
     private javax.swing.JTable tblRegistro;
     private javax.swing.JTextField txtidalmacen;
     private javax.swing.JTextField txtnombalmacen;
@@ -401,10 +383,6 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         cbidubicacion.setSelectedIndex(1);
     }
 
-    private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "NOMBRE", "UBICACIÓN"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
-    }
+    
+    
 }

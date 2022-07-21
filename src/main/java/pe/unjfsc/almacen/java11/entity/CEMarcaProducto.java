@@ -3,13 +3,13 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CEMarcaProducto {
     
-    private String idMarca;
+    private int idMarca;
     private String nombMarca;
 
     public CEMarcaProducto() {
     }
 
-    public CEMarcaProducto(String idMarca, String nombMarca) {
+    public CEMarcaProducto(int idMarca, String nombMarca) {
         this.idMarca = idMarca;
         this.nombMarca = nombMarca;
     }
@@ -22,11 +22,11 @@ public class CEMarcaProducto {
         this.nombMarca = nombMarca;
     }
 
-    public String getIdMarca() {
+    public int getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(String idMarca) {
+    public void setIdMarca(int idMarca) {
         this.idMarca = idMarca;
     }
 

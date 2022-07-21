@@ -10,7 +10,7 @@ public class CLVariacionSaborP {
         String[][] aDataResponse = new String[poHsData.size()][2];
         int iRow = 0;
         for (CESaborProducto oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdSabor();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdSabor());
             aDataResponse[iRow][1] = oItem.getNombSabor();
 
             iRow++;

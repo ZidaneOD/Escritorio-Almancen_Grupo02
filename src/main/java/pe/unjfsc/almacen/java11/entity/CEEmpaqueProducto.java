@@ -2,22 +2,22 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CEEmpaqueProducto {
 
-    private String idEmpaque;
+    private int idEmpaque;
     private String nombEmpa;
 
     public CEEmpaqueProducto() {
     }
 
-    public CEEmpaqueProducto(String idEmpaque, String nombEmpa) {
+    public CEEmpaqueProducto(int idEmpaque, String nombEmpa) {
         this.idEmpaque = idEmpaque;
         this.nombEmpa = nombEmpa;
     }
 
-    public String getIdEmpaque() {
+    public int getIdEmpaque() {
         return idEmpaque;
     }
 
-    public void setIdEmpaque(String idEmpaque) {
+    public void setIdEmpaque(int idEmpaque) {
         this.idEmpaque = idEmpaque;
     }
 

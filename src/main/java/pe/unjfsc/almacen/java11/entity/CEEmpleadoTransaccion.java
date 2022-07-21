@@ -3,7 +3,7 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CEEmpleadoTransaccion {
     
-    private String idEmpl;
+    private int idEmpl;
     private String dniEmpl;
     private String nombEmpl;
     private String apaEmpl;
@@ -15,7 +15,7 @@ public class CEEmpleadoTransaccion {
     public CEEmpleadoTransaccion() {
     }
 
-    public CEEmpleadoTransaccion(String idEmpl, String dniEmpl, String nombEmpl, String apaEmpl, String amaEmpl, String telfEmpl, String mailEmpl, String idPuesto) {
+    public CEEmpleadoTransaccion(int idEmpl, String dniEmpl, String nombEmpl, String apaEmpl, String amaEmpl, String telfEmpl, String mailEmpl, String idPuesto) {
         this.idEmpl = idEmpl;
         this.dniEmpl = dniEmpl;
         this.nombEmpl = nombEmpl;
@@ -34,11 +34,11 @@ public class CEEmpleadoTransaccion {
         this.idCargo = idCargo;
     }
 
-    public String getIdEmpl() {
+    public int getIdEmpl() {
         return idEmpl;
     }
 
-    public void setIdEmpl(String idEmpl) {
+    public void setIdEmpl(int idEmpl) {
         this.idEmpl = idEmpl;
     }
 

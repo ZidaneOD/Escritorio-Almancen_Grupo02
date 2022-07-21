@@ -2,13 +2,13 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CECategoriaProducto {
 
-    private String idCategoria;
+    private int idCategoria;
     private String nombCate;
 
     public CECategoriaProducto() {
     }
 
-    public CECategoriaProducto(String idCategoria, String nombCate) {
+    public CECategoriaProducto(int idCategoria, String nombCate) {
         this.idCategoria = idCategoria;
         this.nombCate = nombCate;
     }
@@ -21,11 +21,11 @@ public class CECategoriaProducto {
         this.nombCate = nombCate;
     }
 
-    public String getIdCategoria() {
+    public int getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(String idCategoria) {
+    public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 

@@ -11,7 +11,7 @@ public class CLVariacionEmpleadoT {
         String[][] aDataResponse = new String[poHsData.size()][8];
         int iRow = 0;
         for (CEEmpleadoTransaccion oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdEmpl();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdEmpl());
             aDataResponse[iRow][1] = oItem.getDniEmpl();
             aDataResponse[iRow][2] = oItem.getNombEmpl();
             aDataResponse[iRow][3] = oItem.getApaEmpl();

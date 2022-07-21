@@ -10,7 +10,7 @@ public class CLVariacionMarcaProducto {
         String[][] aDataResponse = new String[poHsData.size()][2];
         int iRow = 0;
         for (CEMarcaProducto oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdMarca();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdMarca());
             aDataResponse[iRow][1] = oItem.getNombMarca();
 
             iRow++;

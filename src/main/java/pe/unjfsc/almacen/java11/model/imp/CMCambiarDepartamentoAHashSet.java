@@ -1,7 +1,9 @@
 package pe.unjfsc.almacen.java11.model.imp;
-
-import java.util.HashSet;
-import java.util.Iterator;
+import conexion.ConMySQL;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CEDepartamentoAlmacen;
@@ -11,72 +13,52 @@ public class CMCambiarDepartamentoAHashSet implements CICambioAlmacen<CEDepartam
 
     private static final Logger LOG = LoggerFactory.getLogger(CEDepartamentoAlmacen.class);
 
-    private HashSet<CEDepartamentoAlmacen> oHsData;
+    @Override
+    public void saveAlmacenCIC(CEDepartamentoAlmacen objObjeto) throws Exception {
 
-    private CEDepartamentoAlmacen oEmpleado;
+             Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_insert_distrito(?,?);";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setString(1, objObjeto.getNombDepa());
+       // cs.setString(2, objObjeto.getObsvprod());
+        cs.execute();
+    }
 
-    public CMCambiarDepartamentoAHashSet() {
-
-        LOG.info("FSI] Start CMCambiarDepartamentoAHashSet before crear la instancia : ()", oHsData);
-        oHsData = new HashSet<>();
-
-        LOG.info("[FSI] Count del HashSet :", oHsData.isEmpty());
-        oHsData.add(new CEDepartamentoAlmacen("DPT001", "LIMA REGIÓN"));
-        oHsData.add(new CEDepartamentoAlmacen("DPT002", "LAMBAYEQUE"));
-
-        LOG.info("[FSI] After - Count del HashSet : {}", oHsData.size());
+    @Override
+    public void modificarAlmacenCIC(CEDepartamentoAlmacen objObjeto) throws Exception {
+        
+         Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_distrito(?,?,?);";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setInt(1, objObjeto.getidDepartamento());
+        cs.setString(2, objObjeto.getNombDepa());
+        //cs.setString(3, objObjeto.getObsvprod());
+        cs.execute();
 
     }
 
     @Override
-    public void saveAlmacenCIC(CEDepartamentoAlmacen poData) {
-        LOG.info("[FSI] Start saveAlmacenCIC : ", oEmpleado);
-        oHsData.add(new CEDepartamentoAlmacen(poData.getidDepartamento(), poData.getNombDepa()));
+    public void eliminarAlmacenCIC(CEDepartamentoAlmacen objObjeto) throws Exception {
 
+         Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_delete_distrito(?);";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setInt(1, objObjeto.getidDepartamento());
+        cs.execute();
     }
 
     @Override
-    public void modificarAlmacenCIC(CEDepartamentoAlmacen poData) {
-        LOG.info("[FSI] Start modificarAlmacenCIC : {}", poData.getidDepartamento());
-        Iterator<CEDepartamentoAlmacen> oIt = oHsData.iterator();
-        while (oIt.hasNext()) {
-            oEmpleado = new CEDepartamentoAlmacen();
-            oEmpleado = oIt.next();
-            LOG.info("[FSI] Objeto asignado : {}", oEmpleado);
+    public ResultSet buscar(Object objObject) throws Exception {
 
-            if (oEmpleado.getidDepartamento().equals(poData.getidDepartamento())) {
-                LOG.info("[FSI] Objeto modificado : {}", oEmpleado);
-                oEmpleado.setNombDepa(poData.getNombDepa());
-
-                break;
-            }
-        }
-    }
-
-    @Override
-    public void eliminarAlmacenCIC(String pId) {
-
-        LOG.info("[FSI] Start eliminarAlmacenCIC : {}", pId);
-        Iterator<CEDepartamentoAlmacen> oIt = oHsData.iterator();
-        while (oIt.hasNext()) {
-            oEmpleado = new CEDepartamentoAlmacen();
-            oEmpleado = oIt.next();
-            LOG.info("[FSI] Objeto asignado : {}", oEmpleado);
-
-            if (oEmpleado.getidDepartamento().equals(pId)) {
-                LOG.info("[FSI] Objeto Elimnado : {}", oEmpleado);
-                oHsData.remove(oEmpleado);
-                break;
-            }
-        }
+          Connection cn = ConMySQL.getInstance().getConnection();
+        String nombre = "%" + objObject + "%";
+        String sql = "select * from vdistrito where nombdist like ?";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        return rs;
 
     }
 
-    @Override
-    public HashSet<Object> consultAllAlmacenCIC() {
-        LOG.info("[FSI] Start consultAllAlmacenCIC : {}", oHsData.size());
-        LOG.info(String.valueOf(oHsData));
-        return (HashSet<Object>) (Object) oHsData;
-    }
-
+   
 }

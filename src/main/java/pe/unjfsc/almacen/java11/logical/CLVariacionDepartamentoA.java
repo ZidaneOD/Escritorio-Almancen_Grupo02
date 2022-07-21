@@ -10,7 +10,7 @@ public class CLVariacionDepartamentoA {
         String[][] aDataResponse = new String[poHsData.size()][2];
         int iRow = 0;
         for (CEDepartamentoAlmacen oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getidDepartamento();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getidDepartamento());
             aDataResponse[iRow][1] = oItem.getNombDepa();
 
             iRow++;

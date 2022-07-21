@@ -2,14 +2,14 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CEProvinciaAlmacen {
 
-    private String idProvincia;
+    private int idProvincia;
     private String nombProvincia;
     private String idDepartamento;
 
     public CEProvinciaAlmacen() {
     }
 
-    public CEProvinciaAlmacen(String idProvincia, String nombProvincia, String idDepartamento) {
+    public CEProvinciaAlmacen(int idProvincia, String nombProvincia, String idDepartamento) {
         this.idProvincia = idProvincia;
         this.nombProvincia = nombProvincia;
         this.idDepartamento = idDepartamento;
@@ -23,11 +23,11 @@ public class CEProvinciaAlmacen {
         this.idDepartamento = idDepartamento;
     }
 
-    public String getIdProvincia() {
+    public int getIdProvincia() {
         return idProvincia;
     }
 
-    public void setIdProvincia(String idProvincia) {
+    public void setIdProvincia(int idProvincia) {
         this.idProvincia = idProvincia;
     }
 

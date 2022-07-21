@@ -10,7 +10,7 @@ public class CLVariacionUnidadMedida {
         String[][] aDataResponse = new String[poHsData.size()][2];
         int iRow = 0;
         for (CEUnidadMedidaProducto oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdUnidadM();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdUnidadM());
             aDataResponse[iRow][1] = oItem.getNombUnid();
 
             iRow++;

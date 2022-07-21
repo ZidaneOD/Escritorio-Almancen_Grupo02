@@ -2,13 +2,13 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CESaborProducto {
 
-    private String idSabor;
+    private int idSabor;
     private String nombSabor;
 
     public CESaborProducto() {
     }
 
-    public CESaborProducto(String idSabor, String nombSabor) {
+    public CESaborProducto(int idSabor, String nombSabor) {
         this.idSabor = idSabor;
         this.nombSabor = nombSabor;
     }
@@ -21,11 +21,11 @@ public class CESaborProducto {
         this.nombSabor = nombSabor;
     }
 
-    public String getIdSabor() {
+    public int getIdSabor() {
         return idSabor;
     }
 
-    public void setIdSabor(String idSabor) {
+    public void setIdSabor(int idSabor) {
         this.idSabor = idSabor;
     }
 

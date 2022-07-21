@@ -10,7 +10,7 @@ public class CLVariacionEmpaqueProducto {
         String[][] aDataResponse = new String[poHsData.size()][2];
         int iRow = 0;
         for (CEEmpaqueProducto oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdEmpaque();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdEmpaque());
             aDataResponse[iRow][1] = oItem.getNombEmpa();
 
             iRow++;

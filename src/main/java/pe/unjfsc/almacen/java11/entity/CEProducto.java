@@ -2,24 +2,24 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CEProducto {
 
-    private String idProducto;
+    private int idProducto;
     private String nombProd;
     private String descProd;
-    private String idCategoria;
-    private String idSabor;
-    private String idMarca;
+    private int idCategoria;
+    private int idSabor;
+    private int idMarca;
     private double pesoProd;
-    private String idUnidadM;
+    private int idUnidadM;
     private int presxe;
     private String undpxc;
-    private String idEmpaque;
+    private int idEmpaque;
     private int unidad;
     private String imagProd;
 
     public CEProducto() {
     }
 
-    public CEProducto(String idProducto, String nombProd, String descProd, String idCategoria, String idSabor, String idMarca, double pesoProd, String idUnidadM, int presxe, String undpxc, String idEmpaque, int unidad, String imagProd) {
+    public CEProducto(int idProducto, String nombProd, String descProd, int idCategoria, int idSabor, int idMarca, double pesoProd, int idUnidadM, int presxe, String undpxc, int idEmpaque, int unidad, String imagProd) {
         this.idProducto = idProducto;
         this.nombProd = nombProd;
         this.descProd = descProd;
@@ -34,12 +34,14 @@ public class CEProducto {
         this.unidad = unidad;
         this.imagProd = imagProd;
     }
+    
+    
 
-    public String getIdProducto() {
+    public int getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(String idProducto) {
+    public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -59,27 +61,27 @@ public class CEProducto {
         this.descProd = descProd;
     }
 
-    public String getIdCategoria() {
+    public int getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(String idCategoria) {
+    public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 
-    public String getIdSabor() {
+    public int getIdSabor() {
         return idSabor;
     }
 
-    public void setIdSabor(String idSabor) {
+    public void setIdSabor(int idSabor) {
         this.idSabor = idSabor;
     }
 
-    public String getIdMarca() {
+    public int getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(String idMarca) {
+    public void setIdMarca(int idMarca) {
         this.idMarca = idMarca;
     }
 
@@ -91,11 +93,11 @@ public class CEProducto {
         this.pesoProd = pesoProd;
     }
 
-    public String getIdUnidadM() {
+    public int getIdUnidadM() {
         return idUnidadM;
     }
 
-    public void setIdUnidadM(String idUnidadM) {
+    public void setIdUnidadM(int idUnidadM) {
         this.idUnidadM = idUnidadM;
     }
 
@@ -115,11 +117,11 @@ public class CEProducto {
         this.undpxc = undpxc;
     }
 
-    public String getIdEmpaque() {
+    public int getIdEmpaque() {
         return idEmpaque;
     }
 
-    public void setIdEmpaque(String idEmpaque) {
+    public void setIdEmpaque(int idEmpaque) {
         this.idEmpaque = idEmpaque;
     }
 
@@ -139,9 +141,5 @@ public class CEProducto {
         this.imagProd = imagProd;
     }
 
-    @Override
-    public String toString() {
-        return "CEProducto{" + "idProducto=" + idProducto + ", nombProd=" + nombProd + ", descProd=" + descProd + ", idCategoria=" + idCategoria + ", idSabor=" + idSabor + ", idMarca=" + idMarca + ", pesoProd=" + pesoProd + ", idUnidadM=" + idUnidadM + ", presxe=" + presxe + ", undpxc=" + undpxc + ", idEmpaque=" + idEmpaque + ", unidad=" + unidad + ", imagProd=" + imagProd + '}';
-    }
 
 }

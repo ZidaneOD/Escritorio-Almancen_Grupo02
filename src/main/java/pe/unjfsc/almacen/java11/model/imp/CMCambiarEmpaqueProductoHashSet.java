@@ -1,7 +1,10 @@
 package pe.unjfsc.almacen.java11.model.imp;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import conexion.ConMySQL;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CEEmpaqueProducto;
@@ -11,75 +14,52 @@ public class CMCambiarEmpaqueProductoHashSet implements CICambioAlmacen<CEEmpaqu
 
     private static final Logger LOG = LoggerFactory.getLogger(CEEmpaqueProducto.class);
 
-    private HashSet<CEEmpaqueProducto> oHsData;
-
-    private CEEmpaqueProducto oEmpaqueProducto;
-
-    public CMCambiarEmpaqueProductoHashSet() {
-
-        LOG.info("FSI] Start CMCambiarEmpaqueProductoHashSet before crear la instancia : ()", oHsData);
-        oHsData = new HashSet<>();
-
-        LOG.info("[FSI] Count del HashSet :", oHsData.isEmpty());
-        oHsData.add(new CEEmpaqueProducto("EM001", "CAJA"));
-        oHsData.add(new CEEmpaqueProducto("EM002", "BOLSA"));
-
-        LOG.info("[FSI] After - Count del HashSet : {}", oHsData.size());
+    @Override
+    public void saveAlmacenCIC(CEEmpaqueProducto objObjeto) throws Exception {
+      
+           Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_insert_distrito(?,?);";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setString(1, objObjeto.getNombEmpa());
+        //cs.setString(2, objObjeto.g());
+        cs.execute();
 
     }
 
     @Override
-    public void saveAlmacenCIC(CEEmpaqueProducto poData) {
+    public void modificarAlmacenCIC(CEEmpaqueProducto objObjeto) throws Exception {
 
-          LOG.info("[FSI] Start saveAlmacenCIC : ", oEmpaqueProducto);
-        oHsData.add(new CEEmpaqueProducto(poData.getIdEmpaque(), poData.getNombEmpa()));
+          Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_distrito(?,?,?);";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setInt(1, objObjeto.getIdEmpaque());
+        cs.setString(2, objObjeto.getNombEmpa());
+       // cs.setString(3, objObjeto.getObsvprod());
+        cs.execute();
     }
 
     @Override
-    public void modificarAlmacenCIC(CEEmpaqueProducto poData) {
+    public void eliminarAlmacenCIC(CEEmpaqueProducto objObjeto) throws Exception {
 
-        LOG.info("[FSI] Start modificarAlmacenCIC : {}", poData.getIdEmpaque());
-        Iterator<CEEmpaqueProducto> oIt = oHsData.iterator();
-        while (oIt.hasNext()) {
-            oEmpaqueProducto = new CEEmpaqueProducto();
-            oEmpaqueProducto = oIt.next();
-            LOG.info("[FSI] Objeto asignado : {}", oEmpaqueProducto);
-
-            if (oEmpaqueProducto.getIdEmpaque().equals(poData.getIdEmpaque())) {
-                LOG.info("[FSI] Objeto modificado : {}", oEmpaqueProducto);
-                oEmpaqueProducto.setIdEmpaque(poData.getIdEmpaque());
-                oEmpaqueProducto.setNombEmpa(poData.getNombEmpa());
-
-                break;
-            }
-        }
-
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_delete_distrito(?);";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setInt(1, objObjeto.getIdEmpaque());
+        cs.execute();
     }
 
     @Override
-    public void eliminarAlmacenCIC(String pId) {
+    public ResultSet buscar(Object objObject) throws Exception {
 
-        LOG.info("[FSI] Start eliminarAlmacenCIC : {}", pId);
-        Iterator<CEEmpaqueProducto> oIt = oHsData.iterator();
-        while (oIt.hasNext()) {
-            oEmpaqueProducto = new CEEmpaqueProducto();
-            oEmpaqueProducto = oIt.next();
-            LOG.info("[FSI] Objeto asignado : {}", oEmpaqueProducto);
+          Connection cn = ConMySQL.getInstance().getConnection();
+        String nombre = "%" + objObject + "%";
+        String sql = "select * from vdistrito where nombdist like ?";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        return rs;
 
-            if (oEmpaqueProducto.getIdEmpaque().equals(pId)) {
-                LOG.info("[FSI] Objeto Elimnado : {}", oEmpaqueProducto);
-                oHsData.remove(oEmpaqueProducto);
-                break;
-            }
-        }
     }
 
-    @Override
-    public HashSet<Object> consultAllAlmacenCIC() {
-    
-     LOG.info("[FSI] Start consultAllAlmacenCIC : {}", oHsData.size());
-        LOG.info(String.valueOf(oHsData));
-        return (HashSet<Object>) (Object) oHsData;
-     }
-
+   
 }
