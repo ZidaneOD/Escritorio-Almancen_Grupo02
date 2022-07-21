@@ -14,10 +14,10 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
     public void saveAlmacenCIC(CECategoriaProducto objObjeto) throws Exception {
         
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        String sql = "CALL sp_insert_categoria(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombCate());
-       // cs.setString(2, objObjeto.getStadoCate());
+   
         cs.execute();
 
     }
@@ -26,11 +26,10 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
     public void modificarAlmacenCIC(CECategoriaProducto objObjeto) throws Exception {
 
          Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        String sql = "CALL sp_update_categoria(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdCategoria());
         cs.setString(2, objObjeto.getNombCate());
-        //cs.setString(3, objObjeto.getObsvprod());
         cs.execute();
     }
 
@@ -38,9 +37,10 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
     public void eliminarAlmacenCIC(CECategoriaProducto objObjeto) throws Exception {
 
            Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_categoria(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdCategoria());
+        
         cs.execute();
     }
 

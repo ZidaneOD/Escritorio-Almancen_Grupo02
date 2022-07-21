@@ -17,10 +17,9 @@ public class CMCambiarMarcaProductoHashSet implements CICambioAlmacen<CEMarcaPro
     @Override
     public void saveAlmacenCIC(CEMarcaProducto objObjeto) throws Exception {
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        String sql = "CALL sp_insert_marca(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombMarca());
-        //cs.setString(2, objObjeto.getObsvprod());
         cs.execute();
     }
 
@@ -28,11 +27,10 @@ public class CMCambiarMarcaProductoHashSet implements CICambioAlmacen<CEMarcaPro
     public void modificarAlmacenCIC(CEMarcaProducto objObjeto) throws Exception {
 
           Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        String sql = "CALL sp_update_marca(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdMarca());
         cs.setString(2, objObjeto.getNombMarca());
-        //cs.setString(3, objObjeto.getObsvprod());
         cs.execute();
     }
 
@@ -40,7 +38,7 @@ public class CMCambiarMarcaProductoHashSet implements CICambioAlmacen<CEMarcaPro
     public void eliminarAlmacenCIC(CEMarcaProducto objObjeto) throws Exception {
 
           Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_marca(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdMarca());
         cs.execute();

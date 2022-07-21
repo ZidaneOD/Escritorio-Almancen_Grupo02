@@ -20,9 +20,9 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
     public JFrameMostrarAlmacen() {
         initComponents();
           objDtm = (DefaultTableModel) tblRegistro.getModel();
-       // oAlmacen = new CEAlmacen();
+      
         setSize(559, 408);
-        //setVisible(true);
+        setVisible(true);
         setLocationRelativeTo(null);
 
     

@@ -10,7 +10,7 @@ public class CLVariacionCargoEmpleado {
         String[][] aDataResponse = new String[poHsData.size()][2];
         int iRow = 0;
         for (CECargoEmpleado oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdCargo();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdCargo());
             aDataResponse[iRow][1] = oItem.getNombCargo();
 
             iRow++;

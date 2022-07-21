@@ -32,7 +32,6 @@ public class CMCambiarProductoHashSet implements CICambioAlmacen<CEProducto> {
         cs.setInt(10, objObjeto.getIdEmpaque());
         cs.setInt(11, objObjeto.getUnidad());
         cs.setString(12, objObjeto.getImagProd());
-        //cs.setInt(2, objObjeto.getIdEmpaque());
         
         cs.execute();
     }

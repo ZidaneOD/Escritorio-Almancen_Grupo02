@@ -21,7 +21,6 @@ public class CMCambiarUnidadMedidaHashSet implements CICambioAlmacen<CEUnidadMed
         String sql = "CALL sp_insert_distrito(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombUnid());
-      //  cs.setString(2, objObjeto.getObsvprod());
         cs.execute();
     }
 
@@ -33,7 +32,6 @@ public class CMCambiarUnidadMedidaHashSet implements CICambioAlmacen<CEUnidadMed
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdUnidadM());
         cs.setString(2, objObjeto.getNombUnid());
-        //cs.setString(3, objObjeto.getObsvprod());
         cs.execute();
     }
 

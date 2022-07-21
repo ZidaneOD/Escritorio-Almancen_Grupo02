@@ -20,7 +20,7 @@ public class CMCambiarAlmacen implements CICambioAlmacen<CEAlmacen> {
     public void saveAlmacenCIC(CEAlmacen objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        String sql = "CALL sp_insert_almacen(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombAlm());
         cs.setString(2, objObjeto.getIdUbicacion());
@@ -31,7 +31,7 @@ public class CMCambiarAlmacen implements CICambioAlmacen<CEAlmacen> {
     public void modificarAlmacenCIC(CEAlmacen objObjeto) throws Exception {
 
           Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        String sql = "CALL sp_update_almacen(?,?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getIdAlmacen());
         cs.setString(2, objObjeto.getNombAlm());
@@ -43,7 +43,7 @@ public class CMCambiarAlmacen implements CICambioAlmacen<CEAlmacen> {
     public void eliminarAlmacenCIC(CEAlmacen objObjeto) throws Exception {
         
           Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_almacen(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getIdAlmacen());
         cs.execute();

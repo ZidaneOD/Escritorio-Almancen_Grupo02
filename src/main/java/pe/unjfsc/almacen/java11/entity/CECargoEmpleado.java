@@ -3,13 +3,13 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CECargoEmpleado {
     
-    private String idCargo;
+    private int idCargo;
     private String nombCargo;
 
     public CECargoEmpleado() {
     }
 
-    public CECargoEmpleado(String idCargo, String nombCargo) {
+    public CECargoEmpleado(int idCargo, String nombCargo) {
         this.idCargo = idCargo;
         this.nombCargo = nombCargo;
     }
@@ -22,11 +22,11 @@ public class CECargoEmpleado {
         this.nombCargo = nombCargo;
     }
 
-    public String getIdCargo() {
+    public int getIdCargo() {
         return idCargo;
     }
 
-    public void setIdCargo(String idCargo) {
+    public void setIdCargo(int idCargo) {
         this.idCargo = idCargo;
     }
 

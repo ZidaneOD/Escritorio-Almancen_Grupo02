@@ -20,7 +20,6 @@ public class CMCambiarSaborProductoHashSet implements CICambioAlmacen<CESaborPro
         String sql = "CALL sp_insert_distrito(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombSabor());
-       // cs.setString(2, objObjeto.get());
         cs.execute();
 
     }
@@ -33,7 +32,6 @@ public class CMCambiarSaborProductoHashSet implements CICambioAlmacen<CESaborPro
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdSabor());
         cs.setString(2, objObjeto.getNombSabor());
-       // cs.setString(3, objObjeto.getObsvprod());
         cs.execute();
     }
 

@@ -17,10 +17,9 @@ public class CMCambiarDepartamentoAHashSet implements CICambioAlmacen<CEDepartam
     public void saveAlmacenCIC(CEDepartamentoAlmacen objObjeto) throws Exception {
 
              Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        String sql = "CALL sp_insert_departamento(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombDepa());
-       // cs.setString(2, objObjeto.getObsvprod());
         cs.execute();
     }
 
@@ -28,11 +27,10 @@ public class CMCambiarDepartamentoAHashSet implements CICambioAlmacen<CEDepartam
     public void modificarAlmacenCIC(CEDepartamentoAlmacen objObjeto) throws Exception {
         
          Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        String sql = "CALL sp_update_distrito(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getidDepartamento());
         cs.setString(2, objObjeto.getNombDepa());
-        //cs.setString(3, objObjeto.getObsvprod());
         cs.execute();
 
     }
@@ -41,7 +39,7 @@ public class CMCambiarDepartamentoAHashSet implements CICambioAlmacen<CEDepartam
     public void eliminarAlmacenCIC(CEDepartamentoAlmacen objObjeto) throws Exception {
 
          Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_departamento(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getidDepartamento());
         cs.execute();
