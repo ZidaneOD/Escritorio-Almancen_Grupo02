@@ -27,11 +27,6 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jPanel8 = new javax.swing.JPanel();
-        btnEstadoTrans = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         btnMarca = new javax.swing.JButton();
@@ -137,50 +132,11 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(58, 78, 121));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 610, 20));
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnEstadoTrans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emp/icons8-central-air-conditioning-80.png"))); // NOI18N
-        btnEstadoTrans.setContentAreaFilled(false);
-        btnEstadoTrans.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEstadoTrans.setMargin(new java.awt.Insets(4, 16, 4, 16));
-        btnEstadoTrans.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEstadoTransActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnEstadoTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 220, 90));
-
-        jLabel9.setBackground(new java.awt.Color(58, 78, 121));
-        jLabel9.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(58, 78, 121));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("ESTADO DE LA TRANSACCIÓN");
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 250, 30));
-
-        jLabel4.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel4.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("productos a ingresar al área de almacén.");
-        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 280, 30));
-
-        jLabel11.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel11.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Creación y edición de los nuevos ");
-        jPanel8.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 260, 30));
-
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 280, 170));
-
         jLabel10.setBackground(new java.awt.Color(58, 78, 121));
         jLabel10.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(58, 78, 121));
         jLabel10.setText("PRODUCTO Y MÁS SERVICIOS");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 410, 40));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 410, 30));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
@@ -385,7 +341,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(58, 78, 121));
         jLabel12.setText("PRODUCTO Y MÁS SERVICIOS");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 410, 40));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 410, 30));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
@@ -463,7 +419,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jLabel32.setText("Creación y edición de los nuevos ");
         jPanel14.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 220, 30));
 
-        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 250, 170));
+        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 250, 170));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 940, 700));
 
@@ -481,12 +437,6 @@ public class JFrameEmpl extends javax.swing.JFrame {
             System.out.println("ERROR" + e);
         }
     }//GEN-LAST:event_jlblSalirMouseClicked
-
-    private void btnEstadoTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoTransActionPerformed
-        LOG.info("[FSI] Star boton ir a Estado de Transaccion : ");
-        JFrameMostrarEstadoTransaccion a = new JFrameMostrarEstadoTransaccion();
-        a.setVisible(true);
-    }//GEN-LAST:event_btnEstadoTransActionPerformed
 
     private void btnMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcaActionPerformed
         LOG.info("[FSI] Star boton ir a Marca: ");
@@ -535,14 +485,12 @@ public class JFrameEmpl extends javax.swing.JFrame {
     private javax.swing.JButton BtntrasRegis;
     private javax.swing.JButton btnCate;
     public javax.swing.JButton btnEmpaquetado;
-    private javax.swing.JButton btnEstadoTrans;
     private javax.swing.JButton btnMarca;
     private javax.swing.JButton btnProducto;
     private javax.swing.JButton btnSabor;
     private javax.swing.JButton btnUM;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -566,12 +514,10 @@ public class JFrameEmpl extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -580,7 +526,6 @@ public class JFrameEmpl extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
