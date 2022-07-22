@@ -18,22 +18,22 @@ public class CMCambiarUbicacionAHashSet implements CICambioAlmacen<CEUbicacionAl
     public void saveAlmacenCIC(CEUbicacionAlmacen objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        String sql = "CALL sp_insert_ubicacion(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombUbic());
-        cs.setString(2, objObjeto.getIdDistrito());
+        cs.setInt(2, objObjeto.getIdDistrito());
         cs.execute();
     }
 
     @Override
     public void modificarAlmacenCIC(CEUbicacionAlmacen objObjeto) throws Exception {
 
-          Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_ubicacion(?,?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdUbicacion());
         cs.setString(2, objObjeto.getNombUbic());
-        cs.setString(3, objObjeto.getIdDistrito());
+        cs.setInt(3, objObjeto.getIdDistrito());
         cs.execute();
     }
 
@@ -41,7 +41,7 @@ public class CMCambiarUbicacionAHashSet implements CICambioAlmacen<CEUbicacionAl
     public void eliminarAlmacenCIC(CEUbicacionAlmacen objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_ubicacion(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdUbicacion());
         cs.execute();
@@ -50,14 +50,32 @@ public class CMCambiarUbicacionAHashSet implements CICambioAlmacen<CEUbicacionAl
     @Override
     public ResultSet buscar(Object objObject) throws Exception {
 
-         Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vubicacion where DIRECCIÓN like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
         return rs;
     }
 
-   
+    public ResultSet mostrar() throws Exception {
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vubicacion;";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+
+    }
+    
+    public ResultSet buscaPorCodigo(Object objObject) throws Exception {
+
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String nombre = "%" + objObject + "%";
+        String sql = "select * from vubicacion where DIRECCIÓN like ?";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+    }
 }

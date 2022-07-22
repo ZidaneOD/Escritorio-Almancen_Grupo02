@@ -12,7 +12,7 @@ public class CLVariacionDistritoA {
         for (CEDistritoAlmacen oItem : poHsData) {
             aDataResponse[iRow][0] = String.valueOf(oItem.getIdDistrito());
             aDataResponse[iRow][1] = oItem.getNombDistrito();
-            aDataResponse[iRow][2] = oItem.getIdProvincia();
+            aDataResponse[iRow][2] = String.valueOf(oItem.getIdProvincia());
             iRow++;
         }
         return aDataResponse;

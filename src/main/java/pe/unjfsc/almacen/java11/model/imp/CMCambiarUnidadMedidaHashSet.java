@@ -18,7 +18,7 @@ public class CMCambiarUnidadMedidaHashSet implements CICambioAlmacen<CEUnidadMed
     public void saveAlmacenCIC(CEUnidadMedidaProducto objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        String sql = "CALL sp_insert_unidadm(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombUnid());
         cs.execute();
@@ -27,8 +27,8 @@ public class CMCambiarUnidadMedidaHashSet implements CICambioAlmacen<CEUnidadMed
     @Override
     public void modificarAlmacenCIC(CEUnidadMedidaProducto objObjeto) throws Exception {
 
-         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_unidadm(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdUnidadM());
         cs.setString(2, objObjeto.getNombUnid());
@@ -39,7 +39,7 @@ public class CMCambiarUnidadMedidaHashSet implements CICambioAlmacen<CEUnidadMed
     public void eliminarAlmacenCIC(CEUnidadMedidaProducto objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_unidadm(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdUnidadM());
         cs.execute();
@@ -48,13 +48,22 @@ public class CMCambiarUnidadMedidaHashSet implements CICambioAlmacen<CEUnidadMed
     @Override
     public ResultSet buscar(Object objObject) throws Exception {
 
-            Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vunidadm where nombre like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
         return rs;
+    }
+
+    public ResultSet mostrar() throws Exception {
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vunidadm;";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+
     }
 
 }

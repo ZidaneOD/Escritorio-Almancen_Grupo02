@@ -7,14 +7,13 @@ public class CLVariacionTransaccion {
 
     public Object[][] convertHashSetArray(HashSet<CETransaccion> poHsData) {
 
-        String[][] aDataResponse = new String[poHsData.size()][5];
+        String[][] aDataResponse = new String[poHsData.size()][4];
         int iRow = 0;
         for (CETransaccion oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdTransaccion();
-            aDataResponse[iRow][1] = oItem.getIdAlmacen();
-            aDataResponse[iRow][2] = oItem.getIdProducto();
-            aDataResponse[iRow][3] = oItem.getIdEmpleado();
-            aDataResponse[iRow][4] = oItem.getIdEstado();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdkardex());
+            aDataResponse[iRow][1] = String.valueOf(oItem.getIdorigen());
+            aDataResponse[iRow][2] = String.valueOf(oItem.getIddest());
+            aDataResponse[iRow][3] = String.valueOf(oItem.getIdEmpleado());
 
             iRow++;
         }

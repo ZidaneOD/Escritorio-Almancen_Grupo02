@@ -1,47 +1,32 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pe.unjfsc.almacen.java11.entity.CECargoEmpleado;
-import pe.unjfsc.almacen.java11.logical.CLVariacionCargoEmpleado;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarCargoEmpleado;
 
 public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameMostrarCargoEmpleado");
 
-    private HashSet<CECargoEmpleado> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CECargoEmpleado oCargo;
-    CMCambiarCargoEmpleado oCMCargo;
+    DefaultTableModel objDtm;
+    CMCambiarCargoEmpleado objCMCambiarEmpl = new CMCambiarCargoEmpleado();
+    ResultSet rsCargo;
+    int xidcargo;
     boolean sw;
 
     public JFrameMostrarCargoEmpleado() {
         initComponents();
-
-        oCMCargo = new CMCambiarCargoEmpleado();
-        oCargo = new CECargoEmpleado();
         setSize(511, 388);
         //setVisible(true);
         setLocationRelativeTo(null);
+        objDtm = (DefaultTableModel) tblMostrar.getModel();
+        mostrarDatos();
 
-        String[] aTitulo = {"CODIGO", "NOMBRE CARGO"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblMostrar.setModel(oModel);
-    }
-
-    private Object[][] loadData() {
-        oCIAlmacen = oCMCargo;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
-
-        CLVariacionCargoEmpleado oLogicalPuesto = new CLVariacionCargoEmpleado();
-        return oLogicalPuesto.convertHashSetArray(oHsData);
     }
 
     @SuppressWarnings("unchecked")
@@ -164,15 +149,20 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
 
         tblMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "CODIGO", "PUESTO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblMostrarMouseClicked(evt);
@@ -246,33 +236,53 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMostrarMouseClicked
+        try {
+            xidcargo = Integer.parseInt(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 0).toString());
+            rsCargo.first();
 
-        txtCodigo.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 0).toString());
-        txtNombre.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 1).toString());
-        
+            do {
+                if (xidcargo == rsCargo.getInt(1)) {
+                    txtCodigo.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 0).toString());
+                    txtNombre.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 1).toString());
+                    rsCargo.last();
+                }
+
+            } while (rsCargo.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+
     }//GEN-LAST:event_tblMostrarMouseClicked
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
+        try {
+            CECargoEmpleado objCECargoEmpleado = new CECargoEmpleado();
 
-        //Verificar
-        if (!txtCodigo.getText().isEmpty()) {
+            objCECargoEmpleado.setNombCargo(txtNombre.getText().toUpperCase());
 
-            oCargo.setIdCargo(txtCodigo.getText());
-            oCargo.setNombCargo(txtNombre.getText());
+            if (!txtNombre.getText().isEmpty()) {
+                if (sw) {
+                    objCMCambiarEmpl.saveAlmacenCIC(objCECargoEmpleado);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
 
-            if (sw) {
-                oCMCargo.saveAlmacenCIC(oCargo);
-                LOG.info("[FSI] Dato Grabado : {}");
+                    objCECargoEmpleado.setIdCargo(Integer.parseInt(txtCodigo.getText()));
+                    objCMCambiarEmpl.modificarAlmacenCIC(objCECargoEmpleado);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
+
+                mostrarDatos();
             } else {
-                oCMCargo.modificarAlmacenCIC(new CECargoEmpleado(txtCodigo.getText(), txtNombre.getText()));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtCodigo.getText(), " - ", txtNombre.getText());
             }
 
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtCodigo.getText(), " - ", txtNombre.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
+
+       
         habilitaControles(false);
         limpiarControles();
     }//GEN-LAST:event_btnGrabarActionPerformed
@@ -303,7 +313,9 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
             if (!txtCodigo.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
 
-                    oCMCargo.eliminarAlmacenCIC(txtCodigo.getText());
+                    CECargoEmpleado objCECargoEmpleado = new CECargoEmpleado();
+                    objCECargoEmpleado.setIdCargo(Integer.parseInt(txtCodigo.getText()));
+                    objCMCambiarEmpl.eliminarAlmacenCIC(objCECargoEmpleado);
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -325,7 +337,6 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBorrar;
@@ -351,7 +362,6 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void habilitaControles(boolean b) {
-        txtCodigo.setEditable(b);
         txtNombre.setEditable(b);
 
         btnGrabar.setEnabled(b);
@@ -362,7 +372,7 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
         btnBorrar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtCodigo.requestFocus();
+        txtNombre.requestFocus();
     }
 
     private void limpiarControles() {
@@ -370,10 +380,22 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
         txtNombre.setText(null);
     }
 
-    private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "NOMBRE CARGO"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
 
-        tblMostrar.setModel(oModel);
+    private void mostrarDatos() {
+        limpiaJTable();
+        try {
+            rsCargo = objCMCambiarEmpl.mostrar();
+            while (rsCargo.next()) {
+                Object registro[] = {rsCargo.getInt(1), rsCargo.getString(2)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
+
     }
 }

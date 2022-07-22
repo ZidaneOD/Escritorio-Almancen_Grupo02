@@ -1,45 +1,44 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CETransaccion;
-import pe.unjfsc.almacen.java11.logical.CLVariacionTransaccion;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
+import pe.unjfsc.almacen.java11.entity.CESDetalle;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarDetalleHashSet;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarTransaccionHashSet;
 
 public class JFrameMostrarTransaccion extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameTransaccion");
 
-    private HashSet<CETransaccion> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CETransaccion oTransaccion;
-    CMCambiarTransaccionHashSet oCMTransaccion;
+    DefaultTableModel objDtm;
+    DefaultTableModel objDtmProduc;
+
+    CMCambiarAlmacen oCMAlmacen = new CMCambiarAlmacen();
+    CMCambiarTransaccionHashSet oCMTransaccion = new CMCambiarTransaccionHashSet();
+    CMCambiarDetalleHashSet oCMDetalle = new CMCambiarDetalleHashSet();
     boolean sw;
+
+    ResultSet rsKardex;
+
+    ResultSet rsAlmacena;
+    ResultSet rsAlmacenb;
+    int xidAlmacena;
+    int xidAlmacenb;
 
     public JFrameMostrarTransaccion() {
         initComponents();
-        oCMTransaccion = new CMCambiarTransaccionHashSet();
-        oTransaccion = new CETransaccion();
-        setSize(621, 479);
+        setSize(909, 648);
         //setVisible(true);
         setLocationRelativeTo(null);
 
-        String[] aTitulo = {"CODIGO", "ALMACEN", "PRODUCTO", "EMPLEADO", "ESTADO"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
-    }
-
-    private Object[][] loadData() {
-        oCIAlmacen = oCMTransaccion;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
-
-        CLVariacionTransaccion oLogicalTransaccion = new CLVariacionTransaccion();
-        return oLogicalTransaccion.convertHashSetArray(oHsData);
+        objDtmProduc = (DefaultTableModel) tblRegistro.getModel();
+        objDtm = (DefaultTableModel) tblmostrar.getModel();
+        mostrarDatos();
     }
 
     @SuppressWarnings("unchecked")
@@ -49,27 +48,35 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtidtransaccion = new javax.swing.JTextField();
-        cbidproducto = new javax.swing.JComboBox<>();
+        txtnombrep = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        cbidempleado = new javax.swing.JComboBox<>();
-        cbidestado = new javax.swing.JComboBox<>();
-        cbidalmacen = new javax.swing.JComboBox<>();
+        cbidalmacenA = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblRegistro = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        btnGrabar = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        btnCancelar = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        cbidalmacenB = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblmostrar = new javax.swing.JTable();
+        btnBuscarEmpleado = new javax.swing.JButton();
+        txtidtransaccion = new javax.swing.JTextField();
+        txtidEmpleado = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        btnAgregarP = new javax.swing.JButton();
+        btnEliminarP = new javax.swing.JButton();
+        txtidproducto = new javax.swing.JTextField();
+        btnBuscarProducto = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        btnGrabar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -81,53 +88,48 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         jLabel4.setText("ID");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 100, 30));
 
-        jLabel10.setText("ALMACEN");
+        jLabel10.setText("ALMACEN A");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 100, 30));
 
-        txtidtransaccion.setEditable(false);
-        txtidtransaccion.addActionListener(new java.awt.event.ActionListener() {
+        txtnombrep.setEditable(false);
+        txtnombrep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtidtransaccionActionPerformed(evt);
+                txtnombrepActionPerformed(evt);
             }
         });
-        jPanel1.add(txtidtransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 170, 30));
+        jPanel1.add(txtnombrep, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 260, 30));
 
-        cbidproducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "93132401", "93132555" }));
-        cbidproducto.setEnabled(false);
-        jPanel1.add(cbidproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 170, 30));
-
-        jLabel11.setText("PRODUCTO");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 100, 30));
+        jLabel11.setText("NOMBRE");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 100, 30));
 
         jLabel12.setText("EMPLEADO");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 100, 30));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 100, 30));
 
-        jLabel13.setText("ESTADO");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 100, 30));
-
-        cbidempleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EM01", "EM02", "EM03", "EM04", "EM05" }));
-        cbidempleado.setEnabled(false);
-        jPanel1.add(cbidempleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 170, 30));
-
-        cbidestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ES001", "ES002" }));
-        cbidestado.setEnabled(false);
-        jPanel1.add(cbidestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 170, 30));
-
-        cbidalmacen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALM01", "ALM02" }));
-        cbidalmacen.setEnabled(false);
-        jPanel1.add(cbidalmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 170, 30));
+        cbidalmacenA.setEnabled(false);
+        jPanel1.add(cbidalmacenA, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 170, 30));
 
         tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-
+                "CODIGO", "NOMBRE"
             }
-        ));
-        jScrollPane2.setViewportView(tblRegistro);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 400, 90));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblRegistro);
+        if (tblRegistro.getColumnModel().getColumnCount() > 0) {
+            tblRegistro.getColumnModel().getColumn(0).setPreferredWidth(1);
+        }
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 630, 90));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("TRANSACCIÓN");
@@ -150,70 +152,109 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 110, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 590, 110, 40));
 
-        jPanel3.setBackground(new java.awt.Color(58, 78, 121));
+        jLabel14.setText("ALMACEN B");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 100, 30));
 
-        btnGrabar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        btnGrabar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
-        btnGrabar.setText("GRABAR");
-        btnGrabar.setContentAreaFilled(false);
-        btnGrabar.setEnabled(false);
-        btnGrabar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGrabarActionPerformed(evt);
+        cbidalmacenB.setEnabled(false);
+        jPanel1.add(cbidalmacenB, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 170, 30));
+
+        tblmostrar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CODIGO", "FECHA", "ORIGEN", "DESTINO", "EMPLEADO", "APELLIDOS", "ESTADO"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane3.setViewportView(tblmostrar);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 630, 90));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 140, 40));
-
-        jPanel5.setBackground(new java.awt.Color(58, 78, 121));
-
-        btnCancelar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.png"))); // NOI18N
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setEnabled(false);
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarEmpleado.setText("..");
+        btnBuscarEmpleado.setEnabled(false);
+        btnBuscarEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnBuscarEmpleadoActionPerformed(evt);
             }
         });
+        jPanel1.add(btnBuscarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
+        txtidtransaccion.setEditable(false);
+        txtidtransaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidtransaccionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtidtransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 170, 30));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 140, 40));
+        txtidEmpleado.setEditable(false);
+        txtidEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidEmpleadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtidEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, 170, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 450, 480));
+        jLabel13.setText("PRODUCTO");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 100, 30));
+
+        btnAgregarP.setText("Agregar Producto");
+        btnAgregarP.setEnabled(false);
+        btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
+
+        btnEliminarP.setText("Eliminar Producto");
+        btnEliminarP.setEnabled(false);
+        btnEliminarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+
+        txtidproducto.setEditable(false);
+        txtidproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidproductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtidproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 170, 30));
+
+        btnBuscarProducto.setText("..");
+        btnBuscarProducto.setEnabled(false);
+        btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 750, 650));
 
         jPanel2.setBackground(new java.awt.Color(58, 78, 121));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -256,18 +297,79 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 480));
 
+        jPanel3.setBackground(new java.awt.Color(58, 78, 121));
+
+        btnGrabar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        btnGrabar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
+        btnGrabar.setText("GRABAR");
+        btnGrabar.setContentAreaFilled(false);
+        btnGrabar.setEnabled(false);
+        btnGrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrabarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
+
+        btnCancelar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.png"))); // NOI18N
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 140, 40));
+
+        jPanel5.setBackground(new java.awt.Color(58, 78, 121));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtidtransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidtransaccionActionPerformed
+    private void txtnombrepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombrepActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtidtransaccionActionPerformed
+    }//GEN-LAST:event_txtnombrepActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         LOG.info("[FSI] Star boton Nuevo : ");
         habilitaControles(true);
         limpiarControles();
         sw = true;
+        llenaComboCargoA();
+        llenaComboCargoB();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -280,10 +382,10 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         LOG.info("[FSI] Star boton Eliminar : {}");
         try {
             int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (!txtidtransaccion.getText().isEmpty()) {
+            if (!txtnombrep.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
 
-                    oCMTransaccion.eliminarAlmacenCIC(txtidtransaccion.getText());
+                    //oCMTransaccion.eliminarAlmacenCIC(txtnombrep.getText());
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -298,28 +400,37 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
+        try {
+            int xidfactura = 0;
+            CETransaccion oTransaccion = new CETransaccion();
+            //COMBO ORIGEN
+            obtenerIdAlmacenA();
+            oTransaccion.setIdorigen(xidAlmacena);
+            obtenerIdAlmacenB();
+            oTransaccion.setIddest(xidAlmacenb);
+            oTransaccion.setIdEmpleado(Integer.parseInt(txtidEmpleado.getText()));
+            oCMTransaccion.saveAlmacenCIC(oTransaccion);
+            xidfactura=oCMTransaccion.obtenerIdKardex();
+            /**
+             * ************************Detalle del Kardex *****************
+             */
+            int filas = objDtmProduc.getRowCount();
+            for (int i = 0; i < filas; i++) {
 
-        //Verificar
-        if (!txtidtransaccion.getText().isEmpty()) {
+                CESDetalle oDetalle = new CESDetalle();
+                oDetalle.setIdkardex(xidfactura);
+                oDetalle.setIdporducto(Integer.parseInt(tblRegistro.getValueAt(i, 0).toString()));
 
-            oTransaccion.setIdTransaccion(txtidtransaccion.getText());
-            oTransaccion.setIdAlmacen(cbidalmacen.getSelectedItem().toString());
-            oTransaccion.setIdProducto(cbidproducto.getSelectedItem().toString());
-            oTransaccion.setIdEmpleado(cbidempleado.getSelectedItem().toString());
-            oTransaccion.setIdEstado(cbidestado.getSelectedItem().toString());
+                System.out.println(i + "-" + oDetalle.getIdkardex() + " " + oDetalle.getIdporducto());
 
-            if (sw) {
-                oCMTransaccion.saveAlmacenCIC(oTransaccion);
-                LOG.info("[FSI] Dato Grabado : {}");
-            } else {
-                oCMTransaccion.modificarAlmacenCIC(new CETransaccion(txtidtransaccion.getText(), cbidalmacen.getSelectedItem().toString(), cbidproducto.getSelectedItem().toString(), cbidempleado.getSelectedItem().toString(), cbidestado.getSelectedItem().toString()));
-                LOG.info("[FSI] Dato Editado : {}");
+                oCMDetalle.saveAlmacenCIC(oDetalle);
             }
-
             mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtidtransaccion.getText(), " - ", cbidalmacen.getSelectedItem().toString());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
+         mostrarDatos();
         habilitaControles(false);
         limpiarControles();
     }//GEN-LAST:event_btnGrabarActionPerformed
@@ -339,24 +450,81 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
-  
+    private void txtidtransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidtransaccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidtransaccionActionPerformed
+
+    private void txtidEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidEmpleadoActionPerformed
+
+    private void txtidproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidproductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidproductoActionPerformed
+
+    private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
+        JFrameBuscarProducto a = new JFrameBuscarProducto();
+        a.setVisible(true);
+
+    }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void btnEliminarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPActionPerformed
+        objDtmProduc.removeRow(tblRegistro.getSelectedRow());
+
+    }//GEN-LAST:event_btnEliminarPActionPerformed
+
+    private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
+        int cont = 0;
+        int idproducto = Integer.parseInt(txtidproducto.getText());
+        boolean sw = false;
+        Object[] registro = {txtidproducto.getText(), txtnombrep.getText()};
+
+        if (objDtmProduc.getRowCount() == 0) {
+            objDtmProduc.addRow(registro);
+
+        } else {
+            while (cont < objDtmProduc.getRowCount()) {
+                if (idproducto == Integer.parseInt(objDtmProduc.getValueAt(cont, 0).toString())) {
+                    sw = true;
+                    JOptionPane.showMessageDialog(rootPane, "El registro ua existe");
+                    cont = objDtmProduc.getRowCount();
+                }
+                cont++;
+            }
+            if (!sw) {
+                objDtmProduc.addRow(registro);
+            }
+        }
+        txtidproducto.setText(null);
+        txtnombrep.setText(null);
+    }//GEN-LAST:event_btnAgregarPActionPerformed
+
+    private void btnBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpleadoActionPerformed
+        JFrameBuscarEmpleado a = new JFrameBuscarEmpleado();
+        a.setVisible(true);
+
+    }//GEN-LAST:event_btnBuscarEmpleadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarP;
+    private javax.swing.JButton btnBuscarEmpleado;
+    private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminarP;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cbidalmacen;
-    private javax.swing.JComboBox<String> cbidempleado;
-    private javax.swing.JComboBox<String> cbidestado;
-    private javax.swing.JComboBox<String> cbidproducto;
+    private javax.swing.JComboBox<String> cbidalmacenA;
+    private javax.swing.JComboBox<String> cbidalmacenB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -364,16 +532,25 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblRegistro;
+    private javax.swing.JTable tblmostrar;
+    public static javax.swing.JTextField txtidEmpleado;
+    public static javax.swing.JTextField txtidproducto;
     private javax.swing.JTextField txtidtransaccion;
+    public static javax.swing.JTextField txtnombrep;
     // End of variables declaration//GEN-END:variables
 
     private void habilitaControles(boolean b) {
-        txtidtransaccion.setEditable(b);
-        cbidalmacen.setEnabled(b);
-        cbidproducto.setEnabled(b);
-        cbidempleado.setEnabled(b);
-        cbidestado.setEnabled(b);
+
+        cbidalmacenA.setEnabled(b);
+        cbidalmacenA.setEnabled(b);
+        cbidalmacenB.setEnabled(b);
+
+        btnBuscarEmpleado.setEnabled(b);
+        btnBuscarProducto.setEnabled(b);
+        btnAgregarP.setEnabled(b);
+        btnEliminarP.setEnabled(b);
 
         btnGrabar.setEnabled(b);
         btnCancelar.setEnabled(b);
@@ -383,21 +560,119 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         btnEliminar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtidtransaccion.requestFocus();
     }
 
     private void limpiarControles() {
+        txtnombrep.setText(null);
+        txtidEmpleado.setText(null);
+        txtidproducto.setText(null);
         txtidtransaccion.setText(null);
-        cbidalmacen.setSelectedIndex(1);
-        cbidproducto.setSelectedIndex(1);
-        cbidempleado.setSelectedIndex(1);
-        cbidestado.setSelectedIndex(1);
+
+        cbidalmacenA.removeAllItems();
+        cbidalmacenB.removeAllItems();
+        while (objDtmProduc.getRowCount() > 0) {
+            objDtmProduc.removeRow(0);
+        }
+
+    }
+
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+
     }
 
     private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "ALMACEN", "PRODUCTO", "EMPLEADO", "ESTADO"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
+        limpiaJTable();
+        try {
+            rsKardex = oCMTransaccion.mostrar();
+            while (rsKardex.next()) {
+                Object registro[] = {rsKardex.getInt(1), rsKardex.getDate(2), rsKardex.getString(3),
+                    rsKardex.getString(4), rsKardex.getString(5), rsKardex.getString(6), rsKardex.getString(7)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
     }
+
+    private void llenaComboCargoA() {
+        try {
+
+            rsAlmacena = oCMAlmacen.buscar("%");
+
+            if (sw) {
+                while (rsAlmacena.next()) {
+                    cbidalmacenA.addItem(rsAlmacena.getString(2));
+                }
+            } else {
+                String nombre = cbidalmacenA.getSelectedItem().toString();
+                while (rsAlmacena.next()) {
+                    if (!nombre.equals(rsAlmacena.getString(2))) {
+                        cbidalmacenA.addItem(rsAlmacena.getString(2));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR LLENACOMB: " + e);
+        }
+    }
+
+    private void obtenerIdAlmacenA() {
+        try {
+            String nombre = cbidalmacenA.getSelectedItem().toString();
+            rsAlmacena.first();
+
+            do {
+                if (nombre.equals(rsAlmacena.getString(2))) {
+                    xidAlmacena = rsAlmacena.getInt(1);
+                    rsAlmacena.last();
+                }
+            } while (rsAlmacena.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
+    }
+
+    private void llenaComboCargoB() {
+        try {
+
+            rsAlmacenb = oCMAlmacen.buscar("%");
+
+            if (sw) {
+                while (rsAlmacenb.next()) {
+                    cbidalmacenB.addItem(rsAlmacenb.getString(2));
+                }
+            } else {
+                String nombre = cbidalmacenB.getSelectedItem().toString();
+                while (rsAlmacenb.next()) {
+                    if (!nombre.equals(rsAlmacenb.getString(2))) {
+                        cbidalmacenB.addItem(rsAlmacenb.getString(2));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR LLENACOMB: " + e);
+        }
+    }
+
+    private void obtenerIdAlmacenB() {
+        try {
+            String nombre = cbidalmacenB.getSelectedItem().toString();
+            rsAlmacenb.first();
+
+            do {
+                if (nombre.equals(rsAlmacenb.getString(2))) {
+                    xidAlmacenb = rsAlmacenb.getInt(1);
+                    rsAlmacenb.last();
+                }
+            } while (rsAlmacenb.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
+    }
+
 }

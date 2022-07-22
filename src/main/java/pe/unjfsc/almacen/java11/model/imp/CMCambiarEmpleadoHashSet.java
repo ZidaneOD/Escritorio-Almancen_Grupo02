@@ -17,8 +17,8 @@ public class CMCambiarEmpleadoHashSet implements CICambioAlmacen<CEEmpleadoTrans
     @Override
     public void saveAlmacenCIC(CEEmpleadoTransaccion objObjeto) throws Exception {
 
-          Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_insert_empleado(?,?,?,?,?,?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getDniEmpl());
         cs.setString(2, objObjeto.getNombEmpl());
@@ -26,15 +26,15 @@ public class CMCambiarEmpleadoHashSet implements CICambioAlmacen<CEEmpleadoTrans
         cs.setString(4, objObjeto.getAmaEmpl());
         cs.setString(5, objObjeto.getTelfEmpl());
         cs.setString(6, objObjeto.getMailEmpl());
-        cs.setString(7, objObjeto.getIdCargo());
+        cs.setInt(7, objObjeto.getIdCargo());
         cs.execute();
     }
 
     @Override
     public void modificarAlmacenCIC(CEEmpleadoTransaccion objObjeto) throws Exception {
 
-         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_empleado(?,?,?,?,?,?,?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdEmpl());
         cs.setString(2, objObjeto.getDniEmpl());
@@ -43,15 +43,15 @@ public class CMCambiarEmpleadoHashSet implements CICambioAlmacen<CEEmpleadoTrans
         cs.setString(5, objObjeto.getAmaEmpl());
         cs.setString(6, objObjeto.getTelfEmpl());
         cs.setString(7, objObjeto.getMailEmpl());
-        cs.setString(8, objObjeto.getIdCargo());
+        cs.setInt(8, objObjeto.getIdCargo());
         cs.execute();
     }
 
     @Override
     public void eliminarAlmacenCIC(CEEmpleadoTransaccion objObjeto) throws Exception {
 
-         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_delete_empleado(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdEmpl());
         cs.execute();
@@ -62,12 +62,19 @@ public class CMCambiarEmpleadoHashSet implements CICambioAlmacen<CEEmpleadoTrans
 
         Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vempleado where nombre like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
         return rs;
     }
+    
+    public ResultSet mostrar() throws Exception {
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vempleado;";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
 
- 
+    }
 }

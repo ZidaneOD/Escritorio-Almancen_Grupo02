@@ -1,46 +1,31 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CEMarcaProducto;
-import pe.unjfsc.almacen.java11.logical.CLVariacionMarcaProducto;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarMarcaProductoHashSet;
 
 public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameMarcaProducto");
 
-    private HashSet<CEMarcaProducto> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CEMarcaProducto oMarca;
-    CMCambiarMarcaProductoHashSet oCMMarca;
+    DefaultTableModel objDtm;
+    ResultSet rsMarca;
+    int xidMarca;
+    CMCambiarMarcaProductoHashSet oCMMarca = new CMCambiarMarcaProductoHashSet();
     boolean sw;
 
     public JFrameMostrarMarcaProducto() {
         initComponents();
-        oCMMarca = new CMCambiarMarcaProductoHashSet();
-        oMarca = new CEMarcaProducto();
         setSize(552, 419);
         //setVisible(true);
         setLocationRelativeTo(null);
+        objDtm = (DefaultTableModel) tblRegistro.getModel();
+        mostrarDatos();
 
-        String[] aTitulo = {"CODIGO", "MARCA"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
-
-    }
-
-    private Object[][] loadData() {
-        oCIAlmacen = oCMMarca;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
-
-        CLVariacionMarcaProducto oLogicalMarca = new CLVariacionMarcaProducto();
-        return oLogicalMarca.convertHashSetArray(oHsData);
     }
 
     @SuppressWarnings("unchecked")
@@ -98,9 +83,17 @@ public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "CODIGO", "NOMBRE"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblRegistroMouseClicked(evt);
@@ -272,7 +265,9 @@ public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
             if (!txtidmarca.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
 
-                    oCMMarca.eliminarAlmacenCIC(txtidmarca.getText());
+                    CEMarcaProducto oMarca = new CEMarcaProducto();
+                    oMarca.setIdMarca(Integer.parseInt(txtidmarca.getText()));
+                    oCMMarca.eliminarAlmacenCIC(oMarca);
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -288,23 +283,27 @@ public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
 
-        //Verificar
-        if (!txtidmarca.getText().isEmpty()) {
+        try {
+            //Verificar
+            if (!txtnombmarca.getText().isEmpty()) {
+                CEMarcaProducto oMarca = new CEMarcaProducto();
+                oMarca.setNombMarca(txtnombmarca.getText().toUpperCase());
 
-            oMarca.setIdMarca(txtidmarca.getText());
-            oMarca.setNombMarca(txtnombmarca.getText());
+                if (sw) {
+                    oCMMarca.saveAlmacenCIC(oMarca);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oMarca.setIdMarca(Integer.parseInt(txtidmarca.getText()));
+                    oCMMarca.modificarAlmacenCIC(oMarca);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
 
-            if (sw) {
-                oCMMarca.saveAlmacenCIC(oMarca);
-                LOG.info("[FSI] Dato Grabado : {}");
+                mostrarDatos();
             } else {
-                oCMMarca.modificarAlmacenCIC(new CEMarcaProducto(txtidmarca.getText(), txtnombmarca.getText()));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtidmarca.getText(), " - ", txtnombmarca.getText());
             }
-
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtidmarca.getText(), " - ", txtnombmarca.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
         habilitaControles(false);
         limpiarControles();
@@ -326,8 +325,21 @@ public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void tblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMouseClicked
-        txtidmarca.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
-        txtnombmarca.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
+        try {
+            xidMarca = Integer.parseInt(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+            rsMarca.first();
+            do {
+                if (xidMarca == rsMarca.getInt(1)) {
+                    txtidmarca.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+                    txtnombmarca.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
+                    rsMarca.last();
+                }
+            } while (rsMarca.next());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+
+
     }//GEN-LAST:event_tblRegistroMouseClicked
 
 
@@ -355,7 +367,6 @@ public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void habilitaControles(boolean b) {
-        txtidmarca.setEditable(b);
         txtnombmarca.setEditable(b);
 
         btnGrabar.setEnabled(b);
@@ -366,7 +377,7 @@ public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
         btnEliminar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtidmarca.requestFocus();
+        txtnombmarca.requestFocus();
     }
 
     private void limpiarControles() {
@@ -374,11 +385,21 @@ public class JFrameMostrarMarcaProducto extends javax.swing.JFrame {
         txtnombmarca.setText(null);
 
     }
+     private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
 
     private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "MARCA"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
+         limpiaJTable();
+        try {
+            rsMarca = oCMMarca.mostrar();
+            while (rsMarca.next()) {
+                Object registro[] = {rsMarca.getInt(1), rsMarca.getString(2)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
     }
 }

@@ -1,46 +1,36 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CEEmpleadoTransaccion;
-import pe.unjfsc.almacen.java11.logical.CLVariacionEmpleadoT;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarEmpleadoHashSet;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarCargoEmpleado;
 
 public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameEmpleadoTransaccion");
 
-    private HashSet<CEEmpleadoTransaccion> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CEEmpleadoTransaccion oEmpleado;
-    CMCambiarEmpleadoHashSet oCMEmpleado;
+    DefaultTableModel objDtm;
+    ResultSet rsEmpleado;
+    ResultSet rsCargo;
+    int xidEmpleado;
+    int xidcargo;
+
+    CMCambiarEmpleadoHashSet oCMEmpleado = new CMCambiarEmpleadoHashSet();
+    CMCambiarCargoEmpleado oCMCargo = new CMCambiarCargoEmpleado();
     boolean sw;
 
     public JFrameMostrarEmpleadoTransaccion() {
         initComponents();
 
-        oCMEmpleado = new CMCambiarEmpleadoHashSet();
-        oEmpleado = new CEEmpleadoTransaccion();
         setSize(651, 499);
         //setVisible(true);
         setLocationRelativeTo(null);
-
-        String[] aTitulo = {"CODIGO", "DNI", "NOMBRE", "A. PATERNO", "A. MATERNO", "TELFONO", "MAIL", "CARGO"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
-    }
-
-    private Object[][] loadData() {
-        oCIAlmacen = oCMEmpleado;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
-
-        CLVariacionEmpleadoT oLogicalEmpleado = new CLVariacionEmpleadoT();
-        return oLogicalEmpleado.convertHashSetArray(oHsData);
+        objDtm = (DefaultTableModel) tblRegistro.getModel();
+        mostrarDatos();
     }
 
     @SuppressWarnings("unchecked")
@@ -118,9 +108,17 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "CODIGO", "DNI", "NOMBRE", "A PATERNO", "A MATERNO", "TELEFONO", "EMAIL", "PUESTO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblRegistroMouseClicked(evt);
@@ -178,7 +176,6 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         jLabel5.setText("CARGO");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 60, 30));
 
-        cbidcargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P0001", "P0002", "P0003", "P0004", "P0005" }));
         cbidcargo.setEnabled(false);
         jPanel1.add(cbidcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 100, 30));
 
@@ -353,6 +350,8 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         habilitaControles(true);
         limpiarControles();
         sw = true;
+        llenaComboCargo();
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -365,6 +364,7 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         LOG.info("[FSI] Star boton Editar : {}");
         habilitaControles(true);
         sw = false;
+        llenaComboCargo();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -382,8 +382,9 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
             int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (!txtidempleado.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
-
-                    oCMEmpleado.eliminarAlmacenCIC(txtidempleado.getText());
+                    CEEmpleadoTransaccion oEmpleado = new CEEmpleadoTransaccion();
+                    oEmpleado.setIdEmpl(Integer.parseInt(txtidempleado.getText()));
+                    oCMEmpleado.eliminarAlmacenCIC(oEmpleado);
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -400,43 +401,63 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         LOG.info("[FSI] Star boton Grabar : {}");
 
         //Verificar
-        if (!txtidempleado.getText().isEmpty()) {
+        try {
+            if (!txtdni.getText().isEmpty()) {
+                CEEmpleadoTransaccion oEmpleado = new CEEmpleadoTransaccion();
 
-            oEmpleado.setIdEmpl(txtidempleado.getText());
-            oEmpleado.setDniEmpl(txtdni.getText());
-            oEmpleado.setNombEmpl(txtnombemp.getText());
-            oEmpleado.setApaEmpl(txtapa.getText());
-            oEmpleado.setAmaEmpl(txtama.getText());
-            oEmpleado.setTelfEmpl(txttelefono.getText());
-            oEmpleado.setMailEmpl(txtmail.getText());
-            oEmpleado.setIdCargo(cbidcargo.getSelectedItem().toString());
+                oEmpleado.setDniEmpl(txtdni.getText().trim());
+                oEmpleado.setNombEmpl(txtnombemp.getText().toUpperCase().trim());
+                oEmpleado.setApaEmpl(txtapa.getText().toUpperCase().trim());
+                oEmpleado.setAmaEmpl(txtama.getText().toUpperCase().trim());
+                oEmpleado.setTelfEmpl(txttelefono.getText().trim());
+                oEmpleado.setMailEmpl(txtmail.getText().toUpperCase().trim());
 
-            if (sw) {
-                oCMEmpleado.saveAlmacenCIC(oEmpleado);
-                LOG.info("[FSI] Dato Grabado : {}");
+                //CARGO Puesto
+                obtenerIdpuesto();
+                oEmpleado.setIdCargo(xidcargo);
+
+                if (sw) {
+                    oCMEmpleado.saveAlmacenCIC(oEmpleado);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oEmpleado.setIdEmpl(Integer.parseInt(txtidempleado.getText()));
+                    oCMEmpleado.modificarAlmacenCIC(oEmpleado);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
+
+                mostrarDatos();
             } else {
-                oCMEmpleado.modificarAlmacenCIC(new CEEmpleadoTransaccion(txtidempleado.getText(), txtdni.getText(), txtnombemp.getText(), txtapa.getText(), txtama.getText(), txttelefono.getText(), txtmail.getText(), cbidcargo.getSelectedItem().toString()));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtidempleado.getText(), " - ", txtdni.getText());
             }
-
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtidempleado.getText(), " - ", txtdni.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR: " + e);
         }
         habilitaControles(false);
         limpiarControles();
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void tblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMouseClicked
-        txtidempleado.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
-        txtdni.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
-        txtnombemp.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 2).toString());
-        txtapa.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 3).toString());
-        txtama.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 4).toString());
-        txttelefono.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 5).toString());
-        txtmail.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 6).toString());
+        try {
+            xidEmpleado = Integer.parseInt(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+            rsEmpleado.first();
+            do {
+                if (xidEmpleado == rsEmpleado.getInt(1)) {
+                    txtidempleado.setText(rsEmpleado.getInt(1) + "");
+                    txtdni.setText(rsEmpleado.getString(2));
+                    txtnombemp.setText(rsEmpleado.getString(3));
+                    txtapa.setText(rsEmpleado.getString(4));
+                    txtama.setText(rsEmpleado.getString(5));
+                    txttelefono.setText(rsEmpleado.getString(6));
+                    txtmail.setText(rsEmpleado.getString(7));
+                    cbidcargo.removeAllItems();
+                    cbidcargo.addItem(rsEmpleado.getString(8));
 
-        cbidcargo.setSelectedItem(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 7).toString());
+                    rsEmpleado.last();
+                }
+            } while (rsEmpleado.next());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
 
 
     }//GEN-LAST:event_tblRegistroMouseClicked
@@ -445,7 +466,6 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmailActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -487,13 +507,13 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
     private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
     private void habilitaControles(boolean b) {
-        txtidempleado.setEditable(b);
         txtdni.setEditable(b);
         txtnombemp.setEditable(b);
         txtapa.setEditable(b);
         txtama.setEditable(b);
         txttelefono.setEditable(b);
         txtmail.setEditable(b);
+
         cbidcargo.setEnabled(b);
 
         btnGrabar.setEnabled(b);
@@ -504,7 +524,7 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         btnEliminar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtidempleado.requestFocus();
+        txtnombemp.requestFocus();
     }
 
     private void limpiarControles() {
@@ -515,14 +535,65 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         txtama.setText(null);
         txttelefono.setText(null);
         txtmail.setText(null);
-        cbidcargo.setSelectedIndex(1);
+        cbidcargo.removeAllItems();
 
     }
 
-    private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "DNI", "NOMBRE", "A. PATERNO", "A. MATERNO", "TELFONO", "MAIL", "CARGO"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
 
-        tblRegistro.setModel(oModel);
+    private void mostrarDatos() {
+        limpiaJTable();
+        try {
+            rsEmpleado = oCMEmpleado.mostrar();
+            while (rsEmpleado.next()) {
+                Object registro[] = {rsEmpleado.getInt(1), rsEmpleado.getString(2), rsEmpleado.getString(3),
+                    rsEmpleado.getString(4), rsEmpleado.getString(5), rsEmpleado.getString(6), rsEmpleado.getString(7), rsEmpleado.getString(8)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void llenaComboCargo() {
+        try {
+
+            rsCargo = oCMCargo.buscar("%");
+
+            if (sw) {
+                while (rsCargo.next()) {
+                    cbidcargo.addItem(rsCargo.getString(2));
+                }
+            } else {
+                String nombre = cbidcargo.getSelectedItem().toString();
+                while (rsCargo.next()) {
+                    if (!nombre.equals(rsCargo.getString(2))) {
+                        cbidcargo.addItem(rsCargo.getString(2));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR LLENACOMB: " + e);
+        }
+    }
+
+    private void obtenerIdpuesto() {
+        try {
+            String nombre = cbidcargo.getSelectedItem().toString();
+            rsCargo.first();
+
+            do {
+                if (nombre.equals(rsCargo.getString(2))) {
+                    xidcargo = rsCargo.getInt(1);
+                    rsCargo.last();
+                }
+            } while (rsCargo.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
     }
 }

@@ -1,48 +1,31 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pe.unjfsc.almacen.java11.entity.CEEmpaqueProducto;
-import pe.unjfsc.almacen.java11.logical.CLVariacionEmpaqueProducto;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarEmpaqueProductoHashSet;
 
 public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameEmpaqueProducto");
 
-    private HashSet<CEEmpaqueProducto> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CEEmpaqueProducto oEmpaque;
-    CMCambiarEmpaqueProductoHashSet oCMEmpaque;
+    DefaultTableModel objDtm;
+    ResultSet rsEmpaque;
+    int xidEmpaque;
+    CMCambiarEmpaqueProductoHashSet oCMEmpaque = new CMCambiarEmpaqueProductoHashSet();
     boolean sw;
 
     public JFrameMostrarEmpaqueProducto() {
-        
-
         initComponents();
-        oCMEmpaque = new CMCambiarEmpaqueProductoHashSet();
-        oEmpaque = new CEEmpaqueProducto();
         setSize(509, 417);
         //setVisible(true);
         setLocationRelativeTo(null);
-
-        String[] aTitulo = {"CODIGO", "NOMBRE"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
-    }
-
-    private Object[][] loadData() {
-        oCIAlmacen = oCMEmpaque;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
-
-        CLVariacionEmpaqueProducto oLogicalEmpaque = new CLVariacionEmpaqueProducto();
-        return oLogicalEmpaque.convertHashSetArray(oHsData);
+        objDtm = (DefaultTableModel) tblRegistro.getModel();
+        mostrarDatos();
     }
 
     @SuppressWarnings("unchecked")
@@ -165,9 +148,17 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "CODIGO", "NOMBRE"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblRegistroMouseClicked(evt);
@@ -175,7 +166,7 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblRegistro);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 300, 180));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 170, 300, 180));
 
         jPanel4.setBackground(new java.awt.Color(231, 96, 76));
 
@@ -262,9 +253,20 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtidempaqueActionPerformed
 
     private void tblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMouseClicked
-        txtidempaque.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
-        txtnombempaque.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
 
+        try {
+            xidEmpaque = Integer.parseInt(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+            rsEmpaque.first();
+            do {
+                if (xidEmpaque == rsEmpaque.getInt(1)) {
+                    txtidempaque.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+                    txtnombempaque.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
+                    rsEmpaque.last();
+                }
+            } while (rsEmpaque.next());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
 
     }//GEN-LAST:event_tblRegistroMouseClicked
 
@@ -303,7 +305,9 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
             if (!txtidempaque.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
 
-                    oCMEmpaque.eliminarAlmacenCIC(txtidempaque.getText());
+                    CEEmpaqueProducto oEmpaque = new CEEmpaqueProducto();
+                    oEmpaque.setIdEmpaque(Integer.parseInt(txtidempaque.getText()));
+                    oCMEmpaque.eliminarAlmacenCIC(oEmpaque);
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -319,23 +323,27 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
 
-        //Verificar
-        if (!txtidempaque.getText().isEmpty()) {
+        try {
+            CEEmpaqueProducto oEmpaque = new CEEmpaqueProducto();
+            oEmpaque.setNombEmpa(txtnombempaque.getText().toUpperCase().trim());
+            //Verificar
+            if (!txtnombempaque.getText().isEmpty()) {
 
-            oEmpaque.setIdEmpaque(txtidempaque.getText());
-            oEmpaque.setNombEmpa(txtnombempaque.getText());
+                if (sw) {
+                    oCMEmpaque.saveAlmacenCIC(oEmpaque);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oEmpaque.setIdEmpaque(Integer.parseInt(txtidempaque.getText()));
+                    oCMEmpaque.modificarAlmacenCIC(oEmpaque);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
 
-            if (sw) {
-                oCMEmpaque.saveAlmacenCIC(oEmpaque);
-                LOG.info("[FSI] Dato Grabado : {}");
+                mostrarDatos();
             } else {
-                oCMEmpaque.modificarAlmacenCIC(new CEEmpaqueProducto(txtidempaque.getText(), txtnombempaque.getText()));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtidempaque.getText(), " - ", txtnombempaque.getText());
             }
-
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtidempaque.getText(), " - ", txtnombempaque.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
         habilitaControles(false);
         limpiarControles();
@@ -365,7 +373,6 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
     private javax.swing.JTextField txtnombempaque;
     // End of variables declaration//GEN-END:variables
  private void habilitaControles(boolean b) {
-        txtidempaque.setEditable(b);
         txtnombempaque.setEditable(b);
 
         btnGrabar.setEnabled(b);
@@ -376,7 +383,7 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
         btnEliminar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtidempaque.requestFocus();
+        txtnombempaque.requestFocus();
     }
 
     private void limpiarControles() {
@@ -385,10 +392,21 @@ public class JFrameMostrarEmpaqueProducto extends javax.swing.JFrame {
 
     }
 
-    private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "NOMBRE"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
 
-        tblRegistro.setModel(oModel);
+    private void mostrarDatos() {
+        limpiaJTable();
+        try {
+            rsEmpaque = oCMEmpaque.mostrar();
+            while (rsEmpaque.next()) {
+                Object registro[] = {rsEmpaque.getInt(1), rsEmpaque.getString(2)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
     }
 }

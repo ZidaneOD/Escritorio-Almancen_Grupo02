@@ -16,30 +16,30 @@ public class CMCambiarProvinciaHashSet implements CICambioAlmacen<CEProvinciaAlm
 
     @Override
     public void saveAlmacenCIC(CEProvinciaAlmacen objObjeto) throws Exception {
-Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_insert_distrito(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombProvincia());
-        cs.setString(2, objObjeto.getIdDepartamento());
+        cs.setInt(2, objObjeto.getIdDepartamento());
         cs.execute();
     }
 
     @Override
     public void modificarAlmacenCIC(CEProvinciaAlmacen objObjeto) throws Exception {
 
-           Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_update_distrito(?,?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdProvincia());
         cs.setString(2, objObjeto.getNombProvincia());
-        cs.setString(3, objObjeto.getIdDepartamento());
+        cs.setInt(3, objObjeto.getIdDepartamento());
         cs.execute();
     }
 
     @Override
     public void eliminarAlmacenCIC(CEProvinciaAlmacen objObjeto) throws Exception {
 
-         Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_delete_distrito(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdProvincia());
@@ -51,13 +51,11 @@ Connection cn = ConMySQL.getInstance().getConnection();
 
         Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vprovincia where departamento like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
         return rs;
     }
-
-    
 
 }

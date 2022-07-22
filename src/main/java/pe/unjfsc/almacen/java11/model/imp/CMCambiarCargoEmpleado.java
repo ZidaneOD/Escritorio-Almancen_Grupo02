@@ -17,19 +17,18 @@ public class CMCambiarCargoEmpleado implements CICambioAlmacen<CECargoEmpleado> 
     @Override
     public void saveAlmacenCIC(CECargoEmpleado objObjeto) throws Exception {
 
-             Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_insert_puesto(?)";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombCargo());
-      
         cs.execute();
     }
 
     @Override
     public void modificarAlmacenCIC(CECargoEmpleado objObjeto) throws Exception {
-        
-           Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_puesto(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdCargo());
         cs.setString(2, objObjeto.getNombCargo());
@@ -41,7 +40,7 @@ public class CMCambiarCargoEmpleado implements CICambioAlmacen<CECargoEmpleado> 
     public void eliminarAlmacenCIC(CECargoEmpleado objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_puesto(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdCargo());
         cs.execute();
@@ -52,13 +51,21 @@ public class CMCambiarCargoEmpleado implements CICambioAlmacen<CECargoEmpleado> 
 
         Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vpuesto where puesto like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
         return rs;
 
     }
+    
+    public ResultSet mostrar() throws Exception {
 
-   
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vpuesto";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+
+    }
 }

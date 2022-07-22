@@ -4,22 +4,22 @@ public class CEProvinciaAlmacen {
 
     private int idProvincia;
     private String nombProvincia;
-    private String idDepartamento;
+    private int idDepartamento;
 
     public CEProvinciaAlmacen() {
     }
 
-    public CEProvinciaAlmacen(int idProvincia, String nombProvincia, String idDepartamento) {
+    public CEProvinciaAlmacen(int idProvincia, String nombProvincia, int idDepartamento) {
         this.idProvincia = idProvincia;
         this.nombProvincia = nombProvincia;
         this.idDepartamento = idDepartamento;
     }
 
-    public String getIdDepartamento() {
+    public int getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(String idDepartamento) {
+    public void setIdDepartamento(int idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
 

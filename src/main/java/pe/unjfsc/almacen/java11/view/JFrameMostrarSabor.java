@@ -1,45 +1,31 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CESaborProducto;
-import pe.unjfsc.almacen.java11.logical.CLVariacionSaborP;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarSaborProductoHashSet;
 
 public class JFrameMostrarSabor extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameSabor");
 
-    private HashSet<CESaborProducto> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CESaborProducto oSabor;
-    CMCambiarSaborProductoHashSet oCMSabor;
+    DefaultTableModel objDtm;
+    ResultSet rsSabor;
+    CMCambiarSaborProductoHashSet oCMSabor= new CMCambiarSaborProductoHashSet();
+    int xidSabor;
     boolean sw;
 
     public JFrameMostrarSabor() {
         initComponents();
-        oCMSabor = new CMCambiarSaborProductoHashSet();
-        oSabor = new CESaborProducto();
         setSize(564, 409);
         //setVisible(true);
         setLocationRelativeTo(null);
+        objDtm = (DefaultTableModel) tblRegistro.getModel();
+        mostrarDatos();
 
-        String[] aTitulo = {"CODIGO", "SABOR"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
-    }
-
-    private Object[][] loadData() {
-        oCIAlmacen = oCMSabor;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
-
-        CLVariacionSaborP oLogicalSabor = new CLVariacionSaborP();
-        return oLogicalSabor.convertHashSetArray(oHsData);
     }
 
     @SuppressWarnings("unchecked")
@@ -96,9 +82,17 @@ public class JFrameMostrarSabor extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "CODIGO", "NOMBRE"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblRegistroMouseClicked(evt);
@@ -277,8 +271,9 @@ public class JFrameMostrarSabor extends javax.swing.JFrame {
             int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (!txtidsabor.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
-
-                    oCMSabor.eliminarAlmacenCIC(txtidsabor.getText());
+                    CESaborProducto oSabor = new CESaborProducto();
+                    oSabor.setIdSabor(Integer.parseInt(txtidsabor.getText()));
+                    oCMSabor.eliminarAlmacenCIC(oSabor);
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -294,23 +289,27 @@ public class JFrameMostrarSabor extends javax.swing.JFrame {
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
 
-        //Verificar
-        if (!txtidsabor.getText().isEmpty()) {
+        try {
+            CESaborProducto oSabor = new CESaborProducto();
+            oSabor.setNombSabor(txtnombsabor.getText().toUpperCase().trim());
+            //Verificar
+            if (!txtnombsabor.getText().isEmpty()) {
 
-            oSabor.setIdSabor(txtidsabor.getText());
-            oSabor.setNombSabor(txtnombsabor.getText());
+                if (sw) {
+                    oCMSabor.saveAlmacenCIC(oSabor);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oSabor.setIdSabor(Integer.parseInt(txtidsabor.getText()));
+                    oCMSabor.modificarAlmacenCIC(oSabor);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
 
-            if (sw) {
-                oCMSabor.saveAlmacenCIC(oSabor);
-                LOG.info("[FSI] Dato Grabado : {}");
+                mostrarDatos();
             } else {
-                oCMSabor.modificarAlmacenCIC(new CESaborProducto(txtidsabor.getText(), txtnombsabor.getText()));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtidsabor.getText(), " - ", txtnombsabor.getText());
             }
-
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtidsabor.getText(), " - ", txtnombsabor.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
         habilitaControles(false);
         limpiarControles();
@@ -332,9 +331,21 @@ public class JFrameMostrarSabor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void tblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMouseClicked
-        txtidsabor.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
-        txtnombsabor.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
 
+        try {
+            xidSabor = Integer.parseInt(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+            rsSabor.first();
+            do {
+                if (xidSabor == rsSabor.getInt(1)) {
+                    txtidsabor.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+                    txtnombsabor.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
+
+                    rsSabor.last();
+                }
+            } while (rsSabor.next());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
     }//GEN-LAST:event_tblRegistroMouseClicked
 
 
@@ -359,7 +370,6 @@ public class JFrameMostrarSabor extends javax.swing.JFrame {
     private javax.swing.JTextField txtnombsabor;
     // End of variables declaration//GEN-END:variables
     private void habilitaControles(boolean b) {
-        txtidsabor.setEditable(b);
         txtnombsabor.setEditable(b);
 
         btnGrabar.setEnabled(b);
@@ -370,7 +380,7 @@ public class JFrameMostrarSabor extends javax.swing.JFrame {
         btnEliminar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtidsabor.requestFocus();
+        txtnombsabor.requestFocus();
     }
 
     private void limpiarControles() {
@@ -378,11 +388,21 @@ public class JFrameMostrarSabor extends javax.swing.JFrame {
         txtnombsabor.setText(null);
 
     }
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
 
     private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "SABOR"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
+         limpiaJTable();
+        try {
+            rsSabor = oCMSabor.mostrar();
+            while (rsSabor.next()) {
+                Object registro[] = {rsSabor.getInt(1), rsSabor.getString(2)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
     }
 }

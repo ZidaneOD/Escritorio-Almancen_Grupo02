@@ -10,12 +10,12 @@ public class CEEmpleadoTransaccion {
     private String amaEmpl;
     private String telfEmpl;
     private String mailEmpl;
-    private String idCargo;
+    private int idCargo;
 
     public CEEmpleadoTransaccion() {
     }
 
-    public CEEmpleadoTransaccion(int idEmpl, String dniEmpl, String nombEmpl, String apaEmpl, String amaEmpl, String telfEmpl, String mailEmpl, String idPuesto) {
+    public CEEmpleadoTransaccion(int idEmpl, String dniEmpl, String nombEmpl, String apaEmpl, String amaEmpl, String telfEmpl, String mailEmpl, int idPuesto) {
         this.idEmpl = idEmpl;
         this.dniEmpl = dniEmpl;
         this.nombEmpl = nombEmpl;
@@ -26,11 +26,11 @@ public class CEEmpleadoTransaccion {
         this.idCargo = idPuesto;
     }
 
-    public String getIdCargo() {
+    public int getIdCargo() {
         return idCargo;
     }
 
-    public void setIdCargo(String idCargo) {
+    public void setIdCargo(int idCargo) {
         this.idCargo = idCargo;
     }
 

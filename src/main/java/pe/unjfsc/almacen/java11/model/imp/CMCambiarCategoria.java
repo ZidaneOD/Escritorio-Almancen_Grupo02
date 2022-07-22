@@ -12,12 +12,12 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
 
     @Override
     public void saveAlmacenCIC(CECategoriaProducto objObjeto) throws Exception {
-        
+
         Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_insert_categoria(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombCate());
-   
+
         cs.execute();
 
     }
@@ -25,7 +25,7 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
     @Override
     public void modificarAlmacenCIC(CECategoriaProducto objObjeto) throws Exception {
 
-         Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_update_categoria(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdCategoria());
@@ -36,11 +36,11 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
     @Override
     public void eliminarAlmacenCIC(CECategoriaProducto objObjeto) throws Exception {
 
-           Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_delete_categoria(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdCategoria());
-        
+
         cs.execute();
     }
 
@@ -49,13 +49,21 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
 
         Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vcategoria where nombdist like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
         return rs;
     }
 
-    
+    public ResultSet mostrar() throws Exception {
+
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vcategoria";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+
+    }
 
 }

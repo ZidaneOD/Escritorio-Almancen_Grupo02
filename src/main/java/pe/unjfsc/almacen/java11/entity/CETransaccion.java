@@ -3,68 +3,54 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CETransaccion {
     
-    private String idTransaccion;
-    private String idAlmacen;
-    private String idProducto;
-    private String idEmpleado;
-    private String idEstado;
+    private int idkardex;
+    private int idorigen;
+    private int iddest;
+    private int idEmpleado;
+
+    public CETransaccion(int idkardex, int idorigen, int iddest, int idEmpleado) {
+        this.idkardex = idkardex;
+        this.idorigen = idorigen;
+        this.iddest = iddest;
+        this.idEmpleado = idEmpleado;
+    }
 
     public CETransaccion() {
     }
 
-    public CETransaccion(String idTransaccion, String idAlmacen, String idProducto, String idEmpleado, String idEstado) {
-        this.idTransaccion = idTransaccion;
-        this.idAlmacen = idAlmacen;
-        this.idProducto = idProducto;
-        this.idEmpleado = idEmpleado;
-        this.idEstado = idEstado;
+    public int getIdkardex() {
+        return idkardex;
     }
 
-    public String getIdEstado() {
-        return idEstado;
+    public void setIdkardex(int idkardex) {
+        this.idkardex = idkardex;
     }
 
-    public void setIdEstado(String idEstado) {
-        this.idEstado = idEstado;
+    public int getIdorigen() {
+        return idorigen;
     }
 
-    public String getIdTransaccion() {
-        return idTransaccion;
+    public void setIdorigen(int idorigen) {
+        this.idorigen = idorigen;
     }
 
-    public void setIdTransaccion(String idTransaccion) {
-        this.idTransaccion = idTransaccion;
+    public int getIddest() {
+        return iddest;
     }
 
-    public String getIdAlmacen() {
-        return idAlmacen;
+    public void setIddest(int iddest) {
+        this.iddest = iddest;
     }
 
-    public void setIdAlmacen(String idAlmacen) {
-        this.idAlmacen = idAlmacen;
-    }
-
-    public String getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(String idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public String getIdEmpleado() {
+    public int getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(String idEmpleado) {
+    public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 
-    @Override
-    public String toString() {
-        return "CETransaccion{" + "idTransaccion=" + idTransaccion + ", idAlmacen=" + idAlmacen + ", idProducto=" + idProducto + ", idEmpleado=" + idEmpleado + ", idEstado=" + idEstado + '}';
-    }
-    
+   
     
     
     

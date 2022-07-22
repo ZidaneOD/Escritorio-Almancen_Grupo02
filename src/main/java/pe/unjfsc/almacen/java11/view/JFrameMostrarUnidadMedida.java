@@ -1,48 +1,31 @@
 package pe.unjfsc.almacen.java11.view;
 
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CEUnidadMedidaProducto;
-import pe.unjfsc.almacen.java11.logical.CLVariacionUnidadMedida;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarUnidadMedidaHashSet;
 
 public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameMostrarUnidadMedida");
 
-    private HashSet<CEUnidadMedidaProducto> oHsData;
-    private CICambioAlmacen oCIUnidad;
-    CEUnidadMedidaProducto oUnidad;
-    CMCambiarUnidadMedidaHashSet oCMUnidad;
+    DefaultTableModel objDtm;
+    ResultSet rsUnidadm;
+    int xidunidadm;
+    CMCambiarUnidadMedidaHashSet oCMUnidad = new CMCambiarUnidadMedidaHashSet();
     boolean sw;
 
     public JFrameMostrarUnidadMedida() {
         initComponents();
-
-        oCMUnidad = new CMCambiarUnidadMedidaHashSet();
-        oUnidad = new CEUnidadMedidaProducto();
-
         setSize(558, 473);
-        setVisible(true);
-        setLocation(100, 100);
+        //setVisible(true);
         setLocationRelativeTo(null);
+        objDtm = (DefaultTableModel) tblRegistro.getModel();
+        mostrarDatos();
 
-        String[] aTitulo = {"CODIGO", "UNIDAD"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblMostrar.setModel(oModel);
-    }
-
-    private Object[][] loadData() {
-        oCIUnidad = oCMUnidad;
-        oHsData = oCIUnidad.consultAllAlmacenCIC();
-
-        CLVariacionUnidadMedida oLogicalCategoria = new CLVariacionUnidadMedida();
-        return oLogicalCategoria.convertHashSetArray(oHsData);
     }
 
     @SuppressWarnings("unchecked")
@@ -67,7 +50,7 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
         jSeparator14 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMostrar = new javax.swing.JTable();
+        tblRegistro = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
 
@@ -230,23 +213,28 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblMostrar.setModel(new javax.swing.table.DefaultTableModel(
+        tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "CODIGO", "NOMBRE"
             }
-        ));
-        tblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblMostrarMouseClicked(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblMostrar);
+        tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRegistroMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblRegistro);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -342,8 +330,9 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
             int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (!txtCodigo.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
-
-                    oCMUnidad.eliminarAlmacenCIC(txtCodigo.getText());
+                    CEUnidadMedidaProducto oUnidad = new CEUnidadMedidaProducto();
+                    oUnidad.setIdUnidadM(Integer.parseInt(txtCodigo.getText()));
+                    oCMUnidad.eliminarAlmacenCIC(oUnidad);
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -362,24 +351,28 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
+        try {
 
-        //Verificar
-        if (!txtCodigo.getText().isEmpty()) {
+            //Verificar
+            if (!txtNombre.getText().isEmpty()) {
+                CEUnidadMedidaProducto oUnidad = new CEUnidadMedidaProducto();
+                oUnidad.setNombUnid(txtNombre.getText().toUpperCase().trim());
 
-            oUnidad.setIdUnidadM(txtCodigo.getText());
-            oUnidad.setNombUnid(txtNombre.getText());
+                if (sw) {
+                    oCMUnidad.saveAlmacenCIC(oUnidad);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oUnidad.setIdUnidadM(Integer.parseInt(txtCodigo.getText()));
+                    oCMUnidad.modificarAlmacenCIC(oUnidad);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
 
-            if (sw) {
-                oCMUnidad.saveAlmacenCIC(oUnidad);
-                LOG.info("[FSI] Dato Grabado : {}");
+                mostrarDatos();
             } else {
-                oCMUnidad.modificarAlmacenCIC(new CEUnidadMedidaProducto(txtCodigo.getText(), txtNombre.getText()));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtCodigo.getText(), " - ", txtNombre.getText());
             }
-
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtCodigo.getText(), " - ", txtNombre.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
         habilitaControles(false);
         limpiarControles();
@@ -391,11 +384,23 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
         limpiarControles();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void tblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMostrarMouseClicked
+    private void tblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMouseClicked
+        try {
+            xidunidadm = Integer.parseInt(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+            rsUnidadm.first();
+            do {
+                if (xidunidadm == rsUnidadm.getInt(1)) {
+                    txtCodigo.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+                    txtNombre.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
+                    rsUnidadm.last();
+                }
+            } while (rsUnidadm.next());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
 
-        txtCodigo.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 0).toString());
-        txtNombre.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 1).toString());
-    }//GEN-LAST:event_tblMostrarMouseClicked
+
+    }//GEN-LAST:event_tblRegistroMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         LOG.info("[FSI] Star boton salir : ");
@@ -426,13 +431,12 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator14;
-    private javax.swing.JTable tblMostrar;
+    private javax.swing.JTable tblRegistro;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
     private void habilitaControles(boolean b) {
-        txtCodigo.setEditable(b);
         txtNombre.setEditable(b);
 
         btnGrabar.setEnabled(b);
@@ -443,7 +447,7 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
         btnBorrar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtCodigo.requestFocus();
+        txtNombre.requestFocus();
     }
 
     private void limpiarControles() {
@@ -451,10 +455,21 @@ public class JFrameMostrarUnidadMedida extends javax.swing.JFrame {
         txtNombre.setText(null);
     }
 
-    private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "UNIDAD"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
 
-        tblMostrar.setModel(oModel);
+    private void mostrarDatos() {
+        limpiaJTable();
+        try {
+            rsUnidadm = oCMUnidad.mostrar();
+            while (rsUnidadm.next()) {
+                Object registro[] = {rsUnidadm.getInt(1), rsUnidadm.getString(2)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
     }
 }

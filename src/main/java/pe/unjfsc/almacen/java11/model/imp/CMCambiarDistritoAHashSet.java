@@ -21,7 +21,7 @@ public class CMCambiarDistritoAHashSet implements CICambioAlmacen<CEDistritoAlma
         String sql = "CALL sp_insert_distrito(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombDistrito());
-        cs.setString(2, objObjeto.getIdProvincia());
+        cs.setInt(2, objObjeto.getIdProvincia());
         cs.execute();
     }
 
@@ -33,7 +33,7 @@ public class CMCambiarDistritoAHashSet implements CICambioAlmacen<CEDistritoAlma
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdDistrito());
         cs.setString(2, objObjeto.getNombDistrito());
-        cs.setString(3, objObjeto.getIdProvincia());
+        cs.setInt(3, objObjeto.getIdProvincia());
         cs.execute();
     }
 
@@ -52,7 +52,7 @@ public class CMCambiarDistritoAHashSet implements CICambioAlmacen<CEDistritoAlma
 
         Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vdistrito where provincia like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();

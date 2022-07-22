@@ -1,34 +1,34 @@
 package pe.unjfsc.almacen.java11.view;
 
 import java.sql.ResultSet;
+import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pe.unjfsc.almacen.java11.entity.CEAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarAlmacen;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarUbicacionAHashSet;
 
 public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameMostrarAlmacen");
 
-      DefaultTableModel objDtm;
-    CMCambiarAlmacen objDistritoDAO = new CMCambiarAlmacen();
-    ResultSet rsDistrito;
-    int xiddistrito;
+    DefaultTableModel objDtm;
+    CMCambiarAlmacen objAlmacenDAO = new CMCambiarAlmacen();
+    ResultSet rsAlmacen;
+    CMCambiarUbicacionAHashSet objUbicacionDAO = new CMCambiarUbicacionAHashSet();
+    ResultSet rsUbicacion;
+
     boolean sw;
 
     public JFrameMostrarAlmacen() {
         initComponents();
-          objDtm = (DefaultTableModel) tblRegistro.getModel();
-      
         setSize(559, 408);
-        setVisible(true);
         setLocationRelativeTo(null);
-
-    
+        objDtm = (DefaultTableModel) tblRegistro.getModel();
+        mostrarDatos();
     }
-
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,12 +38,11 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtnombalmacen = new javax.swing.JTextField();
+        txtcodiUbic = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtidalmacen = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblRegistro = new javax.swing.JTable();
-        cbidubicacion = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator14 = new javax.swing.JSeparator();
@@ -52,7 +51,9 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         btnGrabar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
-        jTextBuscar = new javax.swing.JTextField();
+        btnBuscarUbic = new javax.swing.JButton();
+        txtnombalmacen = new javax.swing.JTextField();
+        jSeparator15 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -88,11 +89,11 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         jLabel4.setText(" ID                         :");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 110, 30));
 
-        txtnombalmacen.setEditable(false);
-        txtnombalmacen.setBackground(new java.awt.Color(255, 255, 255));
-        txtnombalmacen.setForeground(new java.awt.Color(102, 102, 102));
-        txtnombalmacen.setBorder(null);
-        jPanel1.add(txtnombalmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 130, 30));
+        txtcodiUbic.setEditable(false);
+        txtcodiUbic.setBackground(new java.awt.Color(255, 255, 255));
+        txtcodiUbic.setForeground(new java.awt.Color(102, 102, 102));
+        txtcodiUbic.setBorder(null);
+        jPanel1.add(txtcodiUbic, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 130, 30));
 
         jLabel10.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel10.setText("NOMBRE            :");
@@ -114,9 +115,17 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "NOMBRE"
+                "ID", "NOMBRE", "DIRECCIÓN", "DISTRITO", "PROVINCIA", "DEPARTAMENTO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblRegistroMouseClicked(evt);
@@ -125,11 +134,6 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblRegistro);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 320, 70));
-
-        cbidubicacion.setForeground(new java.awt.Color(102, 102, 102));
-        cbidubicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UB001", "UB002" }));
-        cbidubicacion.setEnabled(false);
-        jPanel1.add(cbidubicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 130, 30));
 
         jLabel11.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel11.setText("UBICACION        :");
@@ -146,7 +150,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
         jSeparator13.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator13.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 140, 20));
+        jPanel1.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 140, 20));
 
         jPanel3.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -208,12 +212,24 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, 40));
 
-        jTextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextBuscarKeyReleased(evt);
+        btnBuscarUbic.setText("...");
+        btnBuscarUbic.setEnabled(false);
+        btnBuscarUbic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarUbicActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 100, -1));
+        jPanel1.add(btnBuscarUbic, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, -1, -1));
+
+        txtnombalmacen.setEditable(false);
+        txtnombalmacen.setBackground(new java.awt.Color(255, 255, 255));
+        txtnombalmacen.setForeground(new java.awt.Color(102, 102, 102));
+        txtnombalmacen.setBorder(null);
+        jPanel1.add(txtnombalmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 130, 30));
+
+        jSeparator15.setBackground(new java.awt.Color(58, 78, 121));
+        jSeparator15.setForeground(new java.awt.Color(58, 78, 121));
+        jPanel1.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 140, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 400, 410));
 
@@ -269,9 +285,23 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
     }//GEN-LAST:event_txtidalmacenActionPerformed
 
     private void tblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMouseClicked
-        txtidalmacen.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
-        txtnombalmacen.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
-        cbidubicacion.setSelectedItem(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 2).toString());
+        try {
+            txtidalmacen.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+            txtnombalmacen.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
+
+            rsUbicacion = objUbicacionDAO.buscaPorCodigo(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 2).toString());
+            while (rsUbicacion.next()) {
+                if (rsUbicacion.getString(2).equals(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 2).toString())) {
+                    txtcodiUbic.setText(String.valueOf(rsUbicacion.getInt(1)));
+                    rsUbicacion.last();
+                }
+            }
+
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(JFrameMostrarAlmacen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_tblRegistroMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -304,45 +334,72 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         LOG.info("[FSI] Star boton Eliminar : {}");
-        
+        try {
+            int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (!txtidalmacen.getText().isEmpty()) {
+                if (op == JOptionPane.YES_OPTION) {
+
+                    CEAlmacen oAlmacen = new CEAlmacen();
+                    oAlmacen.setIdAlmacen(Integer.parseInt(txtidalmacen.getText()));
+                    objAlmacenDAO.eliminarAlmacenCIC(oAlmacen);
+                    limpiarControles();
+                    JOptionPane.showMessageDialog(rootPane, "Registro borrado");
+                    mostrarDatos();
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar un registro");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
+        try {
 
-        
-    }//GEN-LAST:event_btnGrabarActionPerformed
+            //Verificar
+            if (!txtnombalmacen.getText().isEmpty()) {
+                CEAlmacen oAlmacen = new CEAlmacen();
+                oAlmacen.setNombAlm(txtnombalmacen.getText().toUpperCase());
+                oAlmacen.setIdUbicacion(Integer.parseInt(txtcodiUbic.getText()));
 
-    private void jTextBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscarKeyReleased
-      try {
-            limpiarJTable();
-            if (!jTextBuscar.getText().isEmpty()) {
-                rsDistrito = objDistritoDAO.buscar(jTextBuscar.getText().trim());
-                while (rsDistrito.next()) {
-                    Object registro[] = {rsDistrito.getInt(1), rsDistrito.getString(2)};
-                    objDtm.addRow(registro);
+                if (sw) {
+                    objAlmacenDAO.saveAlmacenCIC(oAlmacen);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oAlmacen.setIdAlmacen(Integer.parseInt(txtidalmacen.getText()));
+                    objAlmacenDAO.modificarAlmacenCIC(oAlmacen);
+                    LOG.info("[FSI] Dato Editado : {}");
                 }
+
+                mostrarDatos();
+            } else {
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtidalmacen.getText(), " - ", txtnombalmacen.getText());
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
-    }//GEN-LAST:event_jTextBuscarKeyReleased
-    
-    
-     private void limpiarJTable() {
-        while (objDtm.getRowCount() > 0) {
-            objDtm.removeRow(0);
-        }
-    }
+        habilitaControles(false);
+        limpiarControles();
+
+    }//GEN-LAST:event_btnGrabarActionPerformed
+
+    private void btnBuscarUbicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUbicActionPerformed
+        JFrameBuscarUbicacion a = new JFrameBuscarUbicacion();
+        a.setVisible(true);
+    }//GEN-LAST:event_btnBuscarUbicActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarUbic;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cbidubicacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -355,16 +412,17 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator14;
-    private javax.swing.JTextField jTextBuscar;
+    private javax.swing.JSeparator jSeparator15;
     private javax.swing.JTable tblRegistro;
+    public static javax.swing.JTextField txtcodiUbic;
     private javax.swing.JTextField txtidalmacen;
     private javax.swing.JTextField txtnombalmacen;
     // End of variables declaration//GEN-END:variables
 
     private void habilitaControles(boolean b) {
-        txtidalmacen.setEditable(b);
+
         txtnombalmacen.setEditable(b);
-        cbidubicacion.setEnabled(b);
+        btnBuscarUbic.setEnabled(b);
 
         btnGrabar.setEnabled(b);
         btnCancelar.setEnabled(b);
@@ -374,15 +432,32 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         btnEliminar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtidalmacen.requestFocus();
+        txtnombalmacen.requestFocus();
     }
 
     private void limpiarControles() {
         txtidalmacen.setText(null);
         txtnombalmacen.setText(null);
-        cbidubicacion.setSelectedIndex(1);
+        txtcodiUbic.setText(null);
     }
 
-    
-    
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
+    }
+
+    private void mostrarDatos() {
+        limpiaJTable();
+        try {
+            rsAlmacen = objAlmacenDAO.mostrar();
+            while (rsAlmacen.next()) {
+                Object registro[] = {rsAlmacen.getInt(1), rsAlmacen.getString(2), rsAlmacen.getString(3),
+                    rsAlmacen.getString(4), rsAlmacen.getString(5), rsAlmacen.getString(6)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
+    }
+
 }

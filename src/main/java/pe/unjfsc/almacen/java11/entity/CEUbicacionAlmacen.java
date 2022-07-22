@@ -4,22 +4,22 @@ public class CEUbicacionAlmacen {
 
     private int idUbicacion;
     private String nombUbic;
-    private String idDistrito;
+    private int idDistrito;
 
     public CEUbicacionAlmacen() {
     }
 
-    public CEUbicacionAlmacen(int idUbicacion, String nombUbic, String idDistrito) {
+    public CEUbicacionAlmacen(int idUbicacion, String nombUbic, int idDistrito) {
         this.idUbicacion = idUbicacion;
         this.nombUbic = nombUbic;
         this.idDistrito = idDistrito;
     }
 
-    public String getIdDistrito() {
+    public int getIdDistrito() {
         return idDistrito;
     }
 
-    public void setIdDistrito(String idDistrito) {
+    public void setIdDistrito(int idDistrito) {
         this.idDistrito = idDistrito;
     }
 

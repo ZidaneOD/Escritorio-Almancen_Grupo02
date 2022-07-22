@@ -4,22 +4,22 @@ public class CEDistritoAlmacen {
 
     private int idDistrito;
     private String nombDistrito;
-    private String idProvincia;
+    private int idProvincia;
 
     public CEDistritoAlmacen() {
     }
 
-    public CEDistritoAlmacen(int idDistrito, String nombDistrito, String idProvincia) {
+    public CEDistritoAlmacen(int idDistrito, String nombDistrito, int idProvincia) {
         this.idDistrito = idDistrito;
         this.nombDistrito = nombDistrito;
         this.idProvincia = idProvincia;
     }
 
-    public String getIdProvincia() {
+    public int getIdProvincia() {
         return idProvincia;
     }
 
-    public void setIdProvincia(String idProvincia) {
+    public void setIdProvincia(int idProvincia) {
         this.idProvincia = idProvincia;
     }
 

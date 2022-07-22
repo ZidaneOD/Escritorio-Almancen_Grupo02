@@ -16,8 +16,8 @@ public class CMCambiarEmpaqueProductoHashSet implements CICambioAlmacen<CEEmpaqu
 
     @Override
     public void saveAlmacenCIC(CEEmpaqueProducto objObjeto) throws Exception {
-      
-           Connection cn = ConMySQL.getInstance().getConnection();
+
+        Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_insert_empaque(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombEmpa());
@@ -28,7 +28,7 @@ public class CMCambiarEmpaqueProductoHashSet implements CICambioAlmacen<CEEmpaqu
     @Override
     public void modificarAlmacenCIC(CEEmpaqueProducto objObjeto) throws Exception {
 
-          Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String sql = "CALL sp_update_empaque(?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdEmpaque());
@@ -49,9 +49,9 @@ public class CMCambiarEmpaqueProductoHashSet implements CICambioAlmacen<CEEmpaqu
     @Override
     public ResultSet buscar(Object objObject) throws Exception {
 
-          Connection cn = ConMySQL.getInstance().getConnection();
+        Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vdistrito where nombdist like ?";
+        String sql = "select * from vempaque where nombempa like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
@@ -59,5 +59,14 @@ public class CMCambiarEmpaqueProductoHashSet implements CICambioAlmacen<CEEmpaqu
 
     }
 
-   
+    public ResultSet mostrar() throws Exception {
+
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vempaque";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+
+    }
+
 }

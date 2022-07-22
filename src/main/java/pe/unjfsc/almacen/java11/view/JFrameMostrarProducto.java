@@ -100,7 +100,6 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnImprimirProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -294,10 +293,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,7 +375,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 190, 70));
+        jPanel2.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 190, 70));
 
         btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
@@ -393,7 +389,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 190, 70));
+        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 190, 70));
 
         btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
@@ -407,21 +403,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 190, 70));
-
-        btnImprimirProducto.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        btnImprimirProducto.setForeground(new java.awt.Color(255, 255, 255));
-        btnImprimirProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-print-24.png"))); // NOI18N
-        btnImprimirProducto.setText("REPORTE DE PROD.");
-        btnImprimirProducto.setBorderPainted(false);
-        btnImprimirProducto.setContentAreaFilled(false);
-        btnImprimirProducto.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnImprimirProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirProductoActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnImprimirProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 190, 60));
+        jPanel2.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 70));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -586,10 +568,6 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jblImagen.setIcon(new ImageIcon(foto));
     }//GEN-LAST:event_tblRegistroMouseClicked
 
-    private void btnImprimirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnImprimirProductoActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -597,7 +575,6 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGrabar;
-    private javax.swing.JButton btnImprimirProducto;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnseleccionar;

@@ -10,9 +10,9 @@ public class CLVariacionAlmacen {
         String[][] aDataResponse = new String[poHsData.size()][3];
         int iRow = 0;
         for (CEAlmacen oItem : poHsData) {
-            aDataResponse[iRow][0] = oItem.getIdAlmacen();
+            aDataResponse[iRow][0] = String.valueOf(oItem.getIdAlmacen());
             aDataResponse[iRow][1] = oItem.getNombAlm();
-            aDataResponse[iRow][2] = oItem.getIdUbicacion();
+            aDataResponse[iRow][2] = String.valueOf(oItem.getIdUbicacion());
             iRow++;
         }
         return aDataResponse;

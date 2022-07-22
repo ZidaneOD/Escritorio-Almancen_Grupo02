@@ -1,48 +1,36 @@
 package pe.unjfsc.almacen.java11.view;
 
 import java.awt.Color;
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CECategoriaProducto;
-import pe.unjfsc.almacen.java11.logical.CLVariacionCategoriaProducto;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarCategoria;
 
 public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameMostrarCategoriaProducto");
 
-    private HashSet<CECategoriaProducto> oHsData;
-    private CICambioAlmacen oCICategoria;
-    CECategoriaProducto oCategoria;
-    CMCambiarCategoria oCMCategoria;
+    DefaultTableModel objDtm;
+
+    CMCambiarCategoria oCMCategoria = new CMCambiarCategoria();
+
+    ResultSet rsCategoria;
+    int xidcategoria;
     boolean sw;
 
     public JFrameMostrarCategoriaProducto() {
-        oCMCategoria = new CMCambiarCategoria();
-        oCategoria = new CECategoriaProducto();
 
         initComponents();
         setSize(577, 411);
-        setVisible(true);
+        //setVisible(true);
         setLocationRelativeTo(null);
 
-        String[] aTitulo = {"CODIGO", "NOMBRE C"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
+        objDtm = (DefaultTableModel) tblMostrar.getModel();
+        mostrarDatos();
 
-        tblMostrar.setModel(oModel);
-    }
-
-    private Object[][] loadData() {
-        oCICategoria = oCMCategoria;
-        oHsData = oCICategoria.consultAllAlmacenCIC();
-
-        CLVariacionCategoriaProducto oLogicalCategoria = new CLVariacionCategoriaProducto();
-
-        return oLogicalCategoria.convertHashSetArray(oHsData);
     }
 
     @SuppressWarnings("unchecked")
@@ -214,9 +202,17 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "CODIGO", "NOMBRE"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblMostrarMouseClicked(evt);
@@ -267,7 +263,9 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
             if (!txtCodigo.getText().isEmpty()) {
                 if (op == JOptionPane.YES_OPTION) {
 
-                    oCMCategoria.eliminarAlmacenCIC(txtCodigo.getText());
+                    CECategoriaProducto oCategoria = new CECategoriaProducto();
+                    oCategoria.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+                    oCMCategoria.eliminarAlmacenCIC(oCategoria);
                     limpiarControles();
                     JOptionPane.showMessageDialog(rootPane, "Registro borrado");
                     mostrarDatos();
@@ -287,9 +285,21 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMostrarMouseClicked
+        try {
+            xidcategoria = Integer.parseInt(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 0).toString());
+            rsCategoria.first();
+            do {
+                if (xidcategoria == rsCategoria.getInt(1)) {
+                    txtCodigo.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 0).toString());
+                    txtNombre.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 1).toString());
 
-        txtCodigo.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 0).toString());
-        txtNombre.setText(tblMostrar.getValueAt(tblMostrar.getSelectedRow(), 1).toString());
+                    rsCategoria.last();
+                }
+            } while (rsCategoria.next());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+
     }//GEN-LAST:event_tblMostrarMouseClicked
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -304,25 +314,29 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
+        try {
+            CECategoriaProducto oCategoria = new CECategoriaProducto();
+            oCategoria.setNombCate(txtNombre.getText().toUpperCase().trim());
 
-        //Verificar
-        if (!txtCodigo.getText().isEmpty()) {
+            //Verificar
+            if (!txtNombre.getText().isEmpty()) {
+                if (sw) {
+                    oCMCategoria.saveAlmacenCIC(oCategoria);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oCategoria.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+                    oCMCategoria.modificarAlmacenCIC(oCategoria);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
 
-            oCategoria.setIdCategoria(txtCodigo.getText());
-            oCategoria.setNombCate(txtNombre.getText());
-
-            if (sw) {
-                oCMCategoria.saveAlmacenCIC(oCategoria);
-                LOG.info("[FSI] Dato Grabado : {}");
             } else {
-                oCMCategoria.modificarAlmacenCIC(new CECategoriaProducto(txtCodigo.getText(), txtNombre.getText()));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtCodigo.getText(), " - ", txtNombre.getText());
             }
-
             mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtCodigo.getText(), " - ", txtNombre.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
+
         habilitaControles(false);
         limpiarControles();
     }//GEN-LAST:event_btnGrabarActionPerformed
@@ -335,7 +349,6 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBorrar;
@@ -361,7 +374,6 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void habilitaControles(boolean b) {
-        txtCodigo.setEditable(b);
         txtNombre.setEditable(b);
 
         btnGrabar.setEnabled(b);
@@ -372,7 +384,13 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
         btnBorrar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
-        txtCodigo.requestFocus();
+        txtNombre.requestFocus();
+    }
+
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
     }
 
     private void limpiarControles() {
@@ -381,9 +399,14 @@ public class JFrameMostrarCategoriaProducto extends javax.swing.JFrame {
     }
 
     private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "NOMBRE C"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblMostrar.setModel(oModel);
+        limpiaJTable();
+        try {
+            rsCategoria = oCMCategoria.mostrar();
+            while (rsCategoria.next()) {
+                Object registro[] = {rsCategoria.getInt(1), rsCategoria.getString(2)};
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
     }
 }

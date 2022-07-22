@@ -18,7 +18,7 @@ public class CLVariacionEmpleadoT {
             aDataResponse[iRow][4] = oItem.getAmaEmpl();
             aDataResponse[iRow][5] = oItem.getTelfEmpl();
             aDataResponse[iRow][6] = oItem.getMailEmpl();
-            aDataResponse[iRow][7] = oItem.getIdCargo();
+            aDataResponse[iRow][7] = String.valueOf(oItem.getIdCargo());
 
             iRow++;
         }

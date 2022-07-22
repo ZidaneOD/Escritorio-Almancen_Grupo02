@@ -2,24 +2,24 @@ package pe.unjfsc.almacen.java11.entity;
 
 public class CEAlmacen {
 
-    private String idAlmacen;
+    private int idAlmacen;
     private String nombAlm;
-    private String idUbicacion;
+    private int idUbicacion;
 
     public CEAlmacen() {
     }
 
-    public CEAlmacen(String idAlmacen, String nombAlm, String idUbicacion) {
+    public CEAlmacen(int idAlmacen, String nombAlm, int idUbicacion) {
         this.idAlmacen = idAlmacen;
         this.nombAlm = nombAlm;
         this.idUbicacion = idUbicacion;
     }
 
-    public String getIdAlmacen() {
+    public int getIdAlmacen() {
         return idAlmacen;
     }
 
-    public void setIdAlmacen(String idAlmacen) {
+    public void setIdAlmacen(int idAlmacen) {
         this.idAlmacen = idAlmacen;
     }
 
@@ -31,11 +31,11 @@ public class CEAlmacen {
         this.nombAlm = nombAlm;
     }
 
-    public String getIdUbicacion() {
+    public int getIdUbicacion() {
         return idUbicacion;
     }
 
-    public void setIdUbicacion(String idUbicacion) {
+    public void setIdUbicacion(int idUbicacion) {
         this.idUbicacion = idUbicacion;
     }
 
