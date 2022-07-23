@@ -69,12 +69,13 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         btnEliminarP = new javax.swing.JButton();
         txtidproducto = new javax.swing.JTextField();
         btnBuscarProducto = new javax.swing.JButton();
+        btnAnular = new javax.swing.JButton();
+        btnRecibido = new javax.swing.JButton();
+        btnEnviado = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         btnGrabar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
 
@@ -254,6 +255,30 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         });
         jPanel1.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
+        btnAnular.setText("ANULAR");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, 80, -1));
+
+        btnRecibido.setText("RECIBIDO");
+        btnRecibido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecibidoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, -1, -1));
+
+        btnEnviado.setText("ENVIADO");
+        btnEnviado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEnviado, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 490, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 750, 650));
 
         jPanel2.setBackground(new java.awt.Color(58, 78, 121));
@@ -271,34 +296,6 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         });
         jPanel2.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 170, 60));
 
-        btnEliminar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png"))); // NOI18N
-        btnEliminar.setText("ELIMINAR");
-        btnEliminar.setContentAreaFilled(false);
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 170, 60));
-
-        btnEditar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit.png"))); // NOI18N
-        btnEditar.setText("EDITAR");
-        btnEditar.setContentAreaFilled(false);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 170, 60));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 480));
-
-        jPanel3.setBackground(new java.awt.Color(58, 78, 121));
-
         btnGrabar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnGrabar.setForeground(new java.awt.Color(255, 255, 255));
         btnGrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
@@ -310,23 +307,22 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
                 btnGrabarActionPerformed(evt);
             }
         });
+        jPanel2.add(btnGrabar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 140, 40));
+
+        jPanel3.setBackground(new java.awt.Color(58, 78, 121));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 140, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         btnCancelar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -339,7 +335,7 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 140, 40));
+        jPanel2.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 140, 40));
 
         jPanel5.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -354,7 +350,9 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -378,26 +376,6 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         limpiarControles();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        LOG.info("[FSI] Star boton Eliminar : {}");
-        try {
-            int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (!txtnombrep.getText().isEmpty()) {
-                if (op == JOptionPane.YES_OPTION) {
-
-                    //oCMTransaccion.eliminarAlmacenCIC(txtnombrep.getText());
-                    limpiarControles();
-                    JOptionPane.showMessageDialog(rootPane, "Registro borrado");
-                    mostrarDatos();
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar un registro");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
         try {
@@ -410,7 +388,7 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
             oTransaccion.setIddest(xidAlmacenb);
             oTransaccion.setIdEmpleado(Integer.parseInt(txtidEmpleado.getText()));
             oCMTransaccion.saveAlmacenCIC(oTransaccion);
-            xidfactura=oCMTransaccion.obtenerIdKardex();
+            xidfactura = oCMTransaccion.obtenerIdKardex();
             /**
              * ************************Detalle del Kardex *****************
              */
@@ -421,7 +399,7 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
                 oDetalle.setIdkardex(xidfactura);
                 oDetalle.setIdporducto(Integer.parseInt(tblRegistro.getValueAt(i, 0).toString()));
 
-                System.out.println(i + "-" + oDetalle.getIdkardex() + " " + oDetalle.getIdporducto());
+                System.out.println(i + "- xidfactura" + xidfactura + " " + oDetalle.getIdkardex() + " " + oDetalle.getIdporducto());
 
                 oCMDetalle.saveAlmacenCIC(oDetalle);
             }
@@ -430,16 +408,10 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-         mostrarDatos();
+        mostrarDatos();
         habilitaControles(false);
         limpiarControles();
     }//GEN-LAST:event_btnGrabarActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        LOG.info("[FSI] Star boton Editar : {}");
-        habilitaControles(true);
-        sw = false;
-    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         LOG.info("[FSI] Star boton salir : ");
@@ -474,6 +446,7 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarPActionPerformed
 
     private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
+        LOG.info("[FSI] Star boton Agregar : {}");
         int cont = 0;
         int idproducto = Integer.parseInt(txtidproducto.getText());
         boolean sw = false;
@@ -486,7 +459,7 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
             while (cont < objDtmProduc.getRowCount()) {
                 if (idproducto == Integer.parseInt(objDtmProduc.getValueAt(cont, 0).toString())) {
                     sw = true;
-                    JOptionPane.showMessageDialog(rootPane, "El registro ua existe");
+                    JOptionPane.showMessageDialog(rootPane, "El registro ya existe");
                     cont = objDtmProduc.getRowCount();
                 }
                 cont++;
@@ -505,17 +478,63 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBuscarEmpleadoActionPerformed
 
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
+        LOG.info("[FSI] Star boton Anular : {}");
+        try {
+            int idkardex = 0;
+            idkardex = Integer.parseInt(tblmostrar.getValueAt(tblmostrar.getSelectedRow(), 0).toString());
+
+            if (idkardex > 0) {
+                oCMDetalle.modificarAAnulado(idkardex, 4);
+                mostrarDatos();
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnAnularActionPerformed
+
+    private void btnRecibidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibidoActionPerformed
+        LOG.info("[FSI] Star boton Recibido : {}");
+        try {
+            int idkardex = 0;
+            idkardex = Integer.parseInt(tblmostrar.getValueAt(tblmostrar.getSelectedRow(), 0).toString());
+
+            if (idkardex > 0) {
+                oCMDetalle.modificarARecibido(idkardex, 2);
+                mostrarDatos();
+
+            }
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_btnRecibidoActionPerformed
+
+    private void btnEnviadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviadoActionPerformed
+        LOG.info("[FSI] Star boton Enviado : {}");
+        try {
+            int idkardex = 0;
+            idkardex = Integer.parseInt(tblmostrar.getValueAt(tblmostrar.getSelectedRow(), 0).toString());
+
+            if (idkardex > 0) {
+                oCMDetalle.modificarARecibido(idkardex, 1);
+                mostrarDatos();
+
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnEnviadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarP;
+    private javax.swing.JButton btnAnular;
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarP;
+    private javax.swing.JButton btnEnviado;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnRecibido;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbidalmacenA;
     private javax.swing.JComboBox<String> cbidalmacenB;
@@ -556,8 +575,6 @@ public class JFrameMostrarTransaccion extends javax.swing.JFrame {
         btnCancelar.setEnabled(b);
 
         btnNuevo.setEnabled(!b);
-        btnEditar.setEnabled(!b);
-        btnEliminar.setEnabled(!b);
 
         btnSalir.setEnabled(!b);
     }

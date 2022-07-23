@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="712c9550-a438-4ea3-94b7-2c1132dd56ac">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select count(origen),origen
+from vdetalle
+group by origen
+order by origen;]]>
+	</queryString>
+	<field name="count(origen)" class="java.lang.Long"/>
+	<field name="ORIGEN" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="167" y="13" width="483" height="38" uuid="c435a491-a985-4dfa-bf22-9ced3ed811ff"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE KARDEX POR ALMACEN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="285" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="148" y="16" width="481" height="234" uuid="6d643307-cc14-486c-b36d-6d2ba7eab5e8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ORIGEN}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{ORIGEN}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{count(origen)}]]></valueExpression>
+						<labelExpression><![CDATA[$F{ORIGEN}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

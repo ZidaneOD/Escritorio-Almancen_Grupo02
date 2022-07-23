@@ -1,16 +1,25 @@
 package pe.unjfsc.almacen.java11.view;
 
+import conexion.ConMySQL;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarAlmacen;
 
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarDetalleHashSet;
 
 public class JFrameDetalle_Kardex extends javax.swing.JFrame {
-
+ 
     ButtonGroup objButtonGroup = new ButtonGroup();
 
     ResultSet rsDetalle;
@@ -29,7 +38,7 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
 
     public JFrameDetalle_Kardex() {
         initComponents();
-        setSize(867, 417);
+        setSize(945, 537);
         objDtm = (DefaultTableModel) tblRegistro.getModel();
         objButtonGroup.add(rbdAlmacen);
         objButtonGroup.add(rbdEstado);
@@ -55,6 +64,8 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
         cmbAlmacen = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         cmbEstado = new javax.swing.JComboBox<>();
+        btnSalir = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -185,30 +196,52 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        btnImprimir.setText("IMPRIMIR");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(rbdFecha)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rbdAlmacen)
-                                    .addComponent(rbdEstado))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(61, 61, 61)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(rbdFecha)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rbdAlmacen)
+                                            .addComponent(rbdEstado))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(61, 61, 61)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,16 +260,19 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addComponent(rbdEstado))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -330,6 +366,122 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
 
     }//GEN-LAST:event_rbdEstadoActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+
+        if (rbdFecha.isSelected() == true) {
+            try {
+                String fechaInicio = objSimpleDateFormat.format(dadinicio.getDate());
+                String fechaFinal = objSimpleDateFormat.format(dadfinal.getDate());
+
+                Connection cn = ConMySQL.getInstance().getConnection();
+                String direccion = System.getProperty("user.dir") + "\\src\\main\\java\\reporte\\reporteDetalleFechaDia.jrxml";
+                JasperReport reporte = JasperCompileManager.compileReport(direccion);
+                Map parametro = new HashMap();
+
+                parametro.put("fechini", fechaInicio);
+                parametro.put("fechfin", fechaFinal);
+
+                JasperPrint mostrarReporte = JasperFillManager.fillReport(reporte, parametro, cn);
+                JasperViewer view = new JasperViewer(mostrarReporte, false);
+                //view.setTitle("Reporte Detalle Kardex - Fecha");
+                view.setExtendedState(MAXIMIZED_BOTH);
+                view.setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e);
+            }
+        }
+        if (rbdAlmacen.isSelected() == true) {
+            int op = JOptionPane.showConfirmDialog(rootPane, "¿Desea un diagrama del informe?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (op == JOptionPane.YES_OPTION) {
+                try {
+                    String almacen = cmbAlmacen.getSelectedItem().toString();
+
+                    Connection cn = ConMySQL.getInstance().getConnection();
+                    String direccion = System.getProperty("user.dir") + "\\src\\main\\java\\reporte\\reporteDetalleOrigen.jrxml";
+                    JasperReport reporte = JasperCompileManager.compileReport(direccion);
+                    Map parametro = new HashMap();
+
+                    parametro.put("xalmacen", almacen);
+
+                    JasperPrint mostrarReporte = JasperFillManager.fillReport(reporte, parametro, cn);
+                    JasperViewer view = new JasperViewer(mostrarReporte, false);
+                    //view.setTitle("Reporte Detalle Kardex - Fecha");
+                    view.setExtendedState(MAXIMIZED_BOTH);
+                    view.setVisible(true);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, e);
+                }
+
+            } else {
+                try {
+                    String almacen = cmbAlmacen.getSelectedItem().toString();
+
+                    Connection cn = ConMySQL.getInstance().getConnection();
+                    String direccion = System.getProperty("user.dir") + "\\src\\main\\java\\reporte\\reporteDetalleAlmacen.jrxml";
+                    JasperReport reporte = JasperCompileManager.compileReport(direccion);
+                    Map parametro = new HashMap();
+
+                    parametro.put("xalmacen", almacen);
+
+                    JasperPrint mostrarReporte = JasperFillManager.fillReport(reporte, parametro, cn);
+                    JasperViewer view = new JasperViewer(mostrarReporte, false);
+                    //view.setTitle("Reporte Detalle Kardex - Fecha");
+                    view.setExtendedState(MAXIMIZED_BOTH);
+                    view.setVisible(true);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, e);
+                }
+
+            }
+
+        }
+        if (rbdEstado.isSelected() == true) {
+            int op = JOptionPane.showConfirmDialog(rootPane, "¿Desea un diagrama del informe?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (op == JOptionPane.YES_OPTION) {
+                try {
+
+                    Connection cn = ConMySQL.getInstance().getConnection();
+                    String direccion = System.getProperty("user.dir") + "\\src\\main\\java\\reporte\\reporteDetalleEstadoEstado.jrxml";
+                    JasperReport reporte = JasperCompileManager.compileReport(direccion);
+                    Map parametro = new HashMap();
+                    parametro.put("xnada", "a");
+                    JasperPrint mostrarReporte = JasperFillManager.fillReport(reporte, parametro, cn);
+                    JasperViewer view = new JasperViewer(mostrarReporte, false);
+                    //view.setTitle("Reporte Detalle Kardex - Fecha");
+                    view.setExtendedState(MAXIMIZED_BOTH);
+                    view.setVisible(true);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, e);
+                }
+            } else {
+                try {
+                    String estado = cmbEstado.getSelectedItem().toString();
+
+                    Connection cn = ConMySQL.getInstance().getConnection();
+                    String direccion = System.getProperty("user.dir") + "\\src\\main\\java\\reporte\\reporteDetalleEstado.jrxml";
+                    JasperReport reporte = JasperCompileManager.compileReport(direccion);
+                    Map parametro = new HashMap();
+
+                    parametro.put("xestado", estado);
+
+                    JasperPrint mostrarReporte = JasperFillManager.fillReport(reporte, parametro, cn);
+                    JasperViewer view = new JasperViewer(mostrarReporte, false);
+                    //view.setTitle("Reporte Detalle Kardex - Fecha");
+                    view.setExtendedState(MAXIMIZED_BOTH);
+                    view.setVisible(true);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, e);
+                }
+            }
+
+        }
+
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -357,6 +509,8 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -368,6 +522,8 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbAlmacen;
     private javax.swing.JComboBox<String> cmbEstado;
     private com.toedter.calendar.JDateChooser dadfinal;

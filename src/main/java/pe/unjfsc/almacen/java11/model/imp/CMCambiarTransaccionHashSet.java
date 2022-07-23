@@ -57,7 +57,7 @@ public class CMCambiarTransaccionHashSet implements CICambioAlmacen<CETransaccio
     public ResultSet mostrar() throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "select * from vkardex";
+        String sql = "select * from vkardex order by codigo;";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = ps.executeQuery();
         return rs;
@@ -66,7 +66,7 @@ public class CMCambiarTransaccionHashSet implements CICambioAlmacen<CETransaccio
 
     public int obtenerIdKardex() throws Exception {
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "select * from vkardex";
+        String sql = "select * from vkardex order by codigo;";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = ps.executeQuery();
         rs.last();

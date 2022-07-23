@@ -1,4 +1,3 @@
-
 package pe.unjfsc.almacen.java11.model.imp;
 
 import conexion.ConMySQL;
@@ -11,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CESDetalle;
 import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 
+public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle> {
 
-public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle>{
     private static final Logger LOG = LoggerFactory.getLogger(CMCambiarDetalleHashSet.class);
 
     @Override
@@ -22,11 +21,17 @@ public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle>{
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdkardex());
         cs.setInt(2, objObjeto.getIdporducto());
-        cs.execute();    }
+        cs.execute();
+    }
 
     @Override
     public void modificarAlmacenCIC(CESDetalle objObjeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_detalle(?,?)";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setInt(1, objObjeto.getIdkardex());
+        cs.setInt(2, objObjeto.getIdporducto());
+        cs.execute();
     }
 
     @Override
@@ -38,7 +43,7 @@ public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle>{
     public ResultSet buscar(Object objObject) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public ResultSet buscarPorFecha(Object objObject1, Object objObject2) throws Exception {
         Connection cn = ConMySQL.getInstance().getConnection();
         String fechaIni = objObject1.toString();
@@ -50,7 +55,7 @@ public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle>{
         ResultSet rs = ps.executeQuery();
         return rs;
     }
-    
+
     public ResultSet buscarPorAlmacen(Object objObject) throws Exception {
         Connection cn = ConMySQL.getInstance().getConnection();
         String almacen = objObject.toString();
@@ -60,7 +65,7 @@ public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle>{
         ResultSet rs = ps.executeQuery();
         return rs;
     }
-    
+
     public ResultSet buscarPorEstado(Object objObject) throws Exception {
         Connection cn = ConMySQL.getInstance().getConnection();
         String estado = objObject.toString();
@@ -70,5 +75,23 @@ public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle>{
         ResultSet rs = ps.executeQuery();
         return rs;
     }
+
+    public void modificarARecibido(int id, int esta) throws Exception {
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_kardex(?,?)";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setInt(1, id);
+        cs.setInt(2, esta);
+        cs.execute();
+    }
     
+     public void modificarAAnulado(int id, int esta) throws Exception {
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "CALL sp_update_kardex(?,?)";
+        CallableStatement cs = cn.prepareCall(sql);
+        cs.setInt(1, id);
+        cs.setInt(2, esta);
+        cs.execute();
+    }
+
 }
