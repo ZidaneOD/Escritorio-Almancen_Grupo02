@@ -78,5 +78,14 @@ public class CMCambiarProductoHashSet implements CICambioAlmacen<CEProducto> {
         ResultSet rs = ps.executeQuery();
         return rs;
     }
+    
+   public ResultSet mostrar() throws Exception {
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vproducto";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+
+    }
 
 }

@@ -2,7 +2,7 @@ package pe.unjfsc.almacen.java11.view;
 
 import java.awt.Image;
 import java.io.File;
-import java.util.HashSet;
+import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -11,41 +11,51 @@ import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CEProducto;
-import pe.unjfsc.almacen.java11.logical.CLVariacionProducto;
-import pe.unjfsc.almacen.java11.model.CICambioAlmacen;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarProductoHashSet;
 
 public class JFrameMostrarProducto extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameMostrarProducto");
 
-    private HashSet<CEProducto> oHsData;
-    private CICambioAlmacen oCIAlmacen;
-    CEProducto oAlmacen;
-    CMCambiarProductoHashSet oCMAlmacen;
+    DefaultTableModel objDtm;
+    ResultSet rsProducto;
+    ResultSet rsDistrito;
+    ResultSet rsProvincia;
+    ResultSet rsDepartamento;
     boolean sw;
+
+    CMCambiarProductoHashSet oCMProducto = new CMCambiarProductoHashSet();
 
     public JFrameMostrarProducto() {
         initComponents();
-        oCMAlmacen = new CMCambiarProductoHashSet();
-        oAlmacen = new CEProducto();
+
         setSize(880, 651);
         //setVisible(true);
         setLocationRelativeTo(null);
 
-        String[] aTitulo = {"CODIGO", "NOMBRE", "DESCRIPCION", "CATEGORIA", "SABOR", "MARCA", "PESO P.", "UN. MED.", "PREST X EMP", "UNDxEMP", "EMPAQUE", "UNIDAD", "IMG"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
+        objDtm = (DefaultTableModel) tblRegistro.getModel();
+        mostrarDatos();
 
     }
 
-    private Object[][] loadData() {
-        oCIAlmacen = oCMAlmacen;
-        oHsData = oCIAlmacen.consultAllAlmacenCIC();
+    private void mostrarDatos() {
+        limpiaJTable();
+        try {
+            rsProducto = oCMProducto.mostrar();
+            while (rsProducto.next()) {
+                Object registro[] = {rsProducto.getInt(1), rsProducto.getString(2), rsProducto.getString(3),
+                    rsProducto.getString(4), rsProducto.getString(5), rsProducto.getString(6), rsProducto.getDouble(7),
+                    rsProducto.getString(8), rsProducto.getInt(9), rsProducto.getString(10), rsProducto.getInt(11), rsProducto.getInt(12) };
+                objDtm.addRow(registro);
+            }
+        } catch (Exception e) {
+        }
+    }
 
-        CLVariacionProducto oLogicalProducto = new CLVariacionProducto();
-        return oLogicalProducto.convertHashSetArray(oHsData);
+    private void limpiaJTable() {
+        while (objDtm.getRowCount() > 0) {
+            objDtm.removeRow(0);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -429,28 +439,14 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         LOG.info("[FSI] Star boton Eliminar : {}");
-        try {
-            int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (!txtidproducto.getText().isEmpty()) {
-                if (op == JOptionPane.YES_OPTION) {
 
-                    oCMAlmacen.eliminarAlmacenCIC(txtidproducto.getText());
-                    limpiarControles();
-                    JOptionPane.showMessageDialog(rootPane, "Registro borrado");
-                    mostrarDatos();
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar un registro");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
 
         //Verificar
+        /*
         if (!txtidproducto.getText().isEmpty()) {
 
             oAlmacen.setIdProducto(txtidproducto.getText());
@@ -502,7 +498,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
             LOG.info("[FSI] Error al ingreso de datos : {} ", txtidproducto.getText(), " - ", txtnombre.getText());
         }
         habilitaControles(false);
-        limpiarControles();
+        limpiarControles();*/
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -534,7 +530,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         String directorio = System.getProperty("user.dir") + "\\src\\main\\resources\\productos_de_almacen";
         File ruta = new File(directorio);
         System.out.println(directorio);
-        
+
         archivo.setCurrentDirectory(ruta);
         int ventana = archivo.showOpenDialog(null);
         if (ventana == JFileChooser.APPROVE_OPTION) {
@@ -567,7 +563,6 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         foto = foto.getScaledInstance(160, 200, Image.SCALE_DEFAULT);
         jblImagen.setIcon(new ImageIcon(foto));
     }//GEN-LAST:event_tblRegistroMouseClicked
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -629,8 +624,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtpresentxemp.setEditable(b);
         txtunidad.setEditable(b);
         txtunxemp.setEditable(b);
-        
-        
+
         cbidcategoria.setEnabled(b);
         cbidempaque.setEnabled(b);
         cbidmarca.setEnabled(b);
@@ -659,19 +653,12 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtunidad.setText(null);
         txtunxemp.setText(null);
         txtimg.setText(null);
-        
+
         cbidcategoria.setSelectedIndex(0);
         cbidempaque.setSelectedIndex(0);
         cbidmarca.setSelectedIndex(0);
         cbidsabor.setSelectedIndex(0);
         cbidunidadm.setSelectedIndex(0);
-    }
-
-    private void mostrarDatos() {
-        String[] aTitulo = {"CODIGO", "NOMBRE", "DESCRIPCION", "CATEGORIA", "SABOR", "MARCA", "PESO P.", "UN. MED.", "PREST X EMP", "UNDxEMP", "EMPAQUE", "UNIDAD", "IMG"};
-        DefaultTableModel oModel = new DefaultTableModel(loadData(), aTitulo);
-
-        tblRegistro.setModel(oModel);
     }
 
 }
