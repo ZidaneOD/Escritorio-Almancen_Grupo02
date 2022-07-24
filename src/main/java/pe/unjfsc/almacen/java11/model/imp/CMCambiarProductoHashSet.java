@@ -18,7 +18,7 @@ public class CMCambiarProductoHashSet implements CICambioAlmacen<CEProducto> {
     public void saveAlmacenCIC(CEProducto objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_insert_distrito(?,?);";
+        String sql = "CALL sp_insert_producto(?,?,?,?,?,?,?,?,?,?,?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setString(1, objObjeto.getNombProd());
         cs.setString(2, objObjeto.getDescProd());
@@ -40,7 +40,7 @@ public class CMCambiarProductoHashSet implements CICambioAlmacen<CEProducto> {
     public void modificarAlmacenCIC(CEProducto objObjeto) throws Exception {
 
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_update_distrito(?,?,?);";
+        String sql = "CALL sp_update_producto(?,?,?,?,?,?,?,?,?,?,?,?,?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdProducto());
         cs.setString(2, objObjeto.getNombProd());
@@ -61,7 +61,7 @@ public class CMCambiarProductoHashSet implements CICambioAlmacen<CEProducto> {
     @Override
     public void eliminarAlmacenCIC(CEProducto objObjeto) throws Exception {
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "CALL sp_delete_distrito(?);";
+        String sql = "CALL sp_delete_producto(?);";
         CallableStatement cs = cn.prepareCall(sql);
         cs.setInt(1, objObjeto.getIdProducto());
         cs.execute();
@@ -81,7 +81,7 @@ public class CMCambiarProductoHashSet implements CICambioAlmacen<CEProducto> {
     
    public ResultSet mostrar() throws Exception {
         Connection cn = ConMySQL.getInstance().getConnection();
-        String sql = "select * from vproducto";
+        String sql = "select * from vproducto;";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = ps.executeQuery();
         return rs;

@@ -49,7 +49,7 @@ public class CMCambiarMarcaProductoHashSet implements CICambioAlmacen<CEMarcaPro
 
         Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vmarca where nommarca like ?";
+        String sql = "select * from vmarca where marca like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();

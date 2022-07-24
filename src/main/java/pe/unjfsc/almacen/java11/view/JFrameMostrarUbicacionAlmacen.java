@@ -568,6 +568,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 Object registro[] = {rsUnidadm.getInt(1), rsUnidadm.getString(2), rsUnidadm.getString(3),
                     rsUnidadm.getString(4), rsUnidadm.getString(5)};
                 objDtm.addRow(registro);
+                System.out.println(registro);
             }
         } catch (Exception e) {
         }

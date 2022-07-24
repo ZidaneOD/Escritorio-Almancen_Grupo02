@@ -51,7 +51,7 @@ public class CMCambiarSaborProductoHashSet implements CICambioAlmacen<CESaborPro
 
         Connection cn = ConMySQL.getInstance().getConnection();
         String nombre = "%" + objObject + "%";
-        String sql = "select * from vsabor where nombsabo like ?";
+        String sql = "select * from vsabor where sabores like ?";
         PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();

@@ -3,6 +3,8 @@ package pe.unjfsc.almacen.java11.view;
 import java.awt.Image;
 import java.io.File;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -11,7 +13,12 @@ import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pe.unjfsc.almacen.java11.entity.CEProducto;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarCategoria;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarEmpaqueProductoHashSet;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarMarcaProductoHashSet;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarProductoHashSet;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarSaborProductoHashSet;
+import pe.unjfsc.almacen.java11.model.imp.CMCambiarUnidadMedidaHashSet;
 
 public class JFrameMostrarProducto extends javax.swing.JFrame {
 
@@ -19,12 +26,20 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
 
     DefaultTableModel objDtm;
     ResultSet rsProducto;
-    ResultSet rsDistrito;
-    ResultSet rsProvincia;
-    ResultSet rsDepartamento;
+    ResultSet rsCategoria;
+    ResultSet rsMarca;
+    ResultSet rsSabor;
+    ResultSet rsUnidadM;
+    ResultSet rsEmpaque;
+    int xidCategoria, xidMarca, xidSabro, xidUnidadM, xidEmpaque, xidProducto;
     boolean sw;
 
     CMCambiarProductoHashSet oCMProducto = new CMCambiarProductoHashSet();
+    CMCambiarCategoria oCategoria = new CMCambiarCategoria();
+    CMCambiarMarcaProductoHashSet oMarca = new CMCambiarMarcaProductoHashSet();
+    CMCambiarSaborProductoHashSet oSabor = new CMCambiarSaborProductoHashSet();
+    CMCambiarUnidadMedidaHashSet oUnidad = new CMCambiarUnidadMedidaHashSet();
+    CMCambiarEmpaqueProductoHashSet oEmpaque = new CMCambiarEmpaqueProductoHashSet();
 
     public JFrameMostrarProducto() {
         initComponents();
@@ -44,9 +59,11 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
             rsProducto = oCMProducto.mostrar();
             while (rsProducto.next()) {
                 Object registro[] = {rsProducto.getInt(1), rsProducto.getString(2), rsProducto.getString(3),
-                    rsProducto.getString(4), rsProducto.getString(5), rsProducto.getString(6), rsProducto.getDouble(7),
-                    rsProducto.getString(8), rsProducto.getInt(9), rsProducto.getString(10), rsProducto.getInt(11), rsProducto.getInt(12) };
+                    rsProducto.getString(4), rsProducto.getString(5), rsProducto.getString(6), rsProducto.getString(7),
+                    rsProducto.getString(8), rsProducto.getString(9), rsProducto.getString(10), rsProducto.getString(11),
+                    rsProducto.getString(12)};
                 objDtm.addRow(registro);
+                System.out.println("OBJET>" + registro);
             }
         } catch (Exception e) {
         }
@@ -91,7 +108,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         btnseleccionar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtunxemp = new javax.swing.JTextField();
-        txtimg = new javax.swing.JTextField();
+        txtURLimg = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
@@ -144,7 +161,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "CODIGO", "NOMBRE", "DESCRIPCION", "CATEGORIA", "SABOR", "MARCA", "PESO", "UNIDAD_M", "PRES EMPAQUE", "UNIDAD_EMPAQUE", "EMPAQUE", "UNIDAD_PRO"
             }
         ));
         tblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,15 +190,12 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jLabel5.setText("MARCA");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 110, 30));
 
-        cbidcategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CA001", "CA002", "CA003" }));
         cbidcategoria.setEnabled(false);
         jPanel1.add(cbidcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 150, 30));
 
-        cbidmarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MR001", "MR002", "MR003", "MR004" }));
         cbidmarca.setEnabled(false);
         jPanel1.add(cbidmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 120, 30));
 
-        cbidsabor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S001", "S002", "S003", "S004", "S005" }));
         cbidsabor.setEnabled(false);
         jPanel1.add(cbidsabor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 110, 30));
 
@@ -196,7 +210,6 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jLabel15.setText("UNIDAD M.");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 60, 30));
 
-        cbidunidadm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UN001", "UN002", "UN003" }));
         cbidunidadm.setEnabled(false);
         jPanel1.add(cbidunidadm, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 110, 30));
 
@@ -211,7 +224,6 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jLabel16.setText("EMPAQUE");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 100, 30));
 
-        cbidempaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EM001", "EM002", "EM003", "EM004" }));
         cbidempaque.setEnabled(false);
         jPanel1.add(cbidempaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 130, 30));
 
@@ -243,13 +255,13 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtunxemp.setBorder(null);
         jPanel1.add(txtunxemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 120, 30));
 
-        txtimg.setEditable(false);
-        txtimg.addActionListener(new java.awt.event.ActionListener() {
+        txtURLimg.setEditable(false);
+        txtURLimg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtimgActionPerformed(evt);
+                txtURLimgActionPerformed(evt);
             }
         });
-        jPanel1.add(txtimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 87, -1));
+        jPanel1.add(txtURLimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 87, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("PRODUCTO");
@@ -429,6 +441,11 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         habilitaControles(true);
         limpiarControles();
         sw = true;
+        llenaComboCategoria();
+        llenaComboMarca();
+        llenaComboEmpaque();
+        llenaComboSabor();
+        llenaComboUnidadM();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -438,73 +455,101 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        LOG.info("[FSI] Star boton Eliminar : {}");
+        LOG.info("[FSI] Star boton Eliminar : PRODUCTO ");
+   
+        try {
+            int op = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que desea eliminar?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (!txtidproducto.getText().isEmpty()) {
+                if (op == JOptionPane.YES_OPTION) {
+                    CEProducto producto = new CEProducto();
+                    producto.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+                    oCMProducto.eliminarAlmacenCIC(producto);
+                    limpiarControles();
+                    JOptionPane.showMessageDialog(rootPane, "Registro borrado");
+                    mostrarDatos();
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar un registro");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         LOG.info("[FSI] Star boton Grabar : {}");
 
-        //Verificar
-        /*
-        if (!txtidproducto.getText().isEmpty()) {
+        try {
+            if (!txtnombre.getText().isEmpty()) {
+                CEProducto oProducto = new CEProducto();
+                oProducto.setNombProd(txtnombre.getText().toUpperCase());
+                oProducto.setDescProd(txtdescripcion.getText().toUpperCase());
+                oProducto.setPesoProd(Double.parseDouble(txtpeso.getText()));
+                oProducto.setPresxe(Integer.parseInt(txtpresentxemp.getText()));
+                oProducto.setUndpxc(txtunxemp.getText().toUpperCase());
+                oProducto.setUnidad(Integer.parseInt(txtunidad.getText().toUpperCase()));
 
-            oAlmacen.setIdProducto(txtidproducto.getText());
-            oAlmacen.setNombProd(txtnombre.getText());
-            oAlmacen.setDescProd(txtdescripcion.getText());
+                //CATEGORIA COMBO
+                obtenerCategoria();
+                oProducto.setIdCategoria(xidCategoria);
 
-            oAlmacen.setIdCategoria(cbidcategoria.getSelectedItem().toString());
-            oAlmacen.setIdSabor(cbidsabor.getSelectedItem().toString());
-            oAlmacen.setIdMarca(cbidmarca.getSelectedItem().toString());
+                //MARCA COMBO
+                obtenerMarca();
+                oProducto.setIdMarca(xidMarca);
 
-            oAlmacen.setPesoProd(Double.parseDouble(txtpeso.getText()));
-            oAlmacen.setIdUnidadM(cbidunidadm.getSelectedItem().toString());
-            oAlmacen.setPresxe(Integer.parseInt(txtpresentxemp.getText()));
+                //SABOR COMBO
+                obtenerSabor();
+                oProducto.setIdSabor(xidSabro);
 
-            oAlmacen.setUndpxc(txtunxemp.getText());
-            oAlmacen.setIdEmpaque(cbidempaque.getSelectedItem().toString());
-            oAlmacen.setUnidad(Integer.parseInt(txtunidad.getText()));
+                //UNIDADM COMBO
+                obtenerUnidadM();
+                oProducto.setIdUnidadM(xidUnidadM);
 
-            oAlmacen.setImagProd(txtimg.getText());
+                //EMPAQUE COMBO
+                obtenerEmpaque();
+                oProducto.setIdEmpaque(xidEmpaque);
 
-            Image foto = getToolkit().getImage(txtimg.getText());
-            foto = foto.getScaledInstance(160, 200, Image.SCALE_DEFAULT);
-            jblImagen.setIcon(new ImageIcon(foto));
+                // imagen
+                oProducto.setImagProd(txtURLimg.getText());
 
-            if (sw) {
-                oCMAlmacen.saveAlmacenCIC(oAlmacen);
-                LOG.info("[FSI] Dato Grabado : {}");
+                Image foto = getToolkit().getImage(txtnombre.getText());
+                foto = foto.getScaledInstance(187, 203, Image.SCALE_DEFAULT);
+                jblImagen.setIcon(new ImageIcon(foto));
+                rsProducto.last();
+
+                if (sw) {
+                    oCMProducto.saveAlmacenCIC(oProducto);
+                    LOG.info("[FSI] Dato Grabado : {}");
+                } else {
+                    oProducto.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+                    oCMProducto.modificarAlmacenCIC(oProducto);
+                    LOG.info("[FSI] Dato Editado : {}");
+                }
+
+                mostrarDatos();
             } else {
-                oCMAlmacen.modificarAlmacenCIC(new CEProducto(
-                        txtidproducto.getText(),
-                        txtnombre.getText(),
-                        txtdescripcion.getText(),
-                        cbidcategoria.getSelectedItem().toString(),
-                        cbidsabor.getSelectedItem().toString(),
-                        cbidmarca.getSelectedItem().toString(),
-                        Double.parseDouble(txtpeso.getText()),
-                        cbidunidadm.getSelectedItem().toString(),
-                        Integer.parseInt(txtpresentxemp.getText()),
-                        txtunxemp.getText(),
-                        cbidempaque.getSelectedItem().toString(),
-                        Integer.parseInt(txtunidad.getText()),
-                        txtimg.getText()
-                ));
-                LOG.info("[FSI] Dato Editado : {}");
+                LOG.info("[FSI] Error al ingreso de datos : {} ", txtidproducto.getText(), " - ", txtdescripcion.getText());
             }
-
-            mostrarDatos();
-        } else {
-            LOG.info("[FSI] Error al ingreso de datos : {} ", txtidproducto.getText(), " - ", txtnombre.getText());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR " + e);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(JFrameMostrarProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
         habilitaControles(false);
-        limpiarControles();*/
+        limpiarControles();
+
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         LOG.info("[FSI] Star boton Editar : {}");
         habilitaControles(true);
         sw = false;
+        llenaComboCategoria();
+        llenaComboMarca();
+        llenaComboEmpaque();
+        llenaComboSabor();
+        llenaComboUnidadM();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -516,9 +561,9 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void txtimgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtimgActionPerformed
+    private void txtURLimgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtURLimgActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtimgActionPerformed
+    }//GEN-LAST:event_txtURLimgActionPerformed
 
     private void btnseleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnseleccionarActionPerformed
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG", "jpg", "jpeg");
@@ -535,33 +580,57 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         int ventana = archivo.showOpenDialog(null);
         if (ventana == JFileChooser.APPROVE_OPTION) {
             File file = archivo.getSelectedFile();
-            txtimg.setText(String.valueOf(file));
-            Image foto = getToolkit().getImage(txtimg.getText());
+            txtURLimg.setText(String.valueOf(file));
+            Image foto = getToolkit().getImage(txtURLimg.getText());
             foto = foto.getScaledInstance(160, 200, Image.SCALE_DEFAULT);
             jblImagen.setIcon(new ImageIcon(foto));
         }
+
 
     }//GEN-LAST:event_btnseleccionarActionPerformed
 
     private void tblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMouseClicked
 
-        txtidproducto.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
-        txtnombre.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 1).toString());
-        txtdescripcion.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 2).toString());
-        cbidcategoria.setSelectedItem(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 3).toString());
-        cbidsabor.setSelectedItem(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 4).toString());
-        cbidmarca.setSelectedItem(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 5).toString());
-        txtpeso.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 6).toString());
-        cbidunidadm.setSelectedItem(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 7).toString());
-        txtpresentxemp.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 8).toString());
-        txtunxemp.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 9).toString());
-        cbidempaque.setSelectedItem(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 10).toString());
-        txtunidad.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 11).toString());
-        txtimg.setText(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 12).toString());
+        try {
 
-        Image foto = getToolkit().getImage(txtimg.getText());
-        foto = foto.getScaledInstance(160, 200, Image.SCALE_DEFAULT);
-        jblImagen.setIcon(new ImageIcon(foto));
+            xidProducto = Integer.parseInt(tblRegistro.getValueAt(tblRegistro.getSelectedRow(), 0).toString());
+            rsProducto.first();
+            do {
+                if (xidProducto == rsProducto.getInt(1)) {
+
+                    txtidproducto.setText(String.valueOf(rsProducto.getInt(1)));
+                    txtnombre.setText(rsProducto.getString(2));
+                    txtdescripcion.setText(rsProducto.getString(3));
+                    cbidcategoria.removeAllItems();
+                    cbidcategoria.addItem(rsProducto.getString(4));
+                    cbidmarca.removeAllItems();
+                    cbidmarca.addItem(rsProducto.getString(6));
+                    txtpeso.setText(rsProducto.getString(7));
+                    cbidunidadm.removeAllItems();
+                    cbidunidadm.addItem(rsProducto.getString(8));
+                    txtpresentxemp.setText(rsProducto.getString(9));
+                    txtunxemp.setText(rsProducto.getString(10));
+                    txtunidad.setText(String.valueOf(rsProducto.getString(12)));
+
+                    cbidsabor.removeAllItems();
+                    cbidsabor.addItem(rsProducto.getString(5));
+
+                    cbidempaque.removeAllItems();
+                    cbidempaque.addItem(rsProducto.getString(11));
+
+                    txtURLimg.setText(rsProducto.getString(13));
+                    Image foto = getToolkit().getImage(txtURLimg.getText());
+                    foto = foto.getScaledInstance(187, 203, Image.SCALE_DEFAULT);
+                    jblImagen.setIcon(new ImageIcon(foto));
+
+                    rsProducto.last();
+                }
+
+            } while (rsProducto.next());
+
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_tblRegistroMouseClicked
 
 
@@ -606,9 +675,9 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JLabel jblImagen;
     private javax.swing.JTable tblRegistro;
+    private javax.swing.JTextField txtURLimg;
     private javax.swing.JTextField txtdescripcion;
     private javax.swing.JTextField txtidproducto;
-    private javax.swing.JTextField txtimg;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtpeso;
     private javax.swing.JTextField txtpresentxemp;
@@ -652,13 +721,233 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtpresentxemp.setText(null);
         txtunidad.setText(null);
         txtunxemp.setText(null);
-        txtimg.setText(null);
+        txtURLimg.setText(null);
 
-        cbidcategoria.setSelectedIndex(0);
-        cbidempaque.setSelectedIndex(0);
-        cbidmarca.setSelectedIndex(0);
-        cbidsabor.setSelectedIndex(0);
-        cbidunidadm.setSelectedIndex(0);
+        cbidcategoria.removeAllItems();
+        cbidempaque.removeAllItems();
+        cbidmarca.removeAllItems();
+        cbidsabor.removeAllItems();
+        cbidunidadm.removeAllItems();
+    }
+
+    public void llenaComboCategoria() {
+        System.out.println("Metodo llenar combo categoria");
+
+        try {
+
+            rsCategoria = oCategoria.buscar2("%");
+            System.out.println(rsCategoria);
+
+            if (sw) {
+                while (rsCategoria.next()) {
+                    cbidcategoria.addItem(rsCategoria.getString(2));
+                    System.out.println(rsCategoria.getString(2));
+                }
+            } else {
+                String nombre = cbidcategoria.getSelectedItem().toString();
+                while (rsCategoria.next()) {
+                    if (!nombre.equals(rsCategoria.getString(2))) {
+                        cbidcategoria.addItem(rsCategoria.getString(2));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    private void obtenerCategoria() {
+        try {
+            String nombre = cbidcategoria.getSelectedItem().toString();
+            rsCategoria.first();
+
+            do {
+                if (nombre.equals(rsCategoria.getString(2))) {
+                    xidCategoria = rsCategoria.getInt(1);
+                    rsCategoria.last();
+                }
+            } while (rsCategoria.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
+    }
+
+    public void llenaComboMarca() {
+        System.out.println("Metodo llenar combo Marca");
+
+        try {
+
+            rsMarca = oMarca.buscar("%");
+            System.out.println(rsMarca);
+
+            if (sw) {
+                while (rsMarca.next()) {
+                    cbidmarca.addItem(rsMarca.getString(2));
+                    System.out.println(rsMarca.getString(2));
+                }
+            } else {
+                String nombre = cbidmarca.getSelectedItem().toString();
+                while (rsMarca.next()) {
+                    if (!nombre.equals(rsMarca.getString(2))) {
+                        cbidmarca.addItem(rsMarca.getString(2));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void llenaComboSabor() {
+        System.out.println("Metodo llenar combo sabor");
+
+        try {
+
+            rsSabor = oSabor.buscar("%");
+            System.out.println(oSabor);
+
+            if (sw) {
+                while (rsSabor.next()) {
+                    cbidsabor.addItem(rsSabor.getString(2));
+                    System.out.println(rsSabor.getString(2));
+                }
+            } else {
+                String nombre = cbidsabor.getSelectedItem().toString();
+                while (rsSabor.next()) {
+                    if (!nombre.equals(rsSabor.getString(2))) {
+                        cbidsabor.addItem(rsSabor.getString(2));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void llenaComboUnidadM() {
+        System.out.println("Metodo llenar combo UnidadM");
+
+        try {
+
+            rsUnidadM = oUnidad.buscar("%");
+            System.out.println(rsUnidadM);
+
+            if (sw) {
+                while (rsUnidadM.next()) {
+                    cbidunidadm.addItem(rsUnidadM.getString(2));
+                    System.out.println(rsUnidadM.getString(2));
+                }
+            } else {
+                String nombre = cbidunidadm.getSelectedItem().toString();
+                while (rsUnidadM.next()) {
+                    if (!nombre.equals(rsUnidadM.getString(2))) {
+                        cbidunidadm.addItem(rsUnidadM.getString(2));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void llenaComboEmpaque() {
+        System.out.println("Metodo llenar combo Empaque");
+
+        try {
+
+            rsEmpaque = oEmpaque.buscar("%");
+            System.out.println(rsEmpaque);
+
+            if (sw) {
+                while (rsEmpaque.next()) {
+                    cbidempaque.addItem(rsEmpaque.getString(2));
+                    System.out.println(rsEmpaque.getString(2));
+                }
+            } else {
+                String nombre = cbidempaque.getSelectedItem().toString();
+                while (rsEmpaque.next()) {
+                    if (!nombre.equals(rsEmpaque.getString(2))) {
+                        cbidempaque.addItem(rsEmpaque.getString(2));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    private void obtenerMarca() {
+
+        try {
+            String nombre = cbidmarca.getSelectedItem().toString();
+            rsMarca.first();
+
+            do {
+                if (nombre.equals(rsMarca.getString(2))) {
+                    xidMarca = rsMarca.getInt(1);
+                    rsMarca.last();
+                }
+            } while (rsMarca.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
+    }
+
+    private void obtenerSabor() {
+        try {
+            String nombre = cbidsabor.getSelectedItem().toString();
+            rsSabor.first();
+
+            do {
+                if (nombre.equals(rsSabor.getString(2))) {
+                    xidSabro = rsSabor.getInt(1);
+                    rsSabor.last();
+                }
+            } while (rsSabor.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
+
+    }
+
+    private void obtenerUnidadM() {
+
+        try {
+            String nombre = cbidunidadm.getSelectedItem().toString();
+            rsUnidadM.first();
+
+            do {
+                if (nombre.equals(rsUnidadM.getString(2))) {
+                    xidUnidadM = rsUnidadM.getInt(1);
+                    rsUnidadM.last();
+                }
+            } while (rsUnidadM.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
+
+    }
+
+    private void obtenerEmpaque() {
+
+        try {
+            String nombre = cbidempaque.getSelectedItem().toString();
+            rsEmpaque.first();
+
+            do {
+                if (nombre.equals(rsEmpaque.getString(2))) {
+                    xidEmpaque = rsEmpaque.getInt(1);
+                    rsSabor.last();
+                }
+            } while (rsEmpaque.next());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
+        }
     }
 
 }

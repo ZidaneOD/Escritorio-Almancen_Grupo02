@@ -55,6 +55,17 @@ public class CMCambiarCategoria implements CICambioAlmacen<CECategoriaProducto> 
         ResultSet rs = ps.executeQuery();
         return rs;
     }
+     public ResultSet buscar2(Object objObject) throws Exception {
+
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String nombre = "%" + objObject + "%";
+        String sql = "select * from vcategoria where categoria like ?";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+    }
+
 
     public ResultSet mostrar() throws Exception {
 
