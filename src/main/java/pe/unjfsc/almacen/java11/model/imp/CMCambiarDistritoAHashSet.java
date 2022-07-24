@@ -59,5 +59,14 @@ public class CMCambiarDistritoAHashSet implements CICambioAlmacen<CEDistritoAlma
         return rs;
 
     }
+    
+    public ResultSet mostrar() throws Exception {
+        Connection cn = ConMySQL.getInstance().getConnection();
+        String sql = "select * from vdistrito";
+        PreparedStatement ps = cn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ps.executeQuery();
+        return rs;
+
+    }
 
 }
