@@ -38,6 +38,7 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
 
     public JFrameDetalle_Kardex() {
         initComponents();
+        setLocationRelativeTo(null);
         setSize(870, 489);
         objDtm = (DefaultTableModel) tblRegistro.getModel();
         objButtonGroup.add(rbdAlmacen);
@@ -75,6 +76,7 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));

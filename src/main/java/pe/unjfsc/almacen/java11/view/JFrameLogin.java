@@ -45,12 +45,12 @@ public class JFrameLogin extends javax.swing.JFrame {
         txtsuario2.setForeground(new java.awt.Color(102, 102, 102));
         txtsuario2.setBorder(null);
         txtsuario2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 190, 50));
+        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 180, 50));
 
         txtContra.setFont(new java.awt.Font("Dubai", 1, 16)); // NOI18N
         txtContra.setForeground(new java.awt.Color(102, 102, 102));
         txtContra.setBorder(null);
-        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 190, 50));
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 180, 50));
 
         jPanel2.setBackground(new java.awt.Color(24, 46, 74));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,8 +103,8 @@ public class JFrameLogin extends javax.swing.JFrame {
             String user = "admin";
             String contraseña = "admin";
 
-            String user2 = "traba";
-            String contraseña2 = "traba";
+            String user2 = "almacen";
+            String contraseña2 = "almacen";
 
             String a = txtsuario2.getText();
             String b = txtContra.getText();
