@@ -32,7 +32,7 @@ public class JFrameMostrarKardex extends javax.swing.JFrame {
 
     public JFrameMostrarKardex() {
         initComponents();
-        setSize(994, 701);
+        setSize(998, 701);
         //setVisible(true);
         setLocationRelativeTo(null);
 
@@ -112,7 +112,7 @@ public class JFrameMostrarKardex extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 100, 30));
 
         jLabel12.setText("ESTADO ACTUAL DEL KARDEX: ");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, 190, 40));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 580, 190, 40));
 
         cbidalmacenA.setEnabled(false);
         jPanel1.add(cbidalmacenA, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 170, 30));

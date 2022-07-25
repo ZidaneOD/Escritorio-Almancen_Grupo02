@@ -9,6 +9,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
 
     public JFrameEmpl() {
         initComponents();
+        setSize(941, 696);
         setLocationRelativeTo(null);
     }
 

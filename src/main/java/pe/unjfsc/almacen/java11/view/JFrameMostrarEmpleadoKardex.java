@@ -302,7 +302,7 @@ public class JFrameMostrarEmpleadoKardex extends javax.swing.JFrame {
         jSeparator8.setForeground(new java.awt.Color(58, 78, 121));
         jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 120, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 710, 520));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, -20, 710, 520));
 
         jPanel2.setBackground(new java.awt.Color(58, 78, 121));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

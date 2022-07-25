@@ -29,7 +29,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
 
     public JFrameMostrarUbicacionAlmacen() {
         initComponents();
-        this.setSize(610, 490);
+        this.setSize(768, 489);
         this.setLocationRelativeTo(null);
         objDtm = (DefaultTableModel) tblRegistro.getModel();
         mostrarDatos();

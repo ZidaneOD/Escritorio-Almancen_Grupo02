@@ -25,18 +25,14 @@ public class JFrameLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         txtsuario2 = new javax.swing.JTextField();
         txtContra = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         btn = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -45,19 +41,16 @@ public class JFrameLogin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/imagen1.png"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 530, 480));
-
         txtsuario2.setFont(new java.awt.Font("Dubai", 0, 16)); // NOI18N
         txtsuario2.setForeground(new java.awt.Color(102, 102, 102));
         txtsuario2.setBorder(null);
         txtsuario2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 160, 170, 50));
+        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 190, 40));
 
         txtContra.setFont(new java.awt.Font("Dubai", 1, 16)); // NOI18N
         txtContra.setForeground(new java.awt.Color(102, 102, 102));
         txtContra.setBorder(null);
-        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, 170, 50));
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 190, 40));
 
         jPanel2.setBackground(new java.awt.Color(24, 46, 74));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,35 +65,20 @@ public class JFrameLogin extends javax.swing.JFrame {
                 btnActionPerformed(evt);
             }
         });
-        jPanel2.add(btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
+        jPanel2.add(btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 120, 30));
-
-        jLabel3.setFont(new java.awt.Font("Yu Gothic", 1, 30)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("INICIO DE SESIÓN");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 350, 150));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/fondo.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 0, 810, 520));
-
-        jSeparator1.setBackground(new java.awt.Color(58, 78, 121));
-        jSeparator1.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 210, 10));
-
-        jSeparator2.setBackground(new java.awt.Color(58, 78, 121));
-        jSeparator2.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 210, 10));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 120, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/pass.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 30, 40));
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 40, 50));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/usu.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 160, 30, 40));
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 40, 60));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("X");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,6 +87,9 @@ public class JFrameLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, 40, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/Sin-título-1.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 520));
 
@@ -171,16 +152,12 @@ public class JFrameLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn;
-    public javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPasswordField txtContra;
     private javax.swing.JTextField txtsuario2;
     // End of variables declaration//GEN-END:variables

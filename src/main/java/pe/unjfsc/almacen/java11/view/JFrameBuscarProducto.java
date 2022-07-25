@@ -13,7 +13,7 @@ public class JFrameBuscarProducto extends javax.swing.JFrame {
     public JFrameBuscarProducto() {
         initComponents();
         objDtm = (DefaultTableModel) tblRegistro.getModel();
-        setSize(867, 360);
+        setSize(870, 360);
         setLocationRelativeTo(this);
 
     }

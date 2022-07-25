@@ -171,7 +171,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblRegistro);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 760, 140));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 760, 140));
 
         txtdescripcion.setEditable(false);
         txtdescripcion.setBackground(new java.awt.Color(255, 255, 255));
