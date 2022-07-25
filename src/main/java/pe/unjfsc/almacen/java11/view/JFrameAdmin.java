@@ -1,19 +1,18 @@
-
 package pe.unjfsc.almacen.java11.view;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JFrameAdmin extends javax.swing.JFrame {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger("JFrameAdmin");
-    
+
     public JFrameAdmin() {
         initComponents();
         this.setSize(930, 711);
         setLocationRelativeTo(null);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -28,6 +27,8 @@ public class JFrameAdmin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
+        btnDetalleKardez = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         btnPuesto = new javax.swing.JButton();
@@ -70,25 +71,25 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/icons8-user-37.png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 50, 50));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 50, 50));
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Administración");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 140, 30));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 140, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/perfil1-modified (1).png"))); // NOI18N
         jLabel3.setMaximumSize(new java.awt.Dimension(300, 300));
         jLabel3.setMinimumSize(new java.awt.Dimension(300, 300));
         jLabel3.setPreferredSize(new java.awt.Dimension(300, 300));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 170, 180));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 170, 180));
 
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("son los más importantes.");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 250, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 250, 30));
 
         jlblSalir.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jlblSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,20 +104,34 @@ public class JFrameAdmin extends javax.swing.JFrame {
                 jlblSalirMouseClicked(evt);
             }
         });
-        jPanel2.add(jlblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 260, 70));
+        jPanel2.add(jlblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 260, 70));
 
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Nuestros usuarios ");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 210, 60));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 260, 20));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 210, 60));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 260, 20));
 
         jLabel8.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Ing. Gustavo Durand Vasquez");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 260, 60));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 260, 60));
+
+        btnDetalleKardez.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
+        btnDetalleKardez.setForeground(new java.awt.Color(255, 255, 255));
+        btnDetalleKardez.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/icons8-graph-report-30.png"))); // NOI18N
+        btnDetalleKardez.setText("VER INFORMES");
+        btnDetalleKardez.setBorderPainted(false);
+        btnDetalleKardez.setContentAreaFilled(false);
+        btnDetalleKardez.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleKardezActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnDetalleKardez, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 260, 70));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 260, 20));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 710));
 
@@ -341,12 +356,12 @@ public class JFrameAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlblSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblSalirMouseClicked
-       LOG.info("[FSI] Star boton Salir: ");
+        LOG.info("[FSI] Star boton Salir: ");
         try {
-             dispose();
-             JFrameLogin d= new JFrameLogin();
+            dispose();
+            JFrameLogin d = new JFrameLogin();
             d.setVisible(true);
-             
+
         } catch (Exception e) {
             System.out.println("ERROR" + e);
         }
@@ -354,38 +369,44 @@ public class JFrameAdmin extends javax.swing.JFrame {
 
     private void btnDisPrvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisPrvActionPerformed
         LOG.info("[FSI] Star boton ir a distrito-provincia-departamento : ");
-        JFrameMostrarDepaProvDistr a= new JFrameMostrarDepaProvDistr();
+        JFrameMostrarDepaProvDistr a = new JFrameMostrarDepaProvDistr();
         a.setVisible(true);
     }//GEN-LAST:event_btnDisPrvActionPerformed
 
     private void btnPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestoActionPerformed
         LOG.info("[FSI] Star boton ir a Puesto : ");
-        JFrameMostrarCargoEmpleado b= new JFrameMostrarCargoEmpleado();
+        JFrameMostrarCargoEmpleado b = new JFrameMostrarCargoEmpleado();
         b.setVisible(true);
     }//GEN-LAST:event_btnPuestoActionPerformed
 
     private void btnEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadoActionPerformed
-       LOG.info("[FSI] Star boton ir a Empleado : ");
-        JFrameMostrarEmpleadoTransaccion b= new JFrameMostrarEmpleadoTransaccion();
+        LOG.info("[FSI] Star boton ir a Empleado : ");
+        JFrameMostrarEmpleadoKardex b = new JFrameMostrarEmpleadoKardex();
         b.setVisible(true);
     }//GEN-LAST:event_btnEmpleadoActionPerformed
 
     private void btnAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlmacenActionPerformed
-       LOG.info("[FSI] Star boton ir a Almacén : ");
-        JFrameMostrarAlmacen b= new JFrameMostrarAlmacen();
+        LOG.info("[FSI] Star boton ir a Almacén : ");
+        JFrameMostrarAlmacen b = new JFrameMostrarAlmacen();
         b.setVisible(true);
     }//GEN-LAST:event_btnAlmacenActionPerformed
 
     private void btnUbicaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbicaciónActionPerformed
-       LOG.info("[FSI] Star boton ir a ubicacion : ");
-        JFrameMostrarUbicacionAlmacen b= new JFrameMostrarUbicacionAlmacen();
+        LOG.info("[FSI] Star boton ir a ubicacion : ");
+        JFrameMostrarUbicacionAlmacen b = new JFrameMostrarUbicacionAlmacen();
         b.setVisible(true);
     }//GEN-LAST:event_btnUbicaciónActionPerformed
 
-    
+    private void btnDetalleKardezActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleKardezActionPerformed
+        LOG.info("[FSI] Star boton ir a detalle Kardex: ");
+        JFrameDetalle_Kardex a = new JFrameDetalle_Kardex();
+        a.setVisible(true);
+    }//GEN-LAST:event_btnDetalleKardezActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlmacen;
+    private javax.swing.JButton btnDetalleKardez;
     private javax.swing.JButton btnDisPrv;
     private javax.swing.JButton btnEmpleado;
     private javax.swing.JButton btnPuesto;
@@ -423,6 +444,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel jlblSalir;
     // End of variables declaration//GEN-END:variables
 }

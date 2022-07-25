@@ -78,19 +78,19 @@ public class JFrameEmpl extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/icons8-user-37.png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 50, 50));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 50, 50));
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Área de almacenaje");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 140, 30));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 140, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/perfil1-modified (1).png"))); // NOI18N
         jLabel3.setMaximumSize(new java.awt.Dimension(300, 300));
         jLabel3.setMinimumSize(new java.awt.Dimension(300, 300));
         jLabel3.setPreferredSize(new java.awt.Dimension(300, 300));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 170, 180));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 170, 180));
 
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -253,7 +253,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jLabel23.setText("Creación, edición de los nuevas ");
         jPanel10.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 30));
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 190, 180));
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, 190, 180));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
@@ -292,7 +292,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jLabel26.setText("para empaquetados.");
         jPanel11.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 30));
 
-        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, -1, 180));
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 500, -1, 180));
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
@@ -331,7 +331,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jLabel29.setText("Creación, edición de los nuevas ");
         jPanel12.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 30));
 
-        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 500, 190, 180));
+        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 500, 200, 180));
 
         jSeparator3.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator3.setForeground(new java.awt.Color(58, 78, 121));
@@ -395,33 +395,33 @@ public class JFrameEmpl extends javax.swing.JFrame {
                 BtntrasRegisActionPerformed(evt);
             }
         });
-        jPanel14.add(BtntrasRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 90));
+        jPanel14.add(BtntrasRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 370, 90));
 
         jLabel30.setBackground(new java.awt.Color(58, 78, 121));
         jLabel30.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(58, 78, 121));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("TRANSACCIÓN A REGISTRAR");
+        jLabel30.setText("KARDEX A REGISTRAR");
         jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel14.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 250, 30));
+        jPanel14.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 380, 30));
 
         jLabel31.setBackground(new java.awt.Color(204, 204, 204));
         jLabel31.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(153, 153, 153));
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("productos a ingresar al área de almacén.");
-        jPanel14.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 240, 30));
+        jPanel14.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 380, 30));
 
         jLabel32.setBackground(new java.awt.Color(204, 204, 204));
         jLabel32.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(153, 153, 153));
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("Creación y edición de los nuevos ");
-        jPanel14.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 220, 30));
+        jPanel14.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 360, 30));
 
-        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 250, 170));
+        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 380, 170));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 940, 700));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -476,7 +476,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
 
     private void BtntrasRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtntrasRegisActionPerformed
         LOG.info("[FSI] Star boton ir a Registro: ");
-        JFrameMostrarTransaccion a = new JFrameMostrarTransaccion();
+        JFrameMostrarKardex a = new JFrameMostrarKardex();
         a.setVisible(true);
     }//GEN-LAST:event_BtntrasRegisActionPerformed
 

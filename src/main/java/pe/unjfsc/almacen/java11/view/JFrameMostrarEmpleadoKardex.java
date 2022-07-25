@@ -9,7 +9,7 @@ import pe.unjfsc.almacen.java11.entity.CEEmpleadoTransaccion;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarEmpleadoHashSet;
 import pe.unjfsc.almacen.java11.model.imp.CMCambiarCargoEmpleado;
 
-public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
+public class JFrameMostrarEmpleadoKardex extends javax.swing.JFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger("JFrameEmpleadoTransaccion");
 
@@ -23,10 +23,10 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
     CMCambiarCargoEmpleado oCMCargo = new CMCambiarCargoEmpleado();
     boolean sw;
 
-    public JFrameMostrarEmpleadoTransaccion() {
+    public JFrameMostrarEmpleadoKardex() {
         initComponents();
 
-        setSize(651, 499);
+        setSize(870, 519);
         //setVisible(true);
         setLocationRelativeTo(null);
         objDtm = (DefaultTableModel) tblRegistro.getModel();
@@ -83,15 +83,15 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setText("ID");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 80, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 80, 30));
 
         txtdni.setEditable(false);
         txtdni.setBackground(new java.awt.Color(255, 255, 255));
         txtdni.setBorder(null);
-        jPanel1.add(txtdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 180, 30));
+        jPanel1.add(txtdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 200, 30));
 
         jLabel10.setText("DNI");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 80, 30));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 80, 30));
 
         txtidempleado.setEditable(false);
         txtidempleado.setBackground(new java.awt.Color(255, 255, 255));
@@ -101,7 +101,7 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
                 txtidempleadoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtidempleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 180, 30));
+        jPanel1.add(txtidempleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 200, 30));
 
         tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,39 +126,49 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblRegistro);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 450, 100));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 670, 100));
 
         txtnombemp.setEditable(false);
         txtnombemp.setBackground(new java.awt.Color(255, 255, 255));
         txtnombemp.setBorder(null);
-        jPanel1.add(txtnombemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, 30));
+        txtnombemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnombempActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtnombemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 200, 30));
 
         jLabel11.setText("NOMBRE");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 80, 30));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 80, 30));
 
         jLabel12.setText("A. PATERNO");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 80, 30));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 80, 30));
 
         jLabel13.setText("A. MATERNO");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, 30));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 80, 30));
 
         txtapa.setEditable(false);
         txtapa.setBackground(new java.awt.Color(255, 255, 255));
         txtapa.setBorder(null);
-        jPanel1.add(txtapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 180, 30));
+        jPanel1.add(txtapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 200, 30));
 
         txtama.setEditable(false);
         txtama.setBackground(new java.awt.Color(255, 255, 255));
         txtama.setBorder(null);
-        jPanel1.add(txtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 180, 30));
+        jPanel1.add(txtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 200, 30));
 
         jLabel14.setText("TELEFONO");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 80, 30));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 80, 30));
 
         txttelefono.setEditable(false);
         txttelefono.setBackground(new java.awt.Color(255, 255, 255));
         txttelefono.setBorder(null);
-        jPanel1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 120, 30));
+        txttelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttelefonoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 120, 30));
 
         txtmail.setEditable(false);
         txtmail.setBackground(new java.awt.Color(255, 255, 255));
@@ -168,16 +178,16 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
                 txtmailActionPerformed(evt);
             }
         });
-        jPanel1.add(txtmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 150, 30));
+        jPanel1.add(txtmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 150, 30));
 
         jLabel15.setText("MAIL");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 60, 30));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 60, 30));
 
         jLabel5.setText("CARGO");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 60, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 60, 30));
 
         cbidcargo.setEnabled(false);
-        jPanel1.add(cbidcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 100, 30));
+        jPanel1.add(cbidcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 100, 30));
 
         jPanel4.setBackground(new java.awt.Color(231, 96, 76));
 
@@ -196,19 +206,19 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 110, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 460, 120, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("TRABAJADORES");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 230, 30));
+        jLabel1.setText("REGISTRO DE NUEVOS TRABAJADORES");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 440, -1));
 
         jPanel3.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -228,14 +238,14 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 130, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 130, 40));
 
         jPanel5.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -262,37 +272,37 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
             .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 130, 40));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 130, 40));
 
         jSeparator2.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator2.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 180, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 200, 20));
 
         jSeparator3.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator3.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 180, 20));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 200, 20));
 
         jSeparator4.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator4.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 180, 20));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 200, 20));
 
         jSeparator5.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator5.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 150, 20));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 150, 20));
 
         jSeparator6.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator6.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 180, 20));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 200, 20));
 
         jSeparator7.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator7.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 180, 20));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 200, 20));
 
         jSeparator8.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator8.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 120, 20));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 120, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 490, 500));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 710, 520));
 
         jPanel2.setBackground(new java.awt.Color(58, 78, 121));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -308,7 +318,7 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 160, 60));
+        jPanel2.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 160, 60));
 
         btnEditar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
@@ -321,7 +331,7 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 160, 60));
+        jPanel2.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 160, 60));
 
         btnEliminar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -336,7 +346,7 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
         });
         jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 160, 60));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 500));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -465,6 +475,14 @@ public class JFrameMostrarEmpleadoTransaccion extends javax.swing.JFrame {
     private void txtmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmailActionPerformed
+
+    private void txtnombempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombempActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombempActionPerformed
+
+    private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelefonoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

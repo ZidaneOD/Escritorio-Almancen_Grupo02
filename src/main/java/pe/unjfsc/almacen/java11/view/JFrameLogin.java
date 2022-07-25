@@ -15,6 +15,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         admin = new JFrameAdmin();
         empl = new JFrameEmpl();
         initComponents();
+        this.setSize(1002, 521);
 
         setLocationRelativeTo(null);
     }
@@ -24,12 +25,12 @@ public class JFrameLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         txtsuario2 = new javax.swing.JTextField();
         txtContra = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         btn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -44,16 +45,19 @@ public class JFrameLogin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/imagen1.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 530, 480));
+
         txtsuario2.setFont(new java.awt.Font("Dubai", 0, 16)); // NOI18N
         txtsuario2.setForeground(new java.awt.Color(102, 102, 102));
         txtsuario2.setBorder(null);
         txtsuario2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 160, 170, 40));
+        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 160, 170, 50));
 
         txtContra.setFont(new java.awt.Font("Dubai", 1, 16)); // NOI18N
         txtContra.setForeground(new java.awt.Color(102, 102, 102));
         txtContra.setBorder(null);
-        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, 170, 40));
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, 170, 50));
 
         jPanel2.setBackground(new java.awt.Color(24, 46, 74));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,29 +72,26 @@ public class JFrameLogin extends javax.swing.JFrame {
                 btnActionPerformed(evt);
             }
         });
-        jPanel2.add(btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
+        jPanel2.add(btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 120, 30));
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Yu Gothic", 1, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("INICIO DE SESIÓN");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 270, 100));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/imagen1.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 550, 370));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 350, 150));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/fondo.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 0, 810, 520));
 
         jSeparator1.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator1.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 210, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 210, 10));
 
         jSeparator2.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator2.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 200, 210, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 210, 10));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/pass.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 30, 40));
@@ -167,49 +168,15 @@ public class JFrameLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameLogin().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn;
     public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;

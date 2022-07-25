@@ -44,7 +44,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
     public JFrameMostrarProducto() {
         initComponents();
 
-        setSize(880, 651);
+        setSize(975, 651);
         //setVisible(true);
         setLocationRelativeTo(null);
 
@@ -141,7 +141,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtnombre.setEditable(false);
         txtnombre.setBackground(new java.awt.Color(255, 255, 255));
         txtnombre.setBorder(null);
-        jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 30));
+        jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 200, 30));
 
         jLabel10.setText("NOMBRE");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 30));
@@ -154,7 +154,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 txtidproductoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtidproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 200, 30));
+        jPanel1.add(txtidproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 200, 30));
 
         tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,12 +171,12 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblRegistro);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 630, 140));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 760, 140));
 
         txtdescripcion.setEditable(false);
         txtdescripcion.setBackground(new java.awt.Color(255, 255, 255));
         txtdescripcion.setBorder(null);
-        jPanel1.add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 220, 30));
+        jPanel1.add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, 30));
 
         jLabel11.setText("DESCRIPCION");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 100, 30));
@@ -185,19 +185,19 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 100, 30));
 
         jLabel13.setText("SABOR");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 70, 30));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 70, 30));
 
         jLabel5.setText("MARCA");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 110, 30));
 
         cbidcategoria.setEnabled(false);
-        jPanel1.add(cbidcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 150, 30));
+        jPanel1.add(cbidcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 150, 30));
 
         cbidmarca.setEnabled(false);
-        jPanel1.add(cbidmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 120, 30));
+        jPanel1.add(cbidmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 120, 30));
 
         cbidsabor.setEnabled(false);
-        jPanel1.add(cbidsabor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 110, 30));
+        jPanel1.add(cbidsabor, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, 110, 30));
 
         jLabel14.setText("PESO");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 90, 30));
@@ -205,13 +205,13 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtpeso.setEditable(false);
         txtpeso.setBackground(new java.awt.Color(255, 255, 255));
         txtpeso.setBorder(null);
-        jPanel1.add(txtpeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 120, 30));
+        jPanel1.add(txtpeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 120, 30));
 
         jLabel15.setText("UNIDAD M.");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 60, 30));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 60, 30));
 
         cbidunidadm.setEnabled(false);
-        jPanel1.add(cbidunidadm, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 110, 30));
+        jPanel1.add(cbidunidadm, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 110, 30));
 
         jLabel2.setText("PRESENT X EMPAQUE");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 110, 30));
@@ -219,24 +219,24 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         txtpresentxemp.setEditable(false);
         txtpresentxemp.setBackground(new java.awt.Color(255, 255, 255));
         txtpresentxemp.setBorder(null);
-        jPanel1.add(txtpresentxemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 120, 30));
+        jPanel1.add(txtpresentxemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 120, 30));
 
         jLabel16.setText("EMPAQUE");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 100, 30));
 
         cbidempaque.setEnabled(false);
-        jPanel1.add(cbidempaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 130, 30));
+        jPanel1.add(cbidempaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 130, 30));
 
         jLabel3.setText("UNIDAD");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 70, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 70, 30));
 
         txtunidad.setEditable(false);
         txtunidad.setBackground(new java.awt.Color(255, 255, 255));
         txtunidad.setBorder(null);
-        jPanel1.add(txtunidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 120, 30));
+        jPanel1.add(txtunidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 120, 30));
 
         jblImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(jblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 160, 200));
+        jPanel1.add(jblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 160, 200));
 
         btnseleccionar.setText("SELECCIONAR IMG.");
         btnseleccionar.setEnabled(false);
@@ -245,15 +245,15 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 btnseleccionarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnseleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, 151, -1));
+        jPanel1.add(btnseleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 151, -1));
 
         jLabel7.setText("UNxEMP");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 70, 30));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 70, 30));
 
         txtunxemp.setEditable(false);
         txtunxemp.setBackground(new java.awt.Color(255, 255, 255));
         txtunxemp.setBorder(null);
-        jPanel1.add(txtunxemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 120, 30));
+        jPanel1.add(txtunxemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 120, 30));
 
         txtURLimg.setEditable(false);
         txtURLimg.addActionListener(new java.awt.event.ActionListener() {
@@ -261,14 +261,13 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 txtURLimgActionPerformed(evt);
             }
         });
-        jPanel1.add(txtURLimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 87, -1));
+        jPanel1.add(txtURLimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, 87, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("PRODUCTO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 190, -1));
+        jLabel1.setText("PRODUCTO A REGISTRAR");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 290, -1));
 
         jPanel4.setBackground(new java.awt.Color(231, 96, 76));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnSalir.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(51, 51, 51));
@@ -285,16 +284,17 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 130, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 590, 130, 40));
 
         jPanel3.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -322,7 +322,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
             .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 140, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 140, 40));
 
         jPanel5.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -343,44 +343,44 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 160, 40));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, 150, 40));
 
         jSeparator2.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator2.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 120, 30));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 120, 30));
 
         jSeparator3.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator3.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 200, 30));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 200, 30));
 
         jSeparator4.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator4.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 200, 30));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 200, 30));
 
         jSeparator5.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator5.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 220, 30));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 220, 30));
 
         jSeparator6.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator6.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 120, 30));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 120, 30));
 
         jSeparator7.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator7.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 120, 30));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, 120, 30));
 
         jSeparator8.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator8.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 120, 30));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 120, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 690, 650));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 790, 650));
 
         jPanel2.setBackground(new java.awt.Color(58, 78, 121));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -397,7 +397,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 190, 70));
+        jPanel2.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 70));
 
         btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
@@ -411,7 +411,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 190, 70));
+        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 190, 70));
 
         btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
@@ -425,7 +425,7 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 70));
+        jPanel2.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 190, 70));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -950,13 +950,13 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         }
     }
     
-     public static void main(String args[]) {
+    //public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+       /* try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -978,11 +978,10 @@ public class JFrameMostrarProducto extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFrameLogin().setVisible(true);
             }
-        });
-    }
-
+        });*/
+    //}
 }

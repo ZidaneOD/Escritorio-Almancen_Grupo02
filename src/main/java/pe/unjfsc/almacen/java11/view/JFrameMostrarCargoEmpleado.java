@@ -21,7 +21,7 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
 
     public JFrameMostrarCargoEmpleado() {
         initComponents();
-        setSize(511, 388);
+        setSize(631, 424);
         //setVisible(true);
         setLocationRelativeTo(null);
         objDtm = (DefaultTableModel) tblMostrar.getModel();
@@ -63,27 +63,27 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
         jLabel2.setText("PUESTO:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 110, 130, 30));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 110, 30));
 
         txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setBorder(null);
-        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 110, 150, 30));
+        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 210, 30));
 
         txtCodigo.setEditable(false);
         txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setBorder(null);
-        jPanel2.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 70, 150, 30));
+        jPanel2.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 210, 30));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
         jLabel1.setText("CODIGO:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 130, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 110, 30));
 
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("AGREGAR PUESTO ");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 380, 50));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 380, 50));
 
         jPanel4.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -110,7 +110,7 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
             .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 130, 40));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 130, 40));
 
         jPanel5.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -137,15 +137,15 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
             .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 130, 40));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 130, 40));
 
         jSeparator11.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator11.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel2.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 150, 20));
+        jPanel2.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 210, 20));
 
         jSeparator12.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator12.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel2.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 150, 20));
+        jPanel2.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 210, 20));
 
         tblMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,7 +170,7 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblMostrar);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 290, 110));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 420, 140));
 
         jPanel6.setBackground(new java.awt.Color(231, 96, 76));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -185,11 +185,11 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel6.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 29));
+        jPanel6.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 40));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 110, 30));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 130, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 350, 390));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 480, 430));
 
         jPanel1.setBackground(new java.awt.Color(58, 78, 121));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -204,7 +204,7 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 160, 60));
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 160, 60));
 
         btnEditar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
@@ -216,7 +216,7 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 160, 60));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 160, 60));
 
         btnBorrar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnBorrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -228,9 +228,9 @@ public class JFrameMostrarCargoEmpleado extends javax.swing.JFrame {
                 btnBorrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 160, 60));
+        jPanel1.add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 160, 60));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 390));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

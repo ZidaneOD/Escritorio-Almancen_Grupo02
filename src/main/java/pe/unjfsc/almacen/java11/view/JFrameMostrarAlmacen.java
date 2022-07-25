@@ -24,7 +24,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
 
     public JFrameMostrarAlmacen() {
         initComponents();
-        setSize(559, 408);
+        setSize(753, 478);
         setLocationRelativeTo(null);
         objDtm = (DefaultTableModel) tblRegistro.getModel();
         mostrarDatos();
@@ -34,8 +34,6 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel4 = new javax.swing.JPanel();
-        btnSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtcodiUbic = new javax.swing.JTextField();
@@ -54,6 +52,8 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         btnBuscarUbic = new javax.swing.JButton();
         txtnombalmacen = new javax.swing.JTextField();
         jSeparator15 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -63,41 +63,22 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(231, 96, 76));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnSalir.setBackground(new java.awt.Color(255, 204, 204));
-        btnSalir.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(51, 51, 51));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sal.png"))); // NOI18N
-        btnSalir.setText("SALIR");
-        btnSalir.setBorderPainted(false);
-        btnSalir.setContentAreaFilled(false);
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 120, 40));
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel4.setText(" ID                         :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 110, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 110, 30));
 
         txtcodiUbic.setEditable(false);
         txtcodiUbic.setBackground(new java.awt.Color(255, 255, 255));
         txtcodiUbic.setForeground(new java.awt.Color(102, 102, 102));
         txtcodiUbic.setBorder(null);
-        jPanel1.add(txtcodiUbic, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 130, 30));
+        jPanel1.add(txtcodiUbic, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 190, 30));
 
         jLabel10.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel10.setText("NOMBRE            :");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 110, 30));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 110, 30));
 
         txtidalmacen.setEditable(false);
         txtidalmacen.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,7 +89,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
                 txtidalmacenActionPerformed(evt);
             }
         });
-        jPanel1.add(txtidalmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 130, 30));
+        jPanel1.add(txtidalmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 180, 30));
 
         tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,24 +114,24 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblRegistro);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 320, 70));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 570, 110));
 
         jLabel11.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel11.setText("UBICACION        :");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 110, 30));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 110, 30));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ALMACEN");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 220, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 220, 50));
 
         jSeparator14.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator14.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 140, 20));
+        jPanel1.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 190, 20));
 
         jSeparator13.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator13.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 140, 20));
+        jPanel1.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 190, 20));
 
         jPanel3.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -179,7 +160,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
             .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 130, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 130, 40));
 
         jPanel5.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -201,7 +182,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,28 +191,50 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, 40));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, -1, 40));
 
-        btnBuscarUbic.setText("...");
+        btnBuscarUbic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-search-20.png"))); // NOI18N
+        btnBuscarUbic.setText("Search");
+        btnBuscarUbic.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnBuscarUbic.setContentAreaFilled(false);
         btnBuscarUbic.setEnabled(false);
         btnBuscarUbic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarUbicActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarUbic, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, -1, -1));
+        jPanel1.add(btnBuscarUbic, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 100, 30));
 
         txtnombalmacen.setEditable(false);
         txtnombalmacen.setBackground(new java.awt.Color(255, 255, 255));
         txtnombalmacen.setForeground(new java.awt.Color(102, 102, 102));
         txtnombalmacen.setBorder(null);
-        jPanel1.add(txtnombalmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 130, 30));
+        jPanel1.add(txtnombalmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 180, 30));
 
         jSeparator15.setBackground(new java.awt.Color(58, 78, 121));
         jSeparator15.setForeground(new java.awt.Color(58, 78, 121));
-        jPanel1.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 140, 20));
+        jPanel1.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 190, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 400, 410));
+        jPanel4.setBackground(new java.awt.Color(231, 96, 76));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir.setBackground(new java.awt.Color(255, 204, 204));
+        btnSalir.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(51, 51, 51));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sal.png"))); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.setBorderPainted(false);
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 420, 120, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 600, 480));
 
         jPanel2.setBackground(new java.awt.Color(58, 78, 121));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -275,7 +278,7 @@ public class JFrameMostrarAlmacen extends javax.swing.JFrame {
         });
         jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 160, 60));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 410));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

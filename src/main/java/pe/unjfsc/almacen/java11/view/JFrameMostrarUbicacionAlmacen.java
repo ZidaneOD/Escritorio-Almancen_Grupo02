@@ -29,7 +29,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
 
     public JFrameMostrarUbicacionAlmacen() {
         initComponents();
-        this.setSize(691, 489);
+        this.setSize(610, 490);
         this.setLocationRelativeTo(null);
         objDtm = (DefaultTableModel) tblRegistro.getModel();
         mostrarDatos();
@@ -40,6 +40,8 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator3 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -53,7 +55,6 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
         txtIdubicacion = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRegistro = new javax.swing.JTable();
-        btnMore = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
@@ -61,10 +62,17 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
         btnGrabar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+
+        jSeparator3.setBackground(new java.awt.Color(58, 78, 121));
+        jSeparator3.setForeground(new java.awt.Color(58, 78, 121));
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -74,19 +82,19 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("ID");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 100, 30));
 
         jLabel3.setText("DIRECCION");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 100, 30));
 
         jLabel4.setText("DEPARTAMENTO");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 100, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 100, 30));
 
         jLabel5.setText("PROVINCIA");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 90, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 90, 30));
 
         jLabel6.setText("DISTRITO");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 70, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 70, 30));
 
         cbDepartamento.setEnabled(false);
         cbDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,7 +121,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 cbDepartamentoKeyReleased(evt);
             }
         });
-        jPanel1.add(cbDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 90, 30));
+        jPanel1.add(cbDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 90, 30));
 
         cbProvincia.setEnabled(false);
         cbProvincia.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,7 +145,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 cbProvinciaKeyReleased(evt);
             }
         });
-        jPanel1.add(cbProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 90, 30));
+        jPanel1.add(cbProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 90, 30));
 
         cbDistrito.setEnabled(false);
         cbDistrito.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,13 +156,17 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 cbDistritoMouseEntered(evt);
             }
         });
-        jPanel1.add(cbDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 90, 30));
+        jPanel1.add(cbDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 90, 30));
 
         txtNombubicacion.setEditable(false);
-        jPanel1.add(txtNombubicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 220, 30));
+        txtNombubicacion.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombubicacion.setBorder(null);
+        jPanel1.add(txtNombubicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 220, 30));
 
         txtIdubicacion.setEditable(false);
-        jPanel1.add(txtIdubicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 120, 30));
+        txtIdubicacion.setBackground(new java.awt.Color(255, 255, 255));
+        txtIdubicacion.setBorder(null);
+        jPanel1.add(txtIdubicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 120, 30));
 
         tblRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,14 +191,11 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblRegistro);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, 126));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 570, 110));
 
-        btnMore.setText("MORE");
-        jPanel1.add(btnMore, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 70, 30));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("UBICACION");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 100, 30));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("UBICACIÓN");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 130, 30));
 
         jPanel2.setBackground(new java.awt.Color(231, 96, 76));
 
@@ -207,7 +216,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +225,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 .addGap(0, 2, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, -1, 40));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 420, 120, 40));
 
         jPanel4.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -244,7 +253,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
             .addComponent(btnGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 150, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 150, 40));
 
         jPanel5.setBackground(new java.awt.Color(58, 78, 121));
 
@@ -272,9 +281,17 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
             .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, 40));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 520, 490));
+        jSeparator4.setBackground(new java.awt.Color(58, 78, 121));
+        jSeparator4.setForeground(new java.awt.Color(58, 78, 121));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 220, 10));
+
+        jSeparator5.setBackground(new java.awt.Color(58, 78, 121));
+        jSeparator5.setForeground(new java.awt.Color(58, 78, 121));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 130, 10));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 610, 490));
 
         jPanel3.setBackground(new java.awt.Color(58, 78, 121));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -290,7 +307,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel3.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 70));
+        jPanel3.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 160, 70));
 
         btnEditar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
@@ -303,7 +320,7 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 70));
+        jPanel3.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 160, 70));
 
         btnEliminar.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -316,9 +333,9 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 180, 70));
+        jPanel3.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 160, 70));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 490));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -505,12 +522,12 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGrabar;
-    private javax.swing.JButton btnMore;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbDepartamento;
     private javax.swing.JComboBox<String> cbDistrito;
     private javax.swing.JComboBox<String> cbProvincia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -523,6 +540,9 @@ public class JFrameMostrarUbicacionAlmacen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTable tblRegistro;
     private javax.swing.JTextField txtIdubicacion;
     private javax.swing.JTextField txtNombubicacion;
