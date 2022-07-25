@@ -45,12 +45,12 @@ public class JFrameLogin extends javax.swing.JFrame {
         txtsuario2.setForeground(new java.awt.Color(102, 102, 102));
         txtsuario2.setBorder(null);
         txtsuario2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 190, 40));
+        jPanel1.add(txtsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 190, 50));
 
         txtContra.setFont(new java.awt.Font("Dubai", 1, 16)); // NOI18N
         txtContra.setForeground(new java.awt.Color(102, 102, 102));
         txtContra.setBorder(null);
-        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 190, 40));
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 190, 50));
 
         jPanel2.setBackground(new java.awt.Color(24, 46, 74));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,20 +65,20 @@ public class JFrameLogin extends javax.swing.JFrame {
                 btnActionPerformed(evt);
             }
         });
-        jPanel2.add(btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
+        jPanel2.add(btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 120, 30));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 130, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/pass.png"))); // NOI18N
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 40, 50));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 40, 50));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/usu.png"))); // NOI18N
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 40, 60));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 40, 60));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("X");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,7 +152,7 @@ public class JFrameLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
