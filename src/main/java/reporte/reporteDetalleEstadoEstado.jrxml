@@ -21,17 +21,6 @@ order by estado;]]>
 	</background>
 	<title>
 		<band height="109" splitType="Stretch">
-			<image>
-				<reportElement x="687" y="12" width="105" height="95" uuid="458c7932-e4d1-46a2-ab49-5ec670506cde"/>
-				<box bottomPadding="0">
-					<pen lineWidth="0.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<imageExpression><![CDATA["C:\\Users\\zidan\\Documents\\NetBeansProjects\\PROYECTO_GIT\\almacen\\TESTEO_3\\src\\main\\resources\\report\\repote1.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="236" y="24" width="303" height="68" uuid="ff579d5a-631d-445f-ac66-00ff14605a7d"/>
 				<textElement textAlignment="Center">
