@@ -24,7 +24,7 @@ order by estado;]]>
 			<staticText>
 				<reportElement x="236" y="24" width="303" height="68" uuid="ff579d5a-631d-445f-ac66-00ff14605a7d"/>
 				<textElement textAlignment="Center">
-					<font size="24" isBold="true"/>
+					<font fontName="Roboto" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INFORME DE KARDEX POR ESTADO]]></text>
 			</staticText>

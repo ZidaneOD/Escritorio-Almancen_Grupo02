@@ -7,45 +7,23 @@
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<queryString language="SQL">
-		<![CDATA[select * from vproducto]]>
+	<queryString>
+		<![CDATA[select * from vproducto
+order by 2]]>
 	</queryString>
-	<field name="CODIGO" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="NOMBRE" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DESCRIPCIÓN" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="CATEGORIA" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="SABOR" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="MARCA" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="PESO" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="UNIDAD_M" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="PRESxEMPAQUE" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="UNIDADxEMP" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="EMPAQUE" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="UND_PROD" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="CODIGO" class="java.lang.Integer"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="DESCRIPCIÓN" class="java.lang.String"/>
+	<field name="CATEGORIA" class="java.lang.String"/>
+	<field name="SABOR" class="java.lang.String"/>
+	<field name="MARCA" class="java.lang.String"/>
+	<field name="PESO" class="java.math.BigDecimal"/>
+	<field name="UNIDAD_M" class="java.lang.String"/>
+	<field name="PRESxEMPAQUE" class="java.lang.Integer"/>
+	<field name="UNIDADxEMP" class="java.lang.String"/>
+	<field name="EMPAQUE" class="java.lang.String"/>
+	<field name="UND_PROD" class="java.lang.Integer"/>
+	<field name="URL" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

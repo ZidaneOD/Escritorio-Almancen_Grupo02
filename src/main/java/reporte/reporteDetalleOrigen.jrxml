@@ -19,7 +19,7 @@ order by origen;]]>
 			<staticText>
 				<reportElement x="167" y="13" width="483" height="38" uuid="c435a491-a985-4dfa-bf22-9ced3ed811ff"/>
 				<textElement textAlignment="Center">
-					<font size="24" isBold="true"/>
+					<font fontName="Roboto Thin" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INFORME DE KARDEX POR ALMACEN]]></text>
 			</staticText>

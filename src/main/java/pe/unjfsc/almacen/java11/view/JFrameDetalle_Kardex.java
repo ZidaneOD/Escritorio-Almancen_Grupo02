@@ -385,7 +385,6 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
 
         cmbEstado.setEnabled(true);
         cmbEstado.removeAllItems();
-        llenaComboEstado();
         cmbAlmacen.removeAllItems();
 
     }//GEN-LAST:event_rbdEstadoActionPerformed
@@ -402,7 +401,7 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
                 String fechaFinal = objSimpleDateFormat.format(dadfinal.getDate());
 
                 Connection cn = ConMySQL.getInstance().getConnection();
-                String direccion = System.getProperty("user.dir") + "\\src\\main\\java\\reporte\\reporteDetalleFechaDia.jrxml";
+                String direccion = System.getProperty("user.dir") + "\\src\\main\\java\\reporte\\reporteDetalleFecha.jrxml";
                 JasperReport reporte = JasperCompileManager.compileReport(direccion);
                 Map parametro = new HashMap();
 
@@ -555,51 +554,4 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
         }
     }
 
-    private void obtenerIdAlmacen() {
-        try {
-            String nombre = cmbAlmacen.getSelectedItem().toString();
-            rsAlmacen.first();
-
-            do {
-                if (nombre.equals(rsAlmacen.getString(2))) {
-                    xidalmacen = rsAlmacen.getString(2);
-                    rsAlmacen.last();
-                }
-            } while (rsAlmacen.next());
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
-        }
-    }
-
-    private void llenaComboEstado() {
-        try {
-
-            rsEstado = oCMAlmacen.buscarEstado("%");
-
-            while (rsEstado.next()) {
-                cmbEstado.addItem(rsEstado.getString(2));
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "ERROR LLENACOMB: " + e);
-        }
-    }
-
-    private void obtenerIdAlmacenB() {
-        try {
-            String nombre = cmbEstado.getSelectedItem().toString();
-            rsEstado.first();
-
-            do {
-                if (nombre.equals(rsEstado.getString(2))) {
-                    xidestado = rsEstado.getString(2);
-                    rsEstado.last();
-                }
-            } while (rsEstado.next());
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "ERROR OBTENER: " + e);
-        }
-    }
 }

@@ -48,7 +48,7 @@ public class CMCambiarDetalleHashSet implements CICambioAlmacen<CESDetalle> {
         Connection cn = ConMySQL.getInstance().getConnection();
         String fechaIni = objObject1.toString();
         String fechaFin = objObject2.toString();
-        String sql = "select * from vdetalle where date(fecha) between ? and ?";
+        String sql = "select * from vdetalle where date(fecha) between ? and ? order by 1";
         PreparedStatement ps = cn.prepareStatement(sql);
         ps.setString(1, fechaIni);
         ps.setString(2, fechaFin);

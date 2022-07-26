@@ -18,32 +18,19 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select * from vdetalle
-where estado like $P{xestado}]]>
+where estado like $P{xestado}
+order by 1]]>
 	</queryString>
 	<field name="IDKARDEX" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="FECHA" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="ORIGEN" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DESTINO" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="PRODUCTO" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DESCRIPCIÓN" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DNI" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="NOMBRE" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="FECHA" class="java.sql.Date"/>
+	<field name="ORIGEN" class="java.lang.String"/>
+	<field name="DESTINO" class="java.lang.String"/>
+	<field name="PRODUCTO" class="java.lang.String"/>
+	<field name="DESCRIPCIÓN" class="java.lang.String"/>
+	<field name="DNI" class="java.lang.String"/>
+	<field name="NOMBRE" class="java.lang.String"/>
 	<field name="APELLIDOS" class="java.lang.String"/>
 	<field name="ESTADO" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

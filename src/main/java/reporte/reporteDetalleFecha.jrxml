@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a378ae59-94f0-4902-8619-f2adb4590a21">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="265"/>
+	<property name="ireport.x" value="52"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
@@ -21,32 +21,19 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select * from vdetalle
-where date(fecha) between $P{fechini} and $P{fechfin}]]>
+where date(fecha) between $P{fechini} and $P{fechfin}
+order by 1]]>
 	</queryString>
 	<field name="IDKARDEX" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="FECHA" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="ORIGEN" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DESTINO" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="PRODUCTO" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DESCRIPCIÓN" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="DNI" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="NOMBRE" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="FECHA" class="java.sql.Date"/>
+	<field name="ORIGEN" class="java.lang.String"/>
+	<field name="DESTINO" class="java.lang.String"/>
+	<field name="PRODUCTO" class="java.lang.String"/>
+	<field name="DESCRIPCIÓN" class="java.lang.String"/>
+	<field name="DNI" class="java.lang.String"/>
+	<field name="NOMBRE" class="java.lang.String"/>
 	<field name="APELLIDOS" class="java.lang.String"/>
 	<field name="ESTADO" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -57,26 +44,40 @@ where date(fecha) between $P{fechini} and $P{fechfin}]]>
 	<title>
 		<band height="136" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="270" y="0" width="263" height="62" uuid="5d816ca0-e420-479c-a144-df9eaef36f0c"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement style="Title" x="1" y="0" width="450" height="118" uuid="5d816ca0-e420-479c-a144-df9eaef36f0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font pdfFontName="Times-Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee Title]]></text>
+				<text><![CDATA[INFORME POR FECHA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="303" y="62" width="196" height="22" uuid="890104d0-261c-428d-b820-9f511366c23a"/>
+				<reportElement style="SubTitle" x="480" y="38" width="118" height="22" uuid="6e69ac53-a04e-471c-8faa-8767f4744a5c"/>
 				<textElement>
 					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee SubTitle]]></text>
+				<text><![CDATA[DESDE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="94" width="383" height="42" uuid="25488f38-28ac-438c-b7a6-d9b5f4211521"/>
-				<textElement textAlignment="Right">
-					<font size="10"/>
+				<reportElement style="SubTitle" x="480" y="60" width="118" height="22" uuid="8af4bf7b-5dcf-42d8-af7e-8c9faccebc73"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
 				</textElement>
-				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
+				<text><![CDATA[HASTA:]]></text>
 			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="598" y="40" width="100" height="20" uuid="422c39ca-feba-42c3-bc15-fe2face79105"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechini}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="598" y="60" width="100" height="20" uuid="6b596855-158d-42ff-bcba-9b9ff3a73a08"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechfin}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -137,10 +138,10 @@ where date(fecha) between $P{fechini} and $P{fechfin}]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="fbce3baa-292f-4223-926c-c98f981c2e8f"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="0" y="0" width="80" height="15" uuid="893bc8fa-b576-4bc9-8b1e-a7a006372eaa"/>
+					<reportElement style="Detail" x="0" y="0" width="80" height="15" forecolor="#FF0033" uuid="893bc8fa-b576-4bc9-8b1e-a7a006372eaa"/>
 					<textFieldExpression><![CDATA[$F{IDKARDEX}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
 					<reportElement style="Detail" x="80" y="0" width="80" height="15" uuid="3ecab550-a30a-460b-9862-92f5e627f8e7"/>
 					<textFieldExpression><![CDATA[$F{FECHA}]]></textFieldExpression>
 				</textField>
