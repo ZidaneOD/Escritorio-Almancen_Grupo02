@@ -381,10 +381,10 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
         cmbAlmacen.setEnabled(false);
 
         dadinicio.setEnabled(false);
-        dadfinal.setEnabled(false);
-
+        dadfinal.setEnabled(false); 
         cmbEstado.setEnabled(true);
         cmbEstado.removeAllItems();
+        llenaComboEstado();
         cmbAlmacen.removeAllItems();
 
     }//GEN-LAST:event_rbdEstadoActionPerformed
@@ -554,4 +554,18 @@ public class JFrameDetalle_Kardex extends javax.swing.JFrame {
         }
     }
 
+    
+     private  void  llenaComboEstado() {
+        try {
+
+            rsEstado = oCMAlmacen . buscarEstado ( "%" );
+
+            while ( rsEstado . next ()) {
+                cmbEstado . addItem ( rsEstado . getString ( 2 ));
+            }
+
+        } catch ( Exception e ) {
+            JOptionPane . showMessageDialog ( rootPane , "ERROR LLENACOMB: " + e );
+        }
+    }
 }
