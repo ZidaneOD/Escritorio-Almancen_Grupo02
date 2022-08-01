@@ -21,12 +21,10 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jlblSalir = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -87,17 +85,11 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jLabel2.setText("Área de almacenaje");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 140, 30));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/perfil1-modified (1).png"))); // NOI18N
-        jLabel3.setMaximumSize(new java.awt.Dimension(300, 300));
-        jLabel3.setMinimumSize(new java.awt.Dimension(300, 300));
-        jLabel3.setPreferredSize(new java.awt.Dimension(300, 300));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 170, 180));
-
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("son los más importantes.");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 260, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 260, 30));
 
         jlblSalir.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jlblSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,20 +104,14 @@ public class JFrameEmpl extends javax.swing.JFrame {
                 jlblSalirMouseClicked(evt);
             }
         });
-        jPanel2.add(jlblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 260, 70));
+        jPanel2.add(jlblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 260, 70));
 
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Nuestros usuarios ");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 220, 60));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 260, 20));
-
-        jLabel8.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Ing. Juan Flores Cueto");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 260, 60));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 220, 60));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 260, 20));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 700));
 
@@ -341,7 +327,7 @@ public class JFrameEmpl extends javax.swing.JFrame {
         jLabel12.setBackground(new java.awt.Color(58, 78, 121));
         jLabel12.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(58, 78, 121));
-        jLabel12.setText("PRODUCTO Y MÁS SERVICIOS");
+        jLabel12.setText("REGISTRO DE KARDEX");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 410, 30));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
@@ -511,14 +497,12 @@ public class JFrameEmpl extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
